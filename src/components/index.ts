@@ -1,0 +1,11 @@
+export { default as Header } from './Header';
+export { default as Footer } from './Footer';
+export { default as Navbar } from './Navbar';
+export { default as CategoryItem } from './CategoryItem';
+export { default as ShopCategories } from './ShopCategories';
+export { default as SliderLayout } from './Layouts/SliderLayout';
+export { default as MainLayout } from './Layouts/MainLayout';
+export { default as BlogsSection } from './BlogsSection';
+export { default as BenefitSection } from './BenefitSection';
+export { default as BlogSectionItem } from './BlogsSection/BlogSectionItem';
+export { default as ProductSection } from './Products/ProductsSection';
