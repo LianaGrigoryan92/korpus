@@ -18,25 +18,25 @@ export const ImageWrapper = styled.div`
 `;
 
 export const BlogSectionItemDescription = styled.p`
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 18px;
-    margin: 14px 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  margin: 14px 0;
 `;
 
 export const LearnMore = styled.button`
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-    text-decoration: none;
-    background: transparent;
-    align-self: flex-start;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    
-    svg {
-        margin-top: -4px;
-    }
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+  background: transparent;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  svg {
+    margin-top: -4px;
+  }
 `;

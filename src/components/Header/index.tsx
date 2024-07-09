@@ -10,10 +10,10 @@ import Logo from '@/public/images/logo.png';
 function Header() {
   return (
     <S.Container>
-        <S.Header>
-            <Image src={Logo} alt="logo" />
-            <Navbar />
-        </S.Header>
+      <S.Header>
+        <Image src={Logo} alt="logo" />
+        <Navbar />
+      </S.Header>
     </S.Container>
   );
 }

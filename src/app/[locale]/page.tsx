@@ -5,10 +5,12 @@ import Image from 'next/image';
 import * as S from './page.styled';
 import KorpusBannerLogo from '@/public/images/home/banner-korpus-logo.svg';
 import {
-    SliderLayout,
-    ShopCategories,
-    BlogsSection,
-    MainLayout, BenefitSection, ProductSection,
+  SliderLayout,
+  ShopCategories,
+  BlogsSection,
+  MainLayout,
+  BenefitSection,
+  ProductSection,
 } from '@/components';
 
 // components

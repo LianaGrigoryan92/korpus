@@ -7,7 +7,7 @@ export const BlogsContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding-bottom: 60px;
-  border-bottom: 1px solid #E4E4E4;
+  border-bottom: 1px solid #e4e4e4;
 `;
 
 export const BlogsTitle = styled.h2`

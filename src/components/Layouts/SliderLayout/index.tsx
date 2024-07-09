@@ -6,7 +6,5 @@ import { ReactNode } from 'react';
 import * as S from './SliderLayout.styled';
 
 export default function SliderLayout({ children }: { children: ReactNode }) {
-  return (
-      <S.SliderLayout>{children}</S.SliderLayout>
-  );
+  return <S.SliderLayout>{children}</S.SliderLayout>;
 }

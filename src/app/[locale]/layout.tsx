@@ -4,7 +4,7 @@ import React from 'react';
 import Providers from '@/lib/Providers';
 import GlobalStyles from '@/styles/GlobalStyles';
 import type { Metadata } from 'next';
-import {Footer, Header} from '@/components';
+import { Footer, Header } from '@/components';
 
 export const metadata: Metadata = {
   title: 'Celsius',
@@ -26,9 +26,9 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <GlobalStyles />
-              <Header />
-              {children}
-              <Footer />
+            <Header />
+            {children}
+            <Footer />
           </Providers>
         </NextIntlClientProvider>
       </body>
