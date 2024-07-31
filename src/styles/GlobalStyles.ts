@@ -20,6 +20,7 @@ const styles = css`
   }
 
   button {
+    font-family: 'Graphik Trial', sans-serif;
     cursor: pointer;
 
     :disabled {

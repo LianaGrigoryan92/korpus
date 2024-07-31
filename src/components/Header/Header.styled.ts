@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.header`
   background: transparent;
-  padding: 42px 60px 0;
+  padding: 32px 60px 0;
   position: absolute;
-  top: 32px;
+  top: 0;
   left: 0;
   right: 0;
   display: flex;

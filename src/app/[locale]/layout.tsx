@@ -7,8 +7,8 @@ import type { Metadata } from 'next';
 import { Footer, Header } from '@/components';
 
 export const metadata: Metadata = {
-  title: 'Celsius',
-  description: 'Celsius',
+  title: 'Korpus',
+  description: 'Korpus description',
 };
 
 export default async function RootLayout({

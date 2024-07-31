@@ -5,13 +5,15 @@ import * as S from './Footer.styled';
 import FooterBanner from '@/public/images/components/footer/banner.png';
 import Logo from '@/public/images/components/footer/logo.png';
 import Link from 'next/link';
-import { FooterNav } from './Footer.styled';
 import { ArrowUpRight } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
     <S.Container>
-      <S.Image src={FooterBanner.src} alt="Korpus Footer Image" />
+      {!pathname.includes('korpus-pro') && <S.Image src={FooterBanner.src} alt="Korpus Footer Image" />}
       <S.FooterContent>
         <S.FooterLeftSide>
           <S.Logo src={Logo.src} alt="Korpus Logo" />

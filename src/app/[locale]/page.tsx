@@ -4,6 +4,9 @@ import Image from 'next/image';
 // styles & images
 import * as S from './page.styled';
 import KorpusBannerLogo from '@/public/images/home/banner-korpus-logo.svg';
+
+
+// components
 import {
   SliderLayout,
   ShopCategories,
@@ -12,8 +15,6 @@ import {
   BenefitSection,
   ProductSection,
 } from '@/components';
-
-// components
 
 function Home() {
   return (

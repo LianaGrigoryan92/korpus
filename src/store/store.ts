@@ -3,11 +3,13 @@ import { productsApi } from '@/features';
 
 // reducers
 import productsReducer from '../features/products/products.slice';
+import modalReducer from '../features/korpusProModal/modal.slice';
 
 export const store = configureStore({
   reducer: {
     [productsApi.reducerPath]: productsApi.reducer,
     products: productsReducer,
+    modal: modalReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(productsApi.middleware),

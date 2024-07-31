@@ -6,7 +6,7 @@ export const HomeWrapper = styled.div``;
 export const ContentWrapper = styled.div`
   background-image: url('/images/home/bg.png');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top;
   background-size: cover;
   width: 100%;
   height: 100dvh;
