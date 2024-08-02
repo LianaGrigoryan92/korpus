@@ -14,9 +14,5 @@ export default async function KorpusProLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <S.KorpusProLayoutWrapper>
-        {children}
-    </S.KorpusProLayoutWrapper>
-  );
+  return <S.KorpusProLayoutWrapper>{children}</S.KorpusProLayoutWrapper>;
 }

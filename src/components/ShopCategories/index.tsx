@@ -3,6 +3,7 @@
 import * as S from './ShopCategories.styled';
 import Slider from 'react-slick';
 import { CategoryItem } from '@/components';
+import { useClientMediaQuery } from '@/hooks/useClientMediaQuery';
 
 const slides = [
   {
@@ -33,7 +34,7 @@ const settings = {
   centerPadding: '40px',
   responsive: [
     {
-      breakpoint: 1024,
+      breakpoint: 1200,
       settings: {
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -41,16 +42,16 @@ const settings = {
       },
     },
     {
-      breakpoint: 600,
+      breakpoint: 968,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
       },
     },
     {
-      breakpoint: 480,
+      breakpoint: 768,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 1.05,
         slidesToScroll: 1,
       },
     },
@@ -58,11 +59,13 @@ const settings = {
 };
 
 export default function ShopCategories() {
+  const isMobile = useClientMediaQuery('(max-width: 768px)');
+
   return (
     <S.ShopCategoriesContainer>
       <S.Title>Shop Categories</S.Title>
       <S.SliderWrapper>
-        <Slider {...settings}>
+        <Slider {...settings} centerPadding={isMobile ? '15px' : '40px'}>
           {slides.map((slide, index) => (
             <CategoryItem key={index} image={slide.img} name={slide.title} />
           ))}

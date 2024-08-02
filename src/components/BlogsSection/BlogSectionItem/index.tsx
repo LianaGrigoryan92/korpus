@@ -18,7 +18,7 @@ export default function BlogSectionItem({
 }: BlogSectionItemProps) {
   return (
     <S.BlogSectionItemContainer>
-      <img src={image} alt="blog-list-image" />
+      <S.Image $bgImage={image} />
       <S.BlogSectionItemDescription>{description}</S.BlogSectionItemDescription>
       <S.LearnMore>
         Learn More <ArrowRight size={24} color={theme.palette.common.black} />

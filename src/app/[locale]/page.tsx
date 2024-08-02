@@ -1,10 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 // styles & images
 import * as S from './page.styled';
 import KorpusBannerLogo from '@/public/images/home/banner-korpus-logo.svg';
-
 
 // components
 import {
@@ -16,7 +16,11 @@ import {
   ProductSection,
 } from '@/components';
 
-function Home() {
+function Home({
+  params: { locale },
+}: Readonly<{ params: { locale: string } }>) {
+  unstable_setRequestLocale(locale);
+
   return (
     <S.HomeWrapper>
       <S.ContentWrapper>

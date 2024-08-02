@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const ShopCategoriesContainer = styled.div`
   margin-top: 12px;
+
+  @media (max-width: 768px) {
+    margin-top: 32px;
+  }
 `;
 
 export const Title = styled.h3`
@@ -9,6 +13,12 @@ export const Title = styled.h3`
   font-weight: 500;
   line-height: 24px;
   color: ${({ theme }) => theme.palette.common.black};
+
+  @media (max-width: 768px) {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 28px;
+  }
 `;
 
 export const SliderWrapper = styled.div`
@@ -21,6 +31,18 @@ export const SliderWrapper = styled.div`
 
   .slick-list {
     margin: 0 -10px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 16px 16px 16px 0;
+
+    .slick-slide > div {
+      margin: 0 10px;
+    }
+
+    .slick-list {
+      margin: 0 -10px;
+    }
   }
 `;
 

@@ -1,8 +1,8 @@
-"use client"
+'use client';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const KorpusProLayoutWrapper = styled.div`
-    margin-top: 144px;
-    overflow: hidden;
+  margin-top: 144px;
+  overflow: hidden;
 `;

@@ -7,59 +7,105 @@ import Logo from '@/public/images/components/footer/logo.png';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { useClientMediaQuery } from '@/hooks/useClientMediaQuery';
 
 export default function Footer() {
+  const isMobile = useClientMediaQuery('(max-width: 980px)');
   const pathname = usePathname();
 
   return (
     <S.Container>
-      {!pathname.includes('korpus-pro') && <S.Image src={FooterBanner.src} alt="Korpus Footer Image" />}
+      {!pathname.includes('korpus-pro') && (
+        <S.Image $bgImage={FooterBanner.src} />
+      )}
       <S.FooterContent>
-        <S.FooterLeftSide>
-          <S.Logo src={Logo.src} alt="Korpus Logo" />
-          <S.Text>
-            Korpus — A collectible furniture studio backed by <br />a
-            manufacturing workshop.
-          </S.Text>
-        </S.FooterLeftSide>
+        {!isMobile && (
+          <S.FooterLeftSide>
+            <S.Logo src={Logo.src} alt="Korpus Logo" />
+            <S.Text>
+              Korpus — A collectible furniture studio backed by <br />a
+              manufacturing workshop.
+            </S.Text>
+          </S.FooterLeftSide>
+        )}
         <S.FooterRightSide>
           <S.FooterNav>
-            <S.FooterNavList>
-              <S.FooterNavItem>
-                <Link href="/about">About</Link>
-              </S.FooterNavItem>
-              <S.FooterNavItem>
-                <Link href="/services">Services</Link>
-              </S.FooterNavItem>
-              <S.FooterNavItem>
-                <Link href="/shop">Shop</Link>
-              </S.FooterNavItem>
-              <S.FooterNavItem>
-                <Link href="/carriers">Carriers</Link>
-              </S.FooterNavItem>
-            </S.FooterNavList>
-            <S.FooterNavList>
-              <S.FooterNavItem>
-                <Link href="/contact">Contact</Link>
-              </S.FooterNavItem>
-              <S.FooterNavItem>
-                <Link href="/shipping">Shipping & Delivery</Link>
-              </S.FooterNavItem>
-              <S.FooterNavItem>
-                <Link href="/refund">Return & Refund</Link>
-              </S.FooterNavItem>
-              <S.FooterNavItem>
-                <Link href="/faq">FAQ</Link>
-              </S.FooterNavItem>
-            </S.FooterNavList>
-            <S.FooterNavList>
-              <S.FooterNavItem>
-                <Link href="/terms">Terms & conditions</Link>
-              </S.FooterNavItem>
-              <S.FooterNavItem>
-                <Link href="/privacy">Privacy policy</Link>
-              </S.FooterNavItem>
-            </S.FooterNavList>
+            {!isMobile && (
+              <>
+                <S.FooterNavList>
+                  <S.FooterNavItem>
+                    <Link href="/about">About</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/services">Services</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/shop">Shop</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/carriers">Carriers</Link>
+                  </S.FooterNavItem>
+                </S.FooterNavList>
+                <S.FooterNavList>
+                  <S.FooterNavItem>
+                    <Link href="/contact">Contact</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/shipping">Shipping & Delivery</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/refund">Return & Refund</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/faq">FAQ</Link>
+                  </S.FooterNavItem>
+                </S.FooterNavList>
+                <S.FooterNavList>
+                  <S.FooterNavItem>
+                    <Link href="/terms">Terms & conditions</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/privacy">Privacy policy</Link>
+                  </S.FooterNavItem>
+                </S.FooterNavList>
+              </>
+            )}
+            {isMobile && (
+              <>
+                <S.FooterNavList>
+                  <S.FooterNavItem>
+                    <Link href="/about">About</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/services">Services</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/shop">Shop</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/carriers">Carriers</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/contact">Contact</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/shipping">Shipping & Delivery</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/refund">Return & Refund</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/faq">FAQ</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/terms">Terms & conditions</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/privacy">Privacy policy</Link>
+                  </S.FooterNavItem>
+                </S.FooterNavList>
+              </>
+            )}
             <S.FooterNavList>
               <S.FooterNavItem>
                 <Link href="/email">
@@ -81,6 +127,15 @@ export default function Footer() {
               </S.FooterNavItem>
             </S.FooterNavList>
           </S.FooterNav>
+          {isMobile && (
+            <S.FooterLeftSide>
+              <S.Logo src={Logo.src} alt="Korpus Logo" />
+              <S.Text>
+                Korpus — A collectible furniture studio backed by <br />a
+                manufacturing workshop.
+              </S.Text>
+            </S.FooterLeftSide>
+          )}
           <S.TextWrapper>
             <S.Text>© 2024 Korpus</S.Text>
             <S.Text>All right Reserved.</S.Text>

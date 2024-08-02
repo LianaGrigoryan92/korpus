@@ -1,5 +1,3 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const CategoryWrapper = styled.div`
-
-`;
+export const CategoryWrapper = styled.div``;

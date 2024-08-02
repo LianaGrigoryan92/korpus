@@ -6,7 +6,7 @@ export const HomeWrapper = styled.div``;
 export const ContentWrapper = styled.div`
   background-image: url('/images/home/bg.png');
   background-repeat: no-repeat;
-  background-position: top;
+  background-position: right;
   background-size: cover;
   width: 100%;
   height: 100dvh;
@@ -19,5 +19,14 @@ export const ContentWrapper = styled.div`
     opacity: 0.7;
     width: 100%;
     background-blend-mode: hard-light;
+  }
+
+  @media (max-width: 768px) {
+    padding: 16px;
+    background-position: right;
+
+    & > img {
+      height: 635px;
+    }
   }
 `;

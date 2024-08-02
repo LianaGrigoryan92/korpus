@@ -1,5 +1,5 @@
 // src/components/steps/Step5.tsx
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 
@@ -19,7 +19,11 @@ const Category: React.FC<StepProps> = ({ onNext, onPrev, data }) => {
   return (
     <div>
       <h2>Step 2</h2>
-      <input name="field1" value={stepData.field1 || ''} onChange={handleChange} />
+      <input
+        name="field1"
+        value={stepData.field1 || ''}
+        onChange={handleChange}
+      />
       <div>
         <button onClick={onPrev}>Back</button>
         <button onClick={() => onNext(stepData)}>Submit</button>

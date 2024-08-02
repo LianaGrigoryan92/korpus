@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const KorpusProModalWrapper = styled.div`
-    .modal-overlay {
-        background-color: rgba(0, 0, 0, 0.5) !important;
-    }
+  .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
 `;
 
 export const ModalWrapper = styled.div`
@@ -26,7 +26,7 @@ export const ModalStepName = styled.h2`
   font-size: 32px;
   font-weight: 500;
   line-height: 38px;
-  color: #1A1A1A;
+  color: #1a1a1a;
 `;
 
 export const ModalStepCategories = styled.div`
@@ -38,7 +38,7 @@ export const ModalStepCategoryItem = styled.div<{ $active: boolean }>`
   font-size: 14px;
   font-weight: ${({ $active }) => ($active ? 500 : 400)};
   line-height: 18px;
-  color: #1A1A1A;
+  color: #1a1a1a;
   cursor: pointer;
 `;
 
@@ -49,7 +49,7 @@ export const ModalBody = styled.div`
 `;
 
 export const ModalFooter = styled.div`
-  border-top: 1px solid #E4E4E4;
+  border-top: 1px solid #e4e4e4;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -62,7 +62,7 @@ export const ModalRestartButton = styled.button`
   font-weight: 500;
   line-height: 20px;
   background-color: transparent;
-  color: #1A1A1A;
+  color: #1a1a1a;
   text-decoration: underline;
 `;
 
@@ -73,9 +73,9 @@ export const ModalControls = styled.div`
 
 export const ModalBackButton = styled.button`
   font-family: 'Graphik Trial', sans-serif;
-  border: 1px solid #A3A3A3;
+  border: 1px solid #a3a3a3;
   background-color: transparent;
-  color: #1A1A1A;
+  color: #1a1a1a;
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
@@ -85,7 +85,7 @@ export const ModalBackButton = styled.button`
 export const ModalNextButton = styled.button`
   font-family: 'Graphik Trial', sans-serif;
   background-color: #000000;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;

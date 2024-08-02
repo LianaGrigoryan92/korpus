@@ -39,7 +39,10 @@ const modalSlice = createSlice({
     prevStep: (state) => {
       state.step -= 1;
     },
-    updateStepData: (state, action: PayloadAction<{ step: number; data: StepData }>) => {
+    updateStepData: (
+      state,
+      action: PayloadAction<{ step: number; data: StepData }>,
+    ) => {
       const { step, data } = action.payload;
       state.data[`step${step}` as keyof ModalState['data']] = data;
     },
@@ -52,5 +55,6 @@ const modalSlice = createSlice({
   },
 });
 
-export const { nextStep, prevStep, updateStepData, showModal, hideModal } = modalSlice.actions;
+export const { nextStep, prevStep, updateStepData, showModal, hideModal } =
+  modalSlice.actions;
 export default modalSlice.reducer;

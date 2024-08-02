@@ -6,6 +6,10 @@ export const MainLayout = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 0 16px;
+  }
 `;
 
 export const MainContent = styled.div`

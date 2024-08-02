@@ -9,6 +9,11 @@ export const Container = styled.header`
   right: 0;
   display: flex;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    margin-top: 60px;
+    padding: 7px 16px;
+  }
 `;
 
 export const Header = styled.div`
@@ -16,4 +21,5 @@ export const Header = styled.div`
   grid-template-columns: 1fr 5fr;
   max-width: 1320px;
   width: 100%;
+  position: relative;
 `;

@@ -10,8 +10,10 @@ import {
   products,
 } from '@/components/Products/ProductsSection/mock';
 import ProductCard from '@/components/Products/ProductCard';
+import { useClientMediaQuery } from '@/hooks/useClientMediaQuery';
 
 export default function ProductsSection() {
+  const isMobile = useClientMediaQuery('(max-width: 768px)');
   const [selectedCategoryId, setSelectedCategoryId] = useState<number>(1);
 
   const handleChangeSelectedCategory = (id: number) => {
@@ -22,9 +24,11 @@ export default function ProductsSection() {
     <S.ProductsSectionContainer>
       <S.ProductsSectionHeader>
         <S.ProductsSectionTitle>Suggested products</S.ProductsSectionTitle>
-        <S.SeeAll>
-          See All <ArrowRight size={18} color={theme.palette.common.black} />
-        </S.SeeAll>
+        {!isMobile && (
+          <S.SeeAll>
+            See All <ArrowRight size={18} color={theme.palette.common.black} />
+          </S.SeeAll>
+        )}
       </S.ProductsSectionHeader>
       <S.ProductCategories>
         {categories.map((category) => (
@@ -50,6 +54,11 @@ export default function ProductsSection() {
           />
         ))}
       </S.Products>
+      {isMobile && (
+        <S.SeeAll>
+          See All <ArrowRight size={18} color={theme.palette.common.black} />
+        </S.SeeAll>
+      )}
     </S.ProductsSectionContainer>
   );
 }
