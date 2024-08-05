@@ -39,6 +39,9 @@ export const Button = styled.button`
 export const NavItemWrapper = styled.div`
   display: flex;
   gap: 24px;
+  display: flex;
+  align-items: center;
+
 
   .products {
     position: relative;

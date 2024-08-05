@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import { Footer, Header } from '@/components';
 import { type Locale, locales } from '@/i18n.config';
 import { unstable_setRequestLocale } from 'next-intl/server';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 
 export const metadata: Metadata = {
   title: 'Korpus',
@@ -32,12 +33,14 @@ export default async function RootLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <Providers>
-            <GlobalStyles />
-            <Header />
-            {children}
-            <Footer />
-          </Providers>
+          <AppRouterCacheProvider options={{ key: 'css' }}>
+            <Providers>
+              <GlobalStyles />
+              <Header />
+              {children}
+              <Footer />
+            </Providers>
+          </AppRouterCacheProvider>
         </NextIntlClientProvider>
       </body>
     </html>
