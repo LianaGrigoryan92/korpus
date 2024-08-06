@@ -7,12 +7,12 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { RootState } from '@/store/store';
 import { hideModal, nextStep, prevStep } from '@/features';
 import * as S from './KorpusProModal.styled';
-import Step2 from './steps/Category';
+import Category from './steps/Category';
 import ProjectName from './steps/ProjectName';
 
 const steps: { [key: number]: React.ComponentType<StepProps> } = {
   1: ProjectName,
-  2: Step2,
+  2: Category,
   //   3: Step3,
   //   4: Step4,
   //   5: Step5,
@@ -120,7 +120,7 @@ function KorpusProModal() {
             borderRadius: '0',
             width: '100%',
             maxWidth: '1088px',
-            height: '80%', // Добавляем это свойство
+            height: '95%', // Добавляем это свойство
           },
         }}
       >

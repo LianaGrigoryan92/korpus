@@ -13,7 +13,7 @@ import KorpusmenCategoryImg from '@/public/images/korpus-pro/categories/korpusme
 export default function Category() {
   const dispatch = useAppDispatch();
 
-  const handleCategoryClick = () => {
+  const handleModuleCategoryClick = () => {
     dispatch(showModal());
   };
 
@@ -24,20 +24,18 @@ export default function Category() {
         <S.CategoryItems>
           <S.CategoryItem
             $bgImage={ServiceCategoryImg.src}
-            onClick={handleCategoryClick}
           >
             <span>Service</span>
           </S.CategoryItem>
           <S.CategoryItem
             $bgImage={ModulesCategoryImg.src}
-            onClick={handleCategoryClick}
+            onClick={handleModuleCategoryClick}
           >
             <span>Modules</span>
           </S.CategoryItem>
         </S.CategoryItems>
         <S.CategoryItem
           $bgImage={KorpusmenCategoryImg.src}
-          onClick={handleCategoryClick}
         >
           <span>Korpusmen</span>
         </S.CategoryItem>
