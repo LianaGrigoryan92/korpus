@@ -55,7 +55,7 @@ export const ProductCardContent = styled.div`
   @media (max-width: 1400px) {
     display: flex;
     justify-content: center;
-  }  
+  }
 
   @media (max-width: 768px) {
     padding: 10px 8px;

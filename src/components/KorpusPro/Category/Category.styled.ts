@@ -8,11 +8,22 @@ export const CategoryContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;
   gap: 32px;
+
+  @media (max-width: 980px) {
+    grid-template-rows: 1fr;
+    gap: 16px;
+  }
 `;
 
 export const CategoryItems = styled.div`
   display: flex;
-  gap: 32px;
+  gap: 16px;
+
+  @media (max-width: 980px) {
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 16px;
+  }
 `;
 
 export const CategoryItem = styled.div<{ $bgImage: string }>`
@@ -33,5 +44,16 @@ export const CategoryItem = styled.div<{ $bgImage: string }>`
     font-size: 24px;
     font-weight: 500;
     line-height: 24px;
+  }
+
+  @media (max-width: 980px) {
+    height: 309px;
+    gap: 16px;
+
+    span {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 24px;
+    }
   }
 `;

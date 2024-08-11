@@ -25,7 +25,7 @@ export const FooterContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-  @media (max-width: 1400px) {  
+  @media (max-width: 1400px) {
     align-items: center;
   }
 
@@ -91,7 +91,7 @@ export const FooterNav = styled.nav`
     gap: 24px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-  }  
+  }
 
   @media (max-width: 980px) {
     display: flex;

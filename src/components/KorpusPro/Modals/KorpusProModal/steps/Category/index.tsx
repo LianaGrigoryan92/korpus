@@ -1,51 +1,58 @@
 'use client';
 
 import { useGetCategoriesQuery } from '@/features/korpusProCategories';
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import * as S from './Category.styled';
 import { getImageUrl } from '@/utils/getImageFullUrl';
-import { useGetSubCategoriesQuery } from '@/features/korpusProSubCategories';
+import { Check } from 'lucide-react';
+import { useAppDispatch } from '@/store/hooks';
+import { updateStepData } from '@/features';
 
 interface StepProps {
   onNext: (data: any) => void;
   onPrev: () => void;
   data: any;
+  step: number;
 }
 
-const Category: React.FC<StepProps> = ({ data }) => {
-  const [stepData, setStepData] = useState(data || {});
-  const {data: categories} = useGetCategoriesQuery();
-  
-  // TODO categoryType-ov get anel subCategories
-  const {data: subCategories} = useGetSubCategoriesQuery({ categoryType: stepData.categoryType });
+const Category: React.FC<StepProps> = ({ data, step }) => {
+  const { data: categories } = useGetCategoriesQuery();
+  const dispatch = useAppDispatch();
+  const [selectedCategoryId, setSelectedCategoryId] = useState<
+    string | number | null
+  >(null);
 
-  console.log({ categories, subCategories });
+  useEffect(() => {
+    const updatedData = {
+      ...data,
+      category: { categoryId: selectedCategoryId },
+    };
+    dispatch(updateStepData({ data: updatedData, step }));
+  }, [selectedCategoryId]);
 
-
-  const handleClick = (categoryType: string) => {
-    setStepData({ ...stepData, categoryType });
+  const handleClick = (categoryId: string | number) => {
+    setSelectedCategoryId(categoryId);
   };
 
   return (
     <S.CategoriesWrapper>
-      {!stepData.categoryType && categories?.map((category) => (
-        <S.CategoryItem 
-          key={category.id}
-          $bgImage={getImageUrl(category.img)}
-          onClick={() => handleClick(category.type)}
-        >
-          <span>{category.name}</span>
-        </S.CategoryItem>
-      ))}
-      {stepData.categoryType && (
-        <S.SubCategories>
-          {subCategories?.map((subCategory) => (
-            <S.SubCategoryItem key={subCategory.id} $bgImage={getImageUrl(subCategory.img)}>
-              <span>{subCategory.name}</span>
-            </S.SubCategoryItem>
-          ))}
-        </S.SubCategories>
-      )}
+      <S.Categories>
+        {categories?.map((category) => (
+          <S.CategoryItem
+            key={category.id}
+            $active={selectedCategoryId === category.id}
+            $bgImage={getImageUrl(category.img)}
+            onClick={() => handleClick(category.id)}
+          >
+            <span className="name">{category.name}</span>
+            {selectedCategoryId === category.id && (
+              <span className="active-name">
+                <Check size={22} />
+              </span>
+            )}
+          </S.CategoryItem>
+        ))}
+      </S.Categories>
     </S.CategoriesWrapper>
   );
 };

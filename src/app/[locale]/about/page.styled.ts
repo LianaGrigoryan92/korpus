@@ -25,12 +25,12 @@ export const AboutFirstContent = styled.div`
 `;
 
 export const AboutFirstInfoContent = styled.div`
-    @media (max-width: 1200px) {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+  @media (max-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
   h2 {
     max-width: 468px;
@@ -41,9 +41,9 @@ export const AboutFirstInfoContent = styled.div`
     color: ${({ theme }) => theme.palette.common.black};
 
     @media (max-width: 1200px) {
-    text-align: center;
-    max-width: 80%;
-  }
+      text-align: center;
+      max-width: 80%;
+    }
   }
 
   p:last-of-type {
@@ -51,8 +51,7 @@ export const AboutFirstInfoContent = styled.div`
 
     @media (max-width: 1200px) {
       margin-top: 0;
-
-  }
+    }
   }
 
   p {
@@ -71,9 +70,9 @@ export const AboutFirstInfoContent = styled.div`
 `;
 
 export const AboutFirstImage = styled.img`
-    @media (max-width: 1200px) {
-      width: 100%;
-    }
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 
 export const AboutSecondaryContent = styled.div`
@@ -82,18 +81,18 @@ export const AboutSecondaryContent = styled.div`
   gap: 60px;
 
   @media (max-width: 1200px) {
-      height: min-content;
-      flex-direction: column;
-      gap: 30px;
-    }
+    height: min-content;
+    flex-direction: column;
+    gap: 30px;
+  }
 `;
 
 export const AboutSecondaryInfoContent = styled.div`
-    @media (max-width: 1200px) {
-      display: flex;
-      justify-content: center;
-      gap: 0;
-    }
+  @media (max-width: 1200px) {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
 
   p {
     max-width: 580px;
@@ -111,10 +110,10 @@ export const AboutSecondaryInfoContent = styled.div`
 `;
 
 export const AboutSecondaryImage = styled.img`
-    @media (max-width: 1200px) {
-      width: 100%;
-      height: 100%;
-    }
+  @media (max-width: 1200px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const AboutLastContent = styled.div`
@@ -221,8 +220,8 @@ export const Image = styled.img`
   max-height: 412px;
 
   @media (max-width: 1200px) {
-      width: 100%;
-      height: 100%;
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -245,8 +244,8 @@ export const AboutBlogImage = styled.img`
   height: 562px;
 
   @media (max-width: 1200px) {
-      width: 100%;
-      height: 100%;
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -254,15 +253,13 @@ export const AboutBlogContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-
-
 `;
 
 export const AboutBlogTitle = styled.h2`
   font-size: 32px;
   font-weight: 500;
   line-height: 40px;
-  color: #1A1A1A;
+  color: #1a1a1a;
 `;
 
 export const AboutBlogDescription = styled.p`
@@ -270,7 +267,7 @@ export const AboutBlogDescription = styled.p`
   font-weight: 400;
   line-height: 20px;
   text-align: left;
-  color: #1A1A1A;
+  color: #1a1a1a;
 `;
 
 export const AboutBlogButton = styled.button`

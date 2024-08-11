@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
 export const LanguageSwitcher = styled.div`
-    select {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        padding: 2px 2px 2px 2px;
-        border: none;
-    }
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 2px 2px 2px 2px;
+    border: none;
+  }
 
-    @media (max-width: 980px) {
-        padding: 8px 0;
-    }
+  @media (max-width: 980px) {
+    padding: 8px 0;
+  }
 `;
 
 export const LanguageSelect = styled.select`

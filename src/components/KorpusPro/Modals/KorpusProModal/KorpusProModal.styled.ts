@@ -27,6 +27,16 @@ export const ModalStepName = styled.h2`
   font-weight: 500;
   line-height: 38px;
   color: #1a1a1a;
+
+  @media (max-width: 980px) {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+  }
 `;
 
 export const ModalStepCategories = styled.div`
@@ -43,7 +53,6 @@ export const ModalStepCategoryItem = styled.div<{ $active: boolean }>`
 `;
 
 export const ModalBody = styled.div`
-  margin-top: 24px;
   padding: 24px;
   height: 100%;
 `;
@@ -64,11 +73,23 @@ export const ModalRestartButton = styled.button`
   background-color: transparent;
   color: #1a1a1a;
   text-decoration: underline;
+
+  @media (max-width: 980px) {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    color: #414141;
+  }
 `;
 
 export const ModalControls = styled.div`
   display: flex;
   gap: 24px;
+
+  @media (max-width: 980px) {
+    width: 100%;
+    justify-content: space-between;
+  }
 `;
 
 export const ModalBackButton = styled.button`
@@ -80,6 +101,15 @@ export const ModalBackButton = styled.button`
   font-weight: 500;
   line-height: 20px;
   padding: 12px 76px;
+
+  @media (max-width: 450px) {
+    max-width: 150px;
+    width: 100%;
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const ModalNextButton = styled.button`
@@ -90,4 +120,28 @@ export const ModalNextButton = styled.button`
   font-weight: 500;
   line-height: 20px;
   padding: 12px 76px;
+
+  @media (max-width: 450px) {
+    max-width: 150px;
+    width: 100%;
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const MobileHeaderButtons = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+export const CancelButton = styled.button`
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #414141;
 `;

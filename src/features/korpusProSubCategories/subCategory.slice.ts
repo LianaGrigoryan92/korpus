@@ -30,6 +30,10 @@ const subCategorySlice = createSlice({
   },
 });
 
-export const { setSubCategories, addSubCategories, updateSubCategories, removeSubCategories } =
-subCategorySlice.actions;
+export const {
+  setSubCategories,
+  addSubCategories,
+  updateSubCategories,
+  removeSubCategories,
+} = subCategorySlice.actions;
 export default subCategorySlice.reducer;

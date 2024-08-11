@@ -18,7 +18,7 @@ export const NavItem = styled.div`
   font-size: 17px;
   font-weight: 500;
   line-height: 18px;
-`
+`;
 
 export const Button = styled.button`
   outline: none;
@@ -42,7 +42,6 @@ export const NavItemWrapper = styled.div`
   display: flex;
   align-items: center;
 
-
   .products {
     position: relative;
   }
@@ -53,7 +52,7 @@ export const NavItemWrapper = styled.div`
     font-weight: 600;
     line-height: 18px;
     text-align: right;
-  
+
     &::placeholder {
       color: ${({ theme }) => theme.palette.common.black};
       font-size: 17px;
@@ -63,12 +62,15 @@ export const NavItemWrapper = styled.div`
     }
   }
 
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration { display: none; }
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-results-button,
+  input[type='search']::-webkit-search-results-decoration {
+    display: none;
+  }
 
-  a, input {
+  a,
+  input {
     text-decoration: none;
     color: ${({ theme }) => theme.palette.common.black};
     font-size: 17px;
@@ -79,7 +81,8 @@ export const NavItemWrapper = styled.div`
   @media (max-width: 768px) {
     gap: 12px;
 
-    a, input {
+    a,
+    input {
       font-size: 14px;
       font-weight: 400;
       line-height: 18px;
@@ -88,15 +91,15 @@ export const NavItemWrapper = styled.div`
 `;
 
 export const ProductCategories = styled.div<{ $isVisible: boolean }>`
-  background-color: #FFFFFF;
-  border: 1px solid #F2F2F2;
+  background-color: #ffffff;
+  border: 1px solid #f2f2f2;
   box-shadow: 6px 4px 30px 0px #00000026;
   padding: 20px;
   position: absolute;
   z-index: 1500;
   top: 30px;
   left: 0;
-  visibility:${({ $isVisible }) => $isVisible ? "visible" : "hidden"};
+  visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
 `;
 
 export const CategoryItem = styled.div`
@@ -107,6 +110,6 @@ export const CategoryItem = styled.div`
   width: 220px;
 
   &:hover {
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
   }
 `;

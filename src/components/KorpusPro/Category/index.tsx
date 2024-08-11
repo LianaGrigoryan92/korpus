@@ -22,9 +22,7 @@ export default function Category() {
       <KorpusProModal />
       <S.CategoryContainer>
         <S.CategoryItems>
-          <S.CategoryItem
-            $bgImage={ServiceCategoryImg.src}
-          >
+          <S.CategoryItem $bgImage={ServiceCategoryImg.src}>
             <span>Service</span>
           </S.CategoryItem>
           <S.CategoryItem
@@ -34,9 +32,7 @@ export default function Category() {
             <span>Modules</span>
           </S.CategoryItem>
         </S.CategoryItems>
-        <S.CategoryItem
-          $bgImage={KorpusmenCategoryImg.src}
-        >
+        <S.CategoryItem $bgImage={KorpusmenCategoryImg.src}>
           <span>Korpusmen</span>
         </S.CategoryItem>
       </S.CategoryContainer>

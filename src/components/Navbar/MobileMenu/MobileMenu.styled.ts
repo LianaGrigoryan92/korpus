@@ -62,20 +62,22 @@ export const Search = styled.input`
   display: flex;
   justify-content: space-between;
   align-items: center;
-      background: transparent;
+  background: transparent;
+  font-size: 18px;
+  line-height: 18px;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.palette.common.black};
     font-size: 18px;
     line-height: 18px;
-  
-    &::placeholder {
-      color: ${({ theme }) => theme.palette.common.black};
-      font-size: 18px;
-      line-height: 18px;
-    }
+  }
 
   &::-webkit-search-decoration,
   &::-webkit-search-cancel-button,
   &::-webkit-search-results-button,
-  &::-webkit-search-results-decoration { display: none; }
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
 `;
 
 export const MenuItem = styled.div`

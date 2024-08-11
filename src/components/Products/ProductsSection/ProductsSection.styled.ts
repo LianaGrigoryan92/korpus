@@ -61,8 +61,6 @@ export const ProductCategoryItem = styled.div<{ selected?: boolean }>`
   border-bottom: ${({ selected, theme }) =>
     selected ? `2px solid ${theme.palette.common.secondaryGray}` : 'none'};
 
-
-
   @media (max-width: 768px) {
     font-size: 14px;
     font-weight: 400;
@@ -85,7 +83,7 @@ export const Products = styled.div`
   @media (max-width: 1400px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-  }  
+  }
 
   @media (max-width: 768px) {
     display: grid;

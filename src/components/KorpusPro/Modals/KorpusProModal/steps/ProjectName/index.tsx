@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '@/store/hooks';
 import { updateStepData } from '@/features';
 
@@ -14,14 +14,19 @@ interface StepProps {
 }
 
 const ProjectName: React.FC<StepProps> = ({ data, error, step }) => {
-  const [stepData, setStepData] = useState(data || {});
   const dispatch = useAppDispatch();
+  const [projectName, setProjectName] = useState(
+    data.project.projectName || '',
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const updatedData = { ...stepData, [e.target.name]: e.target.value };
-    setStepData(updatedData);
-    dispatch(updateStepData({ step, data: updatedData }));
+    setProjectName(() => e.target.value);
   };
+
+  useEffect(() => {
+    const updatedData = { ...data, project: { projectName } };
+    dispatch(updateStepData({ data: updatedData, step }));
+  }, [projectName]);
 
   return (
     <S.StepWrapper>
@@ -29,7 +34,7 @@ const ProjectName: React.FC<StepProps> = ({ data, error, step }) => {
         <S.Label>Project Name*</S.Label>
         <S.Input
           name="projectName"
-          value={stepData.projectName || ''}
+          value={projectName || ''}
           onChange={handleChange}
           placeholder="Enter project name"
         />

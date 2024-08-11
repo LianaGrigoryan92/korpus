@@ -9,13 +9,19 @@ import { hideModal, nextStep, prevStep } from '@/features';
 import * as S from './KorpusProModal.styled';
 import Category from './steps/Category';
 import ProjectName from './steps/ProjectName';
+import Preferences from './steps/Preferences';
+import { useClientMediaQuery } from '@/hooks/useClientMediaQuery';
+import SubCategory from './steps/SubCategory';
+import KorpusColor from './steps/KorpusColor';
+import Facade from './steps/Facade';
 
 const steps: { [key: number]: React.ComponentType<StepProps> } = {
   1: ProjectName,
   2: Category,
-  //   3: Step3,
-  //   4: Step4,
-  //   5: Step5,
+  3: SubCategory,
+  4: Preferences,
+  5: KorpusColor,
+  6: Facade,
 };
 
 interface StepProps {
@@ -35,8 +41,18 @@ const tabNames = [
   'Choose Product',
 ];
 
+const tabNamesMobile = [
+  'Name Your Project',
+  'Choose category',
+  'Choose korups color',
+  'Fasade',
+  'Fasade color',
+  'Choose Product',
+];
+
 const tabCategories = [
   'Project Name',
+  'Category',
   'Category',
   'Set up preferences',
   'Korups color',
@@ -51,6 +67,7 @@ function KorpusProModal() {
     (state: RootState) => state.modal,
   );
   const [error, setError] = useState('');
+  const isMobile = useClientMediaQuery('(max-width: 980px)');
 
   useEffect(() => {
     if (isVisible) {
@@ -77,12 +94,13 @@ function KorpusProModal() {
   };
 
   const handleNext = () => {
-    const currentStepData = data[`step${step}` as keyof typeof data];
+    const stepKeys = Object.keys(data) as Array<keyof typeof data>;
+    const currentStepData = data[stepKeys[step - 1]];
+
     if (validateStep(currentStepData)) {
       dispatch(nextStep());
     }
   };
-
   const handlePrev = () => {
     dispatch(prevStep());
   };
@@ -92,6 +110,8 @@ function KorpusProModal() {
     // Отправка данных на бэкенд
     // dispatch(api.endpoints.updateModalState.initiate(data));
   };
+
+  console.log({ data });
 
   const handleClose = () => {
     dispatch(hideModal());
@@ -115,18 +135,28 @@ function KorpusProModal() {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            padding: '0',
+            padding: isMobile ? '30px 0' : '0',
             border: 'none',
             borderRadius: '0',
-            width: '100%',
+            overflowY: isMobile ? 'hidden' : 'auto',
+            overflowX: isMobile ? 'hidden' : 'auto',
+            width: isMobile ? '100vw' : '100%',
             maxWidth: '1088px',
-            height: '95%', // Добавляем это свойство
+            height: isMobile ? '100vh' : '95%',
           },
         }}
       >
         <S.ModalWrapper>
           <S.ModalHeader>
-            <S.ModalStepName>{tabNames[step - 1]}</S.ModalStepName>
+            <S.ModalStepName>
+              {isMobile ? tabNamesMobile[step - 1] : tabNames[step - 1]}
+              {isMobile && (
+                <S.MobileHeaderButtons>
+                  <S.CancelButton onClick={handleClose}>Cancel</S.CancelButton>
+                  <S.ModalRestartButton>Restart</S.ModalRestartButton>
+                </S.MobileHeaderButtons>
+              )}
+            </S.ModalStepName>
             <S.ModalStepCategories>
               {tabCategories.map((category, index) => (
                 <S.ModalStepCategoryItem
@@ -143,19 +173,17 @@ function KorpusProModal() {
               onNext={handleNext}
               onPrev={handlePrev}
               error={error}
-              data={data[`step${step}` as keyof typeof data]}
+              data={data}
               step={step}
             />
-            {/* {step === 2 && <button onClick={handleSubmit}>Submit</button>} */}
-            {/* <button onClick={handleClose}>Close</button> */}
           </S.ModalBody>
           <S.ModalFooter>
-            <S.ModalRestartButton>Restart</S.ModalRestartButton>
+            {!isMobile && <S.ModalRestartButton>Restart</S.ModalRestartButton>}
             <S.ModalControls>
               <S.ModalBackButton onClick={handlePrev} disabled={step === 1}>
                 Back
               </S.ModalBackButton>
-              <S.ModalNextButton onClick={handleNext} disabled={step === 5}>
+              <S.ModalNextButton onClick={handleNext} disabled={false}>
                 Next
               </S.ModalNextButton>
             </S.ModalControls>

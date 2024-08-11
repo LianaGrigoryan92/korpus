@@ -8,11 +8,12 @@ interface StepData {
 interface ModalState {
   step: number;
   data: {
-    step1: StepData;
-    step2: StepData;
-    step3: StepData;
-    step4: StepData;
-    step5: StepData;
+    project: StepData;
+    category: StepData;
+    subCategory: StepData;
+    preferences: StepData;
+    korpusColor: StepData;
+    facade: StepData;
   };
   isVisible: boolean;
 }
@@ -20,11 +21,12 @@ interface ModalState {
 const initialState: ModalState = {
   step: 1,
   data: {
-    step1: {},
-    step2: {},
-    step3: {},
-    step4: {},
-    step5: {},
+    project: {},
+    category: {},
+    subCategory: {},
+    preferences: {},
+    korpusColor: {},
+    facade: {},
   },
   isVisible: false,
 };
@@ -44,7 +46,13 @@ const modalSlice = createSlice({
       action: PayloadAction<{ step: number; data: StepData }>,
     ) => {
       const { step, data } = action.payload;
-      state.data[`step${step}` as keyof ModalState['data']] = data;
+      (state.step = step),
+        (state.data[
+          Object.keys(initialState.data)[step - 1] as keyof ModalState['data']
+        ] =
+          data[
+            Object.keys(initialState.data)[step - 1] as keyof ModalState['data']
+          ]);
     },
     showModal: (state) => {
       state.isVisible = true;

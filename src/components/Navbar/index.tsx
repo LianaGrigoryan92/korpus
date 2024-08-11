@@ -16,7 +16,8 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const isMobile = useClientMediaQuery('(max-width: 980px)');
   const locale = useLocale() as Locale;
-  const [isVisibleCategories, setIsVisibleCategories] = useState<boolean>(false);
+  const [isVisibleCategories, setIsVisibleCategories] =
+    useState<boolean>(false);
 
   const handleOpenMenu = () => {
     setIsMenuOpen(true);
@@ -28,7 +29,7 @@ export default function Navbar() {
 
   const handleVisibleCategories = () => {
     setIsVisibleCategories(!isVisibleCategories);
-  }
+  };
 
   return (
     <>
@@ -44,20 +45,41 @@ export default function Navbar() {
               <S.NavItem className="products" onClick={handleVisibleCategories}>
                 Products
                 <S.ProductCategories $isVisible={isVisibleCategories}>
-                  <S.CategoryItem>All <ArrowRight size={24} color={theme.palette.common.black} /></S.CategoryItem>
-                  <S.CategoryItem>Lorem <ArrowRight size={24} color={theme.palette.common.black} /></S.CategoryItem>
-                  <S.CategoryItem>Lorem <ArrowRight size={24} color={theme.palette.common.black} /></S.CategoryItem>
-                  <S.CategoryItem>Lorem <ArrowRight size={24} color={theme.palette.common.black} /></S.CategoryItem>
-                  <S.CategoryItem>Lorem <ArrowRight size={24} color={theme.palette.common.black} /></S.CategoryItem>
-                  <S.CategoryItem>Lorem <ArrowRight size={24} color={theme.palette.common.black} /></S.CategoryItem>
-                  <S.CategoryItem>Lorem <ArrowRight size={24} color={theme.palette.common.black} /></S.CategoryItem>
+                  <S.CategoryItem>
+                    All{' '}
+                    <ArrowRight size={24} color={theme.palette.common.black} />
+                  </S.CategoryItem>
+                  <S.CategoryItem>
+                    Lorem{' '}
+                    <ArrowRight size={24} color={theme.palette.common.black} />
+                  </S.CategoryItem>
+                  <S.CategoryItem>
+                    Lorem{' '}
+                    <ArrowRight size={24} color={theme.palette.common.black} />
+                  </S.CategoryItem>
+                  <S.CategoryItem>
+                    Lorem{' '}
+                    <ArrowRight size={24} color={theme.palette.common.black} />
+                  </S.CategoryItem>
+                  <S.CategoryItem>
+                    Lorem{' '}
+                    <ArrowRight size={24} color={theme.palette.common.black} />
+                  </S.CategoryItem>
+                  <S.CategoryItem>
+                    Lorem{' '}
+                    <ArrowRight size={24} color={theme.palette.common.black} />
+                  </S.CategoryItem>
+                  <S.CategoryItem>
+                    Lorem{' '}
+                    <ArrowRight size={24} color={theme.palette.common.black} />
+                  </S.CategoryItem>
                 </S.ProductCategories>
               </S.NavItem>
               <Link href={'/about'}>About</Link>
               <Link href={'/korpus-pro'}>KorpusPro</Link>
             </S.NavItemWrapper>
             <S.NavItemWrapper>
-              <input type={'search'} placeholder='Search' />
+              <input type={'search'} placeholder="Search" />
               <LocaleSwitcher locale={locale} />
               <Link href={'/profile'}>Profile</Link>
               <Link href={'/cart'}>Cart (1)</Link>

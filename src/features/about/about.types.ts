@@ -22,7 +22,7 @@ interface AboutQuestions {
 }
 
 interface QuestionItem {
-  id:  number;
+  id: number;
   question: string;
   answer: string;
 }

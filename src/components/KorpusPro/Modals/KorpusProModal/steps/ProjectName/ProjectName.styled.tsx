@@ -5,6 +5,10 @@ export const StepWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 980px) {
+    align-items: flex-start;
+  }
 `;
 
 export const InputWrapper = styled.div`
