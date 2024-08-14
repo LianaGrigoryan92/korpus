@@ -1,0 +1,53 @@
+export const facadeMaterialsData = {
+  type: {
+    name: 'Type',
+    items: [
+      {
+        id: 1,
+        name: 'Lam. Chipboard',
+        type: 'clipboard',
+        value: 1,
+        editable: true,
+        default: true,
+        isFixed: false,
+        selectable: true,
+      },
+      {
+        id: 2,
+        name: 'Lam. MDF',
+        type: 'mdf',
+        value: 2,
+        editable: true,
+        isFixed: false,
+        selectable: true,
+      },
+      {
+        id: 3,
+        name: 'MDF coloring',
+        type: 'mdfColoring',
+        value: 2,
+        editable: true,
+        isFixed: false,
+        selectable: true,
+      },
+      {
+        id: 4,
+        name: 'MDF veneer',
+        type: 'mdfVeneer',
+        value: 2,
+        editable: true,
+        isFixed: false,
+        selectable: true,
+      },
+      {
+        id: 5,
+        name: 'MDF HPL',
+        type: 'mdfHpl',
+        value: 2,
+        editable: true,
+        isFixed: false,
+        selectable: true,
+      },
+    ],
+  },
+};

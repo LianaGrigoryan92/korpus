@@ -31,7 +31,8 @@ export const ProductCardColor = styled.div<{ color: string }>`
   width: 14px;
   height: 14px;
   background: ${({ color }) => color};
-
+  border: 0.7px solid ${({ color }) => color === '#FFFFFF' || 'white' ? '#C6C6C6' : 'transparent'};
+  
   @media (max-width: 768px) {
     width: 16px;
     height: 16px;

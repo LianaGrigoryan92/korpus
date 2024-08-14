@@ -38,7 +38,10 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
   const handleChangeTotalHeight = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedPreferencesValues((prevState: any) => ({
       ...prevState,
-      position: { [e.target.name]: e.target.value },
+      position: {
+        ...prevState.position,
+        [e.target.name]: e.target.value,
+      },
     }));
   };
 
@@ -48,12 +51,14 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
   ) => {
     setSelectedPreferencesValues((prevState: any) => ({
       ...prevState,
-      [name]: { [e.target.name]: e.target.value },
+      [name]: {
+        ...prevState[name],
+        [e.target.name]: e.target.value,
+      },
     }));
   };
 
-  console.log({ selectedPreferencesValues, data });
-
+  console.log({ selectedPreferencesValues });
   return (
     <S.PreferencesWrapper>
       {preferencesData.position && (
@@ -104,7 +109,6 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
           </S.PreferenceContent>
         </S.Preference>
       )}
-      <S.Divider />
       {preferencesData.totalSize && (
         <S.Preference>
           <S.PreferenceCategory>
@@ -154,6 +158,7 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
           </S.PreferenceContent>
         </S.Preference>
       )}
+      <S.Divider />
       {preferencesData.type && (
         <S.Preference>
           <S.PreferenceCategory>

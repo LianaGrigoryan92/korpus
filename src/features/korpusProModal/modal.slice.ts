@@ -14,6 +14,8 @@ interface ModalState {
     preferences: StepData;
     korpusColor: StepData;
     facade: StepData;
+    facadeMaterialType: StepData;
+    facadeColor: StepData;
   };
   isVisible: boolean;
 }
@@ -27,6 +29,8 @@ const initialState: ModalState = {
     preferences: {},
     korpusColor: {},
     facade: {},
+    facadeMaterialType: {},
+    facadeColor: {},
   },
   isVisible: false,
 };
@@ -40,6 +44,12 @@ const modalSlice = createSlice({
     },
     prevStep: (state) => {
       state.step -= 1;
+    },
+    customNextStep: (state, action: PayloadAction<number>) => {
+      state.step += action.payload;
+    },
+    customPrevStep: (state, action: PayloadAction<number>) => {
+      state.step -= action.payload;
     },
     updateStepData: (
       state,
@@ -63,6 +73,13 @@ const modalSlice = createSlice({
   },
 });
 
-export const { nextStep, prevStep, updateStepData, showModal, hideModal } =
-  modalSlice.actions;
+export const {
+  nextStep,
+  customNextStep,
+  customPrevStep,
+  prevStep,
+  updateStepData,
+  showModal,
+  hideModal,
+} = modalSlice.actions;
 export default modalSlice.reducer;

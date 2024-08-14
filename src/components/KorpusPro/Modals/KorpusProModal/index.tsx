@@ -1,11 +1,16 @@
-// src/components/Modal.tsx
 'use client';
 
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { RootState } from '@/store/store';
-import { hideModal, nextStep, prevStep } from '@/features';
+import {
+  customNextStep,
+  customPrevStep,
+  hideModal,
+  nextStep,
+  prevStep,
+} from '@/features';
 import * as S from './KorpusProModal.styled';
 import Category from './steps/Category';
 import ProjectName from './steps/ProjectName';
@@ -14,15 +19,9 @@ import { useClientMediaQuery } from '@/hooks/useClientMediaQuery';
 import SubCategory from './steps/SubCategory';
 import KorpusColor from './steps/KorpusColor';
 import Facade from './steps/Facade';
-
-const steps: { [key: number]: React.ComponentType<StepProps> } = {
-  1: ProjectName,
-  2: Category,
-  3: SubCategory,
-  4: Preferences,
-  5: KorpusColor,
-  6: Facade,
-};
+import FacadeMaterialType from './steps/FacadeMaterials';
+import FacadeColor from './steps/FacadeColor';
+import Products from './steps/Products';
 
 interface StepProps {
   onNext: (data: any) => void;
@@ -35,31 +34,59 @@ interface StepProps {
 const tabNames = [
   'Give a name to your project',
   'Choose category',
-  'Choose korups color',
-  'Fasade',
-  'Fasade color',
-  'Choose Product',
+  'Choose category', // Repeated for step 3
+  'Set up preferences',
+  'Choose korpus color',
+  'Facade',
+  'Facade', // Repeated for step 7
+  'Facade color',
+  'Choose product',
 ];
 
 const tabNamesMobile = [
   'Name Your Project',
   'Choose category',
-  'Choose korups color',
-  'Fasade',
-  'Fasade color',
-  'Choose Product',
+  'Choose category', // Repeated for step 3
+  'Choose korpus color',
+  'Facade',
+  'Facade', // Repeated for step 7
 ];
 
-const tabCategories = [
+// Create an array of unique categories
+const uniqueTabCategories = [
   'Project Name',
   'Category',
-  'Category',
   'Set up preferences',
-  'Korups color',
-  'Fasade',
-  'Fasade Color',
+  'Korpus color',
+  'Facade',
+  'Facade Color',
   'Products',
 ];
+
+// Mapping each step to the correct unique category index
+const stepToCategoryIndexMap: { [key: number]: number } = {
+  1: 0, // Project Name
+  2: 1, // Category
+  3: 1, // Category (same as step 2)
+  4: 2, // Set up preferences
+  5: 3, // Korpus color
+  6: 4, // Facade
+  7: 4, // Facade (same as step 6)
+  8: 5, // Facade Color
+  9: 6, // Products
+};
+
+const steps: { [key: number]: React.ComponentType<StepProps> } = {
+  1: ProjectName,
+  2: Category,
+  3: SubCategory,
+  4: Preferences,
+  5: KorpusColor,
+  6: Facade,
+  7: FacadeMaterialType,
+  8: FacadeColor,
+  9: Products,
+};
 
 function KorpusProModal() {
   const dispatch = useAppDispatch();
@@ -81,8 +108,6 @@ function KorpusProModal() {
     };
   }, [isVisible]);
 
-  const CurrentStep = steps[step];
-
   const validateStep = (stepData: any): boolean => {
     console.log({ stepData });
     if (step === 1 && !stepData.projectName) {
@@ -98,24 +123,48 @@ function KorpusProModal() {
     const currentStepData = data[stepKeys[step - 1]];
 
     if (validateStep(currentStepData)) {
-      dispatch(nextStep());
+      if (step === 6 && currentStepData.facadePreferences?.type === 'without') {
+        dispatch(customNextStep(3));
+      } else {
+        dispatch(nextStep());
+      }
     }
   };
+
   const handlePrev = () => {
-    dispatch(prevStep());
+    const currentStepData = data['facade'];
+    console.log({ currentStepData });
+    if (step === 9 && currentStepData.facadePreferences?.type === 'without') {
+      dispatch(customPrevStep(3));
+    } else {
+      dispatch(prevStep());
+    }
   };
-
-  const handleSubmit = () => {
-    console.log({ data });
-    // Отправка данных на бэкенд
-    // dispatch(api.endpoints.updateModalState.initiate(data));
-  };
-
-  console.log({ data });
 
   const handleClose = () => {
     dispatch(hideModal());
   };
+
+  const handleReturnTabName = (step: number) => {
+    if (isMobile) {
+      return tabNamesMobile[step - 1];
+    }
+
+    if (step === 2 || step === 3) {
+      return tabNames[1]; // "Choose Category"
+    }
+
+    if (step === 6 || step === 7) {
+      return tabNames[5]; // "Facade"
+    }
+
+    return tabNames[step - 1];
+  };
+
+  const CurrentStep =
+    step === 7 && data?.facade?.facadePreferences?.type === 'without'
+      ? steps[8]
+      : steps[step];
 
   return (
     <S.KorpusProModalWrapper>
@@ -149,7 +198,7 @@ function KorpusProModal() {
         <S.ModalWrapper>
           <S.ModalHeader>
             <S.ModalStepName>
-              {isMobile ? tabNamesMobile[step - 1] : tabNames[step - 1]}
+              {handleReturnTabName(step)}
               {isMobile && (
                 <S.MobileHeaderButtons>
                   <S.CancelButton onClick={handleClose}>Cancel</S.CancelButton>
@@ -158,10 +207,10 @@ function KorpusProModal() {
               )}
             </S.ModalStepName>
             <S.ModalStepCategories>
-              {tabCategories.map((category, index) => (
+              {uniqueTabCategories.map((category, index) => (
                 <S.ModalStepCategoryItem
                   key={index}
-                  $active={step === index + 1}
+                  $active={stepToCategoryIndexMap[step] === index}
                 >
                   {category}
                 </S.ModalStepCategoryItem>
@@ -183,7 +232,7 @@ function KorpusProModal() {
               <S.ModalBackButton onClick={handlePrev} disabled={step === 1}>
                 Back
               </S.ModalBackButton>
-              <S.ModalNextButton onClick={handleNext} disabled={false}>
+              <S.ModalNextButton onClick={handleNext}>
                 Next
               </S.ModalNextButton>
             </S.ModalControls>

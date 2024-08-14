@@ -55,6 +55,8 @@ export const ModalStepCategoryItem = styled.div<{ $active: boolean }>`
 export const ModalBody = styled.div`
   padding: 24px;
   height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 export const ModalFooter = styled.div`

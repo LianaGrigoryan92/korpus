@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import * as S from './Facade.styled';
+import * as S from './FacadeMaterials.styled';
 import { getImageUrl } from '@/utils/getImageFullUrl';
 import { useAppDispatch } from '@/store/hooks';
 import MockImage from '@/public/images/korpus-pro/preferences/image.png';
 import { updateStepData } from '@/features';
 import PreferenceItem from '@/components/KorpusPro/PreferenceItem';
-import { facadeData } from './mock';
+import { facadeMaterialsData } from './mock';
 
 interface StepProps {
   data: any;
@@ -21,13 +21,16 @@ export interface PreferenceValues {
   };
 }
 
-const Facade: React.FC<StepProps> = ({ data, error, step }) => {
+const FacadeMaterialType: React.FC<StepProps> = ({ data, error, step }) => {
   const dispatch = useAppDispatch();
   const [selectedPreferencesValues, setSelectedPreferencesValues] =
     useState<PreferenceValues>({});
 
   useEffect(() => {
-    const updatedData = { ...data, facade: { ...selectedPreferencesValues } };
+    const updatedData = {
+      ...data,
+      facadeMaterialType: selectedPreferencesValues.facadeMaterialType,
+    };
     dispatch(updateStepData({ data: updatedData, step }));
   }, [selectedPreferencesValues]);
 
@@ -40,17 +43,16 @@ const Facade: React.FC<StepProps> = ({ data, error, step }) => {
       [name]: { [e.target.name]: e.target.value },
     }));
   };
-  console.log({ selectedPreferencesValues, data });
 
   return (
     <S.FacadePreferencesWrapper>
-      {facadeData.facadePreferences && (
+      {facadeMaterialsData.type && (
         <S.FacadePreference>
           <S.FacadePreferenceCategory>
-            {facadeData.facadePreferences.name}
+            {facadeMaterialsData.type.name}
           </S.FacadePreferenceCategory>
           <S.FacadePreferenceContent>
-            {facadeData.facadePreferences.items.map((item) => (
+            {facadeMaterialsData.type.items.map((item) => (
               <PreferenceItem
                 key={item.id}
                 title={item.name}
@@ -61,7 +63,7 @@ const Facade: React.FC<StepProps> = ({ data, error, step }) => {
                 value={!Array.isArray(item.type) ? item.type : null}
                 isSelectable={true}
                 defaultSelected={item.default ? item.type : undefined}
-                category={'facadePreferences'}
+                category={'facadeMaterialType'}
                 selectedPreferencesValues={selectedPreferencesValues}
                 setSelectedPreferencesValues={setSelectedPreferencesValues}
                 handleSelectPositionValues={handleSelectPositionValues}
@@ -70,36 +72,8 @@ const Facade: React.FC<StepProps> = ({ data, error, step }) => {
           </S.FacadePreferenceContent>
         </S.FacadePreference>
       )}
-      <S.Divider />
-      {selectedPreferencesValues['facadePreferences']?.type !== 'without' &&
-        facadeData.type && (
-          <S.FacadePreference>
-            <S.FacadePreferenceCategory>
-              {facadeData.type.name}
-            </S.FacadePreferenceCategory>
-            <S.FacadePreferenceContent>
-              {facadeData.type.items.map((item) => (
-                <PreferenceItem
-                  key={item.id}
-                  title={item.name}
-                  imageUrl={MockImage.src}
-                  isFixed={item.isFixed}
-                  isSingleValue={!item.editable}
-                  options={Array.isArray(item.type) ? item.type : undefined}
-                  value={!Array.isArray(item.type) ? item.type : null}
-                  isSelectable={true}
-                  defaultSelected={item.default ? item.type : undefined}
-                  category={'facadeType'}
-                  selectedPreferencesValues={selectedPreferencesValues}
-                  setSelectedPreferencesValues={setSelectedPreferencesValues}
-                  handleSelectPositionValues={handleSelectPositionValues}
-                />
-              ))}
-            </S.FacadePreferenceContent>
-          </S.FacadePreference>
-        )}
     </S.FacadePreferencesWrapper>
   );
 };
 
-export default Facade;
+export default FacadeMaterialType;

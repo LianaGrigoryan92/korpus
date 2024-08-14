@@ -3,9 +3,8 @@ import styled from 'styled-components';
 export const PreferencesWrapper = styled.div`
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  row-gap: 18px;
 `;
 
 export const Preference = styled.div`
@@ -59,4 +58,9 @@ export const Input = styled.input`
   border-bottom: 1px solid #e4e4e4;
 `;
 
-export const Divider = styled.div``;
+export const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: #e6e6e6;
+  margin: 16px 0;
+`;

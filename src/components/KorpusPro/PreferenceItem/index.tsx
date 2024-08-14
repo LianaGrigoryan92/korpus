@@ -2,7 +2,6 @@
 
 import { camelize } from '@/utils/camelize';
 import { PreferenceValues } from '../Modals/KorpusProModal/steps/Preferences';
-// styles
 import * as S from './PreferenceItem.styled';
 import { Dispatch, SetStateAction, useEffect, useMemo } from 'react';
 import { IPreferenceItem } from '../Modals/KorpusProModal/steps/Preferences/mock';
@@ -49,6 +48,7 @@ export default function PreferenceItem({
 
     if (
       defaultOption &&
+      !updatedPreferences[category]?.[camelizedTitle] &&
       (!updatedPreferences[category] ||
         updatedPreferences[category][camelizedTitle] !==
           defaultOption.toString())
@@ -102,10 +102,9 @@ export default function PreferenceItem({
   ]);
 
   const handleTypeSelection = (value: string) => {
-    console.log({ value });
     setSelectedPreferencesValues((prevState: any) => ({
       ...prevState,
-      [category]: { type: value },
+      [category]: { ...prevState[category], type: value },
     }));
   };
 
