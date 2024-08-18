@@ -4,7 +4,7 @@ export const preferencesData = {
     items: [
       {
         id: 1,
-        name: ' ',
+        name: 'Tablecloth',
         value: [12, 28, 30],
         default: 28,
         isFixed: false,
@@ -16,7 +16,7 @@ export const preferencesData = {
         value: [60, 100, 120],
         default: 100,
         editable: true,
-        isFIxed: false,
+        isFixed: false,
       },
       {
         id: 3,

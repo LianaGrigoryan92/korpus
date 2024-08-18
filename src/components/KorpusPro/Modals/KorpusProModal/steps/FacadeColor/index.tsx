@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import * as S from './FacadeColor.styled';
-import { getImageUrl } from '@/utils/getImageFullUrl';
 import { useAppDispatch } from '@/store/hooks';
 import MockImage from '@/public/images/korpus-pro/preferences/image.png';
 import { updateStepData } from '@/features';
-import PreferenceItem from '@/components/KorpusPro/PreferenceItem';
-import { facadeColorData, facadeColors } from './mock';
+import { facadeColorData } from './mock';
 import { camelize } from '@/utils/camelize';
 import { Check } from 'lucide-react';
+import FacadeColorItem from "@/components/KorpusPro/FacadeColorItem";
+import {useGetFacadeColorByFacadeMaterialIdQuery} from "@/features/korpusProFacadeColor";
 
 interface StepProps {
   data: any;
@@ -24,6 +24,7 @@ export interface PreferenceValues {
 }
 
 const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
+  const { data: facadeColorTypes } = useGetFacadeColorByFacadeMaterialIdQuery({ facadeMaterialId: data.facadeMaterialType });
   const dispatch = useAppDispatch();
   const [selectedPreferencesValues, setSelectedPreferencesValues] =
     useState<PreferenceValues>({});
@@ -41,8 +42,19 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
   ) => {
     setSelectedPreferencesValues((prevState: any) => ({
       ['facadeColor']: {
-        ...prevState['type'],
+        ...prevState['facadeColor'],
         [e.target.name]: e.target.value,
+      },
+    }));
+  };
+
+  const handleFacadeColorPositionValue = (
+      value: string | number,
+  ) => {
+    setSelectedPreferencesValues((prevState: any) => ({
+      ['facadeColor']: {
+        ...prevState['facadeColor'],
+        ['type']: value,
       },
     }));
   };
@@ -53,11 +65,6 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
   >(null);
 
   // Filter colors based on the search term
-  const filteredColors = facadeColors?.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.colorCategory.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
 
   // Update the global state when selectedColorId changes
   useEffect(() => {
@@ -73,7 +80,21 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
   // Handle color selection
   const handleClick = (colorId: string | number) => {
     setSelectedColorId(colorId);
+    setSelectedPreferencesValues((prevState: any) => ({
+      ['facadeColor']: {
+        ...prevState['facadeColor'],
+        ['color']: colorId,
+      },
+    }));
   };
+
+  const { lacquerPercentages, facadeColors } = facadeColorTypes?.find(facadeColorType => facadeColorType.id === +selectedPreferencesValues?.facadeColor?.type) || {} as unknown as FacadeColor;
+
+  const filteredColors = facadeColors?.filter(
+      (item) =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.colorCategory.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
 
   console.log({ selectedPreferencesValues, data });
 
@@ -85,70 +106,65 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
             {facadeColorData.type.name}
           </S.FacadePreferenceCategory>
           <S.FacadePreferenceContent>
-            {facadeColorData.type.items.map((item) => (
-              <PreferenceItem
+            {facadeColorTypes?.map((item) => (
+              <FacadeColorItem
                 key={item.id}
-                title={item.name}
+                title={item.title}
                 imageUrl={MockImage.src}
-                isFixed={item.isFixed}
-                isSingleValue={!item.editable}
-                options={Array.isArray(item.type) ? item.type : undefined}
-                value={!Array.isArray(item.type) ? item.type : null}
-                isSelectable={true}
-                defaultSelected={item.default ? item.type : undefined}
-                category={'facadeColor'}
-                selectedPreferencesValues={selectedPreferencesValues}
-                setSelectedPreferencesValues={setSelectedPreferencesValues}
-                handleSelectPositionValues={handleSelectPositionValues}
+                onSelect={handleFacadeColorPositionValue}
+                value={item.id}
+                selectedFacadeColorValue={selectedPreferencesValues['facadeColor']?.['type'] as unknown as number} // Safely accessing 'type'
               />
             ))}
           </S.FacadePreferenceContent>
         </S.FacadePreference>
       )}
-      <S.Divider />
-      <S.Title>{facadeColorData.lacquerPercentage.name}</S.Title>
-      <S.CheckboxWrapper>
-        {facadeColorData.lacquerPercentage.items[0].value.map((option) => (
-          <S.CheckboxItemWrapper key={option}>
-            <S.CheckboxItem
-              name={camelize(facadeColorData.lacquerPercentage.items[0].name)}
-              type="checkbox"
-              checked={
-                selectedPreferencesValues['facadeColor']?.[
-                  camelize(facadeColorData.lacquerPercentage.items[0].name)
-                ] === option.toString()
-              }
-              value={option}
-              onChange={handleSelectPositionValues}
-            />
-            <S.CheckboxLabel>{option}</S.CheckboxLabel>
-          </S.CheckboxItemWrapper>
-        ))}
-      </S.CheckboxWrapper>
-      <S.Divider />
-      <S.FacadeColorWrapper>
-        <S.Title>Facade Color</S.Title>
-        <S.Search
-          type="text"
-          placeholder="Search Color"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-        <S.ColorsWrapper>
-          {filteredColors?.map((color) => (
-            <S.ColorItem key={color.id} onClick={() => handleClick(color.id)}>
-              <S.Color $color={color.hex} />
-              <S.ColorInfo>
-                <S.ColorInfoWrapper>
-                  <S.ColorHex>{color.hex}</S.ColorHex>
-                  <S.ColorName>{color.name}</S.ColorName>
-                </S.ColorInfoWrapper>
-                {selectedColorId === color.id && <Check size={22} />}
-              </S.ColorInfo>
-            </S.ColorItem>
+      {selectedPreferencesValues?.facadeColor?.type && <>
+        <S.Divider />
+        <S.Title>{facadeColorData.lacquerPercentage.name}</S.Title>
+        <S.CheckboxWrapper>
+          {lacquerPercentages?.map((option) => (
+              <S.CheckboxItemWrapper key={option.id}>
+                <S.CheckboxItem
+                    name={camelize(facadeColorData.lacquerPercentage.items[0].name)}
+                    type="checkbox"
+                    checked={
+                        selectedPreferencesValues['facadeColor']?.[
+                            camelize(facadeColorData.lacquerPercentage.items[0].name)
+                            ] === option.title.toString()
+                    }
+                    value={option.title}
+                    onChange={handleSelectPositionValues}
+                />
+                <S.CheckboxLabel>{option.title}%</S.CheckboxLabel>
+              </S.CheckboxItemWrapper>
           ))}
-        </S.ColorsWrapper>
-    </S.FacadeColorWrapper>
+        </S.CheckboxWrapper>
+        <S.Divider />
+        <S.FacadeColorWrapper>
+          <S.Title>Facade Color</S.Title>
+          <S.Search
+              type="text"
+              placeholder="Search Color"
+              value={searchTerm}
+              onChange={handleSearchChange}
+          />
+          <S.ColorsWrapper>
+            {filteredColors?.map((color) => (
+                <S.ColorItem key={color.id} onClick={() => handleClick(color.id)}>
+                  <S.Color $color={color.hex} />
+                  <S.ColorInfo>
+                    <S.ColorInfoWrapper>
+                      <S.ColorHex>{color.hex}</S.ColorHex>
+                      <S.ColorName>{color.title}</S.ColorName>
+                    </S.ColorInfoWrapper>
+                    {selectedColorId === color.id && <Check size={22} />}
+                  </S.ColorInfo>
+                </S.ColorItem>
+            ))}
+          </S.ColorsWrapper>
+        </S.FacadeColorWrapper>
+      </>}
     </S.FacadePreferencesWrapper>
   );
 };

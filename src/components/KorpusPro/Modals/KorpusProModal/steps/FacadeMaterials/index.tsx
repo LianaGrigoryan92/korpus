@@ -8,6 +8,9 @@ import MockImage from '@/public/images/korpus-pro/preferences/image.png';
 import { updateStepData } from '@/features';
 import PreferenceItem from '@/components/KorpusPro/PreferenceItem';
 import { facadeMaterialsData } from './mock';
+import FacadeMaterialItem from "@/components/KorpusPro/FacadeMaterialItem";
+import {useGetFacadesQuery} from "@/features/korpusProFacade";
+import {useGetFacadeMaterialsByFacadeIdQuery} from "@/features/korpusProFacadeMaterial";
 
 interface StepProps {
   data: any;
@@ -22,26 +25,23 @@ export interface PreferenceValues {
 }
 
 const FacadeMaterialType: React.FC<StepProps> = ({ data, error, step }) => {
+  const { data: facadeMaterials } = useGetFacadeMaterialsByFacadeIdQuery({ facadeId: data.facade.facadeType });
   const dispatch = useAppDispatch();
-  const [selectedPreferencesValues, setSelectedPreferencesValues] =
-    useState<PreferenceValues>({});
+  const [selectedPreferencesValue, setSelectedPreferencesValue] =
+    useState<number>(1);
 
   useEffect(() => {
     const updatedData = {
       ...data,
-      facadeMaterialType: selectedPreferencesValues.facadeMaterialType,
+      facadeMaterialType: selectedPreferencesValue,
     };
     dispatch(updateStepData({ data: updatedData, step }));
-  }, [selectedPreferencesValues]);
+  }, [selectedPreferencesValue]);
 
-  const handleSelectPositionValues = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    name: string,
+  const handleSelectPositionValue = (
+    value: number
   ) => {
-    setSelectedPreferencesValues((prevState: any) => ({
-      ...prevState,
-      [name]: { [e.target.name]: e.target.value },
-    }));
+    setSelectedPreferencesValue(value);
   };
 
   return (
@@ -52,21 +52,14 @@ const FacadeMaterialType: React.FC<StepProps> = ({ data, error, step }) => {
             {facadeMaterialsData.type.name}
           </S.FacadePreferenceCategory>
           <S.FacadePreferenceContent>
-            {facadeMaterialsData.type.items.map((item) => (
-              <PreferenceItem
+            {facadeMaterials?.map((item) => (
+              <FacadeMaterialItem
                 key={item.id}
-                title={item.name}
-                imageUrl={MockImage.src}
-                isFixed={item.isFixed}
-                isSingleValue={!item.editable}
-                options={Array.isArray(item.type) ? item.type : undefined}
-                value={!Array.isArray(item.type) ? item.type : null}
-                isSelectable={true}
-                defaultSelected={item.default ? item.type : undefined}
-                category={'facadeMaterialType'}
-                selectedPreferencesValues={selectedPreferencesValues}
-                setSelectedPreferencesValues={setSelectedPreferencesValues}
-                handleSelectPositionValues={handleSelectPositionValues}
+                title={item.title}
+                imageUrl={item.image}
+                selectedFacadeMaterialValue={selectedPreferencesValue}
+                onSelect={handleSelectPositionValue}
+                value={item.id}
               />
             ))}
           </S.FacadePreferenceContent>

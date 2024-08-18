@@ -1,8 +1,7 @@
 import { AddToWishlistButton, ProductCardColor, ProductCardHeader } from "@/components/Products/ProductCard/ProductCard.styled";
-import { Product } from "@/features/products/products.types";
 import { useClientMediaQuery } from "@/hooks/useClientMediaQuery";
 import { Heart, Minus, Plus } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ProductMockImage from '@/public/images/korpus-pro/products/product.png';
 import { capitalize } from '@mui/material';
 import { theme } from '@/styles';
@@ -10,19 +9,19 @@ import * as S from './ProductItem.styled';
 
 interface ProductItemProps {
     product: Product;
-    handleSelectProduct: (productId: number | string, productName: string, count: number) => void;
+    handleSelectProduct: (productId: number | string, productName: string, productPrice: string, image: string, count: number) => void;
     handleRemoveProduct: (productId: number | string) => void;
 }
 
 export default function ProductItem({ product, handleSelectProduct, handleRemoveProduct }: ProductItemProps) {
     const isMobile = useClientMediaQuery('(max-width: 768px)');
-    const [count, setCount] = useState<number>(1);
+    const [count, setCount] = useState<number>(0);
 
     const handleMinusCount = (e: any) => {
         e.stopPropagation();
         if (count > 1) {
             setCount(count - 1);
-            handleSelectProduct(product.id, product.name, count - 1);
+            handleSelectProduct(product.id, product.title, `${product.price} ${product.currency}`, product.image || '',count - 1);
         } else {
             handleRemoveProduct(product.id);
         }
@@ -31,13 +30,13 @@ export default function ProductItem({ product, handleSelectProduct, handleRemove
     const handlePlusCount = (e: any) => {
         e.stopPropagation();
         setCount(count + 1);
-        handleSelectProduct(product.id, product.name, count + 1);
+        handleSelectProduct(product.id, product.title, `${product.price} ${product.currency}`, product.image || '', count + 1);
     }
 
     return (
-        <S.ProductCard className='item' onClick={() => handleSelectProduct(product.id, product.name, count)}>
+        <S.ProductCard className='item' onClick={() => handleSelectProduct(product.id, product.title, `${product.price} ${product.currency}`, product.image || '', count)}>
             <ProductCardHeader>
-                <ProductCardColor color={product.color} />
+                <ProductCardColor color="#FFF" />
                 <AddToWishlistButton>
                     <Heart
                         size={isMobile ? 22 : 16}
@@ -46,12 +45,12 @@ export default function ProductItem({ product, handleSelectProduct, handleRemove
                 </AddToWishlistButton>
             </ProductCardHeader>
             <S.ProductImageWrapper>
-                <S.ProductImage src={ProductMockImage.src} alt={'Korpus Pro Product image'}/>
+                <S.ProductImage src={product.image || ProductMockImage.src} alt={'Korpus Pro Product image'}/>
             </S.ProductImageWrapper>
             <S.ProductCardFooter>
                 <S.ProductInfo>
                     <S.ProductCategory>{capitalize(product.category)}</S.ProductCategory>
-                    <S.ProductName>{product.name}</S.ProductName>
+                    <S.ProductName>{product.title}</S.ProductName>
                 </S.ProductInfo>
                 <S.ProductActions>
                     <S.ProductPrice>

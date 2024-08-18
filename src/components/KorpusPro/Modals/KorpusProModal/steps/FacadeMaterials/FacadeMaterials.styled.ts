@@ -26,6 +26,9 @@ export const FacadePreferenceContent = styled.div`
   grid-template-columns: 1fr 1fr;
   row-gap: 16px;
   column-gap: 16px;
+    @media (max-width: 768px) {
+        grid-template-columns: auto;
+    }
 `;
 
 export const Divider = styled.div`

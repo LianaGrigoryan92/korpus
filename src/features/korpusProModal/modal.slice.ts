@@ -16,6 +16,7 @@ interface ModalState {
     facade: StepData;
     facadeMaterialType: StepData;
     facadeColor: StepData;
+    products: StepData;
   };
   isVisible: boolean;
 }
@@ -31,6 +32,7 @@ const initialState: ModalState = {
     facade: {},
     facadeMaterialType: {},
     facadeColor: {},
+    products: {},
   },
   isVisible: false,
 };

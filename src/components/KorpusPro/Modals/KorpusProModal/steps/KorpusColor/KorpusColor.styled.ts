@@ -35,6 +35,9 @@ export const Search = styled.input`
 export const ColorsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+    }
 `;
 
 export const ColorItem = styled.div`

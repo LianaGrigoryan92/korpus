@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { RootState } from '@/store/store';
 import {
@@ -90,9 +91,11 @@ const steps: { [key: number]: React.ComponentType<StepProps> } = {
 
 function KorpusProModal() {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const { step, data, isVisible } = useAppSelector(
     (state: RootState) => state.modal,
   );
+
   const [error, setError] = useState('');
   const isMobile = useClientMediaQuery('(max-width: 980px)');
 
@@ -114,6 +117,30 @@ function KorpusProModal() {
       setError('Project Name is required');
       return false;
     }
+    if (step === 2 && !stepData.categoryId) {
+      return false;
+    }
+    if (step === 3 && !stepData.subCategory) {
+      return false;
+    }
+    if (step === 4 && (!stepData.position['Total Height*'] || !stepData['total size'] || !stepData.type)) {
+      return false;
+    }
+    if (step === 5 && !stepData.colorId) {
+      return false;
+    }
+    if (step === 6 && !stepData.facadeType && !stepData.Without) {
+      return false;
+    }
+    if (step === 7 && !stepData) {
+      return false;
+    }
+    if (step === 8 && (!stepData.color || !stepData.colorId || !stepData.lacquerPercentage || !stepData.type)) {
+      return false;
+    }
+    if (step === 9 && !Array.isArray(stepData)) {
+      return false;
+    }
     setError('');
     return true;
   };
@@ -123,8 +150,25 @@ function KorpusProModal() {
     const currentStepData = data[stepKeys[step - 1]];
 
     if (validateStep(currentStepData)) {
+      console.log('CHECK ALL STEPS DATA', data)
       if (step === 6 && currentStepData.facadePreferences?.type === 'without') {
         dispatch(customNextStep(3));
+      } else if (step === 9) {
+        let index = 1;
+        while (localStorage.getItem(`cartData-${index}`)) {
+          index++;
+        }
+        const uniqueKey = `cartData-${index}`;
+
+        const dataToSave = {
+          products: data.products,
+          subCategories: data.subCategory,
+          projectName: data.project.projectName,
+        };
+
+        localStorage.setItem(uniqueKey, JSON.stringify(dataToSave));
+
+        router.push('/cart');
       } else {
         dispatch(nextStep());
       }
@@ -233,7 +277,7 @@ function KorpusProModal() {
                 Back
               </S.ModalBackButton>
               <S.ModalNextButton onClick={handleNext}>
-                Next
+                {step === 9 ? 'Continue to card' : 'Next'}
               </S.ModalNextButton>
             </S.ModalControls>
           </S.ModalFooter>

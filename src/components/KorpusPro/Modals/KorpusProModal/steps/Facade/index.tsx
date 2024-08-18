@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import * as S from './Facade.styled';
-import { getImageUrl } from '@/utils/getImageFullUrl';
 import { useAppDispatch } from '@/store/hooks';
 import MockImage from '@/public/images/korpus-pro/preferences/image.png';
 import { updateStepData } from '@/features';
-import PreferenceItem from '@/components/KorpusPro/PreferenceItem';
 import { facadeData } from './mock';
+import FacadeItem from "@/components/KorpusPro/FacadeItem";
+import { useGetFacadesQuery } from "@/features/korpusProFacade";
 
 interface StepProps {
   data: any;
@@ -22,83 +22,79 @@ export interface PreferenceValues {
 }
 
 const Facade: React.FC<StepProps> = ({ data, error, step }) => {
+  const { data: facades } = useGetFacadesQuery();
+
   const dispatch = useAppDispatch();
-  const [selectedPreferencesValues, setSelectedPreferencesValues] =
-    useState<PreferenceValues>({});
+
+  const [selectedFacadeValue, setSelectedFacadeValue] = useState<string>('with');
+  const [selectedFacadeTypeValue, setSelectedFacadeTypeValue] = useState<string | number>('');
+  const [selectedPreferencesValues, setSelectedPreferencesValues] = useState<PreferenceValues>({});
 
   useEffect(() => {
     const updatedData = { ...data, facade: { ...selectedPreferencesValues } };
     dispatch(updateStepData({ data: updatedData, step }));
   }, [selectedPreferencesValues]);
 
-  const handleSelectPositionValues = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    name: string,
-  ) => {
-    setSelectedPreferencesValues((prevState: any) => ({
+  const handleSelectFacadeValues = (name: string, value: string | number) => {
+    setSelectedFacadeValue(`${value}`);
+    // @ts-ignore
+    setSelectedPreferencesValues((prevState) => ({
       ...prevState,
-      [name]: { [e.target.name]: e.target.value },
+      [name]: { facadeMaterialType: value },
     }));
   };
-  console.log({ selectedPreferencesValues, data });
+
+  const handleSelectFacadeTypeValues = (name: string, value: string | number) => {
+    setSelectedFacadeTypeValue(value);
+    // @ts-ignore
+    setSelectedPreferencesValues({
+      [name]: value,
+    });
+  };
 
   return (
-    <S.FacadePreferencesWrapper>
-      {facadeData.facadePreferences && (
-        <S.FacadePreference>
-          <S.FacadePreferenceCategory>
-            {facadeData.facadePreferences.name}
-          </S.FacadePreferenceCategory>
-          <S.FacadePreferenceContent>
-            {facadeData.facadePreferences.items.map((item) => (
-              <PreferenceItem
-                key={item.id}
-                title={item.name}
-                imageUrl={MockImage.src}
-                isFixed={item.isFixed}
-                isSingleValue={!item.editable}
-                options={Array.isArray(item.type) ? item.type : undefined}
-                value={!Array.isArray(item.type) ? item.type : null}
-                isSelectable={true}
-                defaultSelected={item.default ? item.type : undefined}
-                category={'facadePreferences'}
-                selectedPreferencesValues={selectedPreferencesValues}
-                setSelectedPreferencesValues={setSelectedPreferencesValues}
-                handleSelectPositionValues={handleSelectPositionValues}
-              />
-            ))}
-          </S.FacadePreferenceContent>
-        </S.FacadePreference>
-      )}
-      <S.Divider />
-      {selectedPreferencesValues['facadePreferences']?.type !== 'without' &&
-        facadeData.type && (
-          <S.FacadePreference>
-            <S.FacadePreferenceCategory>
-              {facadeData.type.name}
-            </S.FacadePreferenceCategory>
-            <S.FacadePreferenceContent>
-              {facadeData.type.items.map((item) => (
-                <PreferenceItem
-                  key={item.id}
-                  title={item.name}
-                  imageUrl={MockImage.src}
-                  isFixed={item.isFixed}
-                  isSingleValue={!item.editable}
-                  options={Array.isArray(item.type) ? item.type : undefined}
-                  value={!Array.isArray(item.type) ? item.type : null}
-                  isSelectable={true}
-                  defaultSelected={item.default ? item.type : undefined}
-                  category={'facadeType'}
-                  selectedPreferencesValues={selectedPreferencesValues}
-                  setSelectedPreferencesValues={setSelectedPreferencesValues}
-                  handleSelectPositionValues={handleSelectPositionValues}
-                />
-              ))}
-            </S.FacadePreferenceContent>
-          </S.FacadePreference>
+      <S.FacadePreferencesWrapper>
+        {facadeData.facadePreferences && (
+            <S.FacadePreference>
+              <S.FacadePreferenceCategory>
+                {facadeData.facadePreferences.name}
+              </S.FacadePreferenceCategory>
+              <S.FacadePreferenceContent>
+                {facadeData.facadePreferences.items.map((item) => (
+                    <FacadeItem
+                        key={item.id}
+                        title={item.name}
+                        imageUrl={MockImage.src}
+                        value={!Array.isArray(item.type) ? item.type : 'with'}
+                        selectedFacadeValue={selectedFacadeValue}
+                        onSelect={(value) => handleSelectFacadeValues(item.name, value)}
+                    />
+                ))}
+              </S.FacadePreferenceContent>
+            </S.FacadePreference>
         )}
-    </S.FacadePreferencesWrapper>
+        <S.Divider />
+        {selectedFacadeValue !== 'without' &&
+            facadeData.type && (
+                <S.FacadePreference>
+                  <S.FacadePreferenceCategory>
+                    {facadeData.type.name}
+                  </S.FacadePreferenceCategory>
+                  <S.FacadePreferenceContent>
+                    {facades?.map((item) => (
+                        <FacadeItem
+                            key={item.id}
+                            title={item.title}
+                            imageUrl={item.image}
+                            value={item.id}
+                            selectedFacadeValue={selectedFacadeTypeValue}
+                            onSelect={(value) => handleSelectFacadeTypeValues('facadeType', item.id)}
+                        />
+                    ))}
+                  </S.FacadePreferenceContent>
+                </S.FacadePreference>
+            )}
+      </S.FacadePreferencesWrapper>
   );
 };
 

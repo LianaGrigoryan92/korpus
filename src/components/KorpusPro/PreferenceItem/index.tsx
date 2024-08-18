@@ -4,8 +4,9 @@ import { camelize } from '@/utils/camelize';
 import { PreferenceValues } from '../Modals/KorpusProModal/steps/Preferences';
 import * as S from './PreferenceItem.styled';
 import { Dispatch, SetStateAction, useEffect, useMemo } from 'react';
-import { IPreferenceItem } from '../Modals/KorpusProModal/steps/Preferences/mock';
 import { ArrowRight, Check } from 'lucide-react';
+import {getImageUrl} from "@/utils/getImageFullUrl";
+import MockImage from "@/public/images/korpus-pro/preferences/image.png";
 
 interface PreferenceItemProps {
   imageUrl: string;
@@ -14,31 +15,37 @@ interface PreferenceItemProps {
   value?: string | number | null;
   isFixed?: boolean;
   isSingleValue?: boolean;
-  options?: string[] | number[];
+  options: string[];
   defaultOption?: string | number;
-  secondValue?: IPreferenceItem;
   category: string;
   defaultSelected?: string;
   selectedPreferencesValues: PreferenceValues;
   setSelectedPreferencesValues: Dispatch<SetStateAction<any>>;
   handleSelectPositionValues: (e: any, name: string) => void;
+  handleChangeTotalHeight?: (e: any) => void;
+  secondValue?: {
+    title: string;
+    value: string | number | null;
+    isFixed?: boolean;
+  };
 }
 
 export default function PreferenceItem({
-  title,
-  options,
-  imageUrl,
-  value,
-  isFixed,
-  isSingleValue,
-  defaultOption,
-  defaultSelected,
-  isSelectable,
-  category,
-  secondValue,
-  selectedPreferencesValues,
-  setSelectedPreferencesValues,
-  handleSelectPositionValues,
+     title,
+     options,
+     imageUrl,
+     value,
+     isFixed,
+     isSingleValue,
+     defaultOption,
+     defaultSelected,
+     isSelectable,
+     category,
+     selectedPreferencesValues,
+     setSelectedPreferencesValues,
+     handleSelectPositionValues,
+     handleChangeTotalHeight,
+     secondValue,
 }: PreferenceItemProps) {
   const camelizedTitle = useMemo(() => camelize(title), [title]);
 
@@ -47,11 +54,11 @@ export default function PreferenceItem({
     let shouldUpdate = false;
 
     if (
-      defaultOption &&
-      !updatedPreferences[category]?.[camelizedTitle] &&
-      (!updatedPreferences[category] ||
-        updatedPreferences[category][camelizedTitle] !==
-          defaultOption.toString())
+        defaultOption &&
+        !updatedPreferences[category]?.[camelizedTitle] &&
+        (!updatedPreferences[category] ||
+            updatedPreferences[category][camelizedTitle] !==
+            defaultOption.toString())
     ) {
       updatedPreferences[category] = {
         ...updatedPreferences[category],
@@ -61,24 +68,10 @@ export default function PreferenceItem({
     }
 
     if (
-      secondValue &&
-      secondValue.default &&
-      (!updatedPreferences[category] ||
-        updatedPreferences[category][camelize(secondValue.name)] !==
-          secondValue.default.toString())
-    ) {
-      updatedPreferences[category] = {
-        ...updatedPreferences[category],
-        [camelize(secondValue.name)]: secondValue.default.toString(),
-      };
-      shouldUpdate = true;
-    }
-
-    if (
-      !updatedPreferences[category]?.['type'] &&
-      defaultSelected &&
-      isSelectable &&
-      updatedPreferences[category]?.['type'] !== defaultSelected
+        !updatedPreferences[category]?.['type'] &&
+        defaultSelected &&
+        isSelectable &&
+        updatedPreferences[category]?.['type'] !== defaultSelected
     ) {
       updatedPreferences[category] = {
         ...updatedPreferences[category],
@@ -93,7 +86,6 @@ export default function PreferenceItem({
   }, [
     defaultOption,
     defaultSelected,
-    secondValue,
     camelizedTitle,
     category,
     selectedPreferencesValues,
@@ -108,97 +100,109 @@ export default function PreferenceItem({
     }));
   };
 
-  return (
-    <S.PreferenceItem>
-      {options && (
-        <S.Content>
-          <S.Image src={imageUrl} alt="Korpus Pro Preference Item Image" />
-          <S.ActionsBlock>
-            <S.Title>{title}</S.Title>
-            <S.CheckboxWrapper>
-              {options.map((option) => (
-                <S.CheckboxItemWrapper key={option}>
-                  <S.CheckboxItem
-                    name={camelizedTitle}
-                    type="checkbox"
-                    checked={
-                      selectedPreferencesValues[category]?.[camelizedTitle] ===
-                      option.toString()
-                    }
-                    value={option}
-                    onChange={(e) => handleSelectPositionValues(e, category)}
-                  />
-                  <S.CheckboxLabel>{option}</S.CheckboxLabel>
-                </S.CheckboxItemWrapper>
-              ))}
-            </S.CheckboxWrapper>
-          </S.ActionsBlock>
-          {secondValue && (
-            <S.ActionsBlock>
-              <S.Title>{secondValue.name}</S.Title>
-              <S.ValueWrapper>
-                {(typeof secondValue.value === 'object' || isFixed) && (
-                  <S.Selected />
+  const renderContent = () => {
+    switch (true) {
+        case isSingleValue && !options.length:
+            return (
+                    <S.Content>
+                        <S.Image
+                            src={imageUrl ? getImageUrl(imageUrl) : MockImage.src}
+                            alt="Korpus Pro Preference Item Image"
+                        />
+                        <S.ActionsBlock>
+                            <S.InputWrapper>
+                                <S.Label>Total Height*</S.Label>
+                                <S.Input
+                                    name={title}
+                                    maxLength={4}
+                                    value={
+                                        selectedPreferencesValues[category]?.[title] || ''
+                                    }
+                                    onChange={handleChangeTotalHeight as any}
+                                    placeholder="Type"
+                                />
+                            </S.InputWrapper>
+                        </S.ActionsBlock>
+                    </S.Content>
+            )
+      case value && isSelectable && options?.length === 1:
+        return (
+            <S.Content>
+              <S.Image src={imageUrl} alt="Korpus Pro Preference Item Image" />
+              <S.ActionsWrapper>
+                <S.ActionsBlock $isSelectable={isSelectable}>
+                  <S.Title>{title}</S.Title>
+                  <S.SelectValue onClick={() => handleTypeSelection(value as string)}>
+                    {selectedPreferencesValues[category]?.['type'] === value ? (
+                        <Check size={22} strokeWidth={2} />
+                    ) : (
+                        <ArrowRight size={22} strokeWidth={2} />
+                    )}
+                  </S.SelectValue>
+                </S.ActionsBlock>
+              </S.ActionsWrapper>
+            </S.Content>
+        );
+
+      case value && options?.length === 1:
+        return (
+            <S.Content>
+              <S.Image src={imageUrl} alt="Korpus Pro Preference Item Image" />
+              <S.ActionsWrapper>
+                <S.ActionsBlock>
+                  <S.Title>{title}</S.Title>
+                  <S.ValueWrapper>
+                    {(isFixed) && <S.Selected />}
+                    <S.Value $isSingle>
+                      {value}
+                      {isFixed && ' (Fixed)'}
+                    </S.Value>
+                  </S.ValueWrapper>
+                </S.ActionsBlock>
+                {secondValue && (
+                    <S.ActionsBlock>
+                      <S.Title>{secondValue.title}</S.Title>
+                      <S.ValueWrapper>
+                        {secondValue.isFixed && <S.Selected />}
+                        <S.Value $isSingle>
+                          {secondValue.value}
+                          {secondValue.isFixed && ' (Fixed)'}
+                        </S.Value>
+                      </S.ValueWrapper>
+                    </S.ActionsBlock>
                 )}
-                <S.Value $isSingle={!Array.isArray(secondValue.value)}>
-                  {secondValue.value}
-                  {secondValue.isFixed && ' (Fixed)'}
-                </S.Value>
-              </S.ValueWrapper>
-            </S.ActionsBlock>
-          )}
-        </S.Content>
-      )}
-      {value && isSingleValue && !options && (
-        <S.Content>
-          <S.Image src={imageUrl} alt="Korpus Pro Preference Item Image" />
-          <S.ActionsWrapper>
-            <S.ActionsBlock>
-              <S.Title>{title}</S.Title>
-              <S.ValueWrapper>
-                {(isSingleValue || isFixed) && <S.Selected />}
-                <S.Value $isSingle={isSingleValue}>
-                  {value}
-                  {isFixed && ' (Fixed)'}
-                </S.Value>
-              </S.ValueWrapper>
-            </S.ActionsBlock>
-            {secondValue && (
+              </S.ActionsWrapper>
+            </S.Content>
+        );
+
+      default:
+        return (
+            <S.Content>
+              <S.Image src={imageUrl} alt="Korpus Pro Preference Item Image" />
               <S.ActionsBlock>
-                <S.Title>{secondValue.name}</S.Title>
-                <S.ValueWrapper>
-                  {(typeof secondValue.value === 'object' || isFixed) && (
-                    <S.Selected />
-                  )}
-                  <S.Value $isSingle={!Array.isArray(secondValue.value)}>
-                    {secondValue.value}
-                    {secondValue.isFixed && ' (Fixed)'}
-                  </S.Value>
-                </S.ValueWrapper>
+                <S.Title>{title}</S.Title>
+                <S.CheckboxWrapper>
+                  {options.map((option) => (
+                      <S.CheckboxItemWrapper key={option}>
+                        <S.CheckboxItem
+                            name={camelizedTitle}
+                            type="checkbox"
+                            checked={
+                                selectedPreferencesValues[category]?.[camelizedTitle] ===
+                                option.toString()
+                            }
+                            value={option}
+                            onChange={(e) => handleSelectPositionValues(e, category)}
+                        />
+                        <S.CheckboxLabel>{option}</S.CheckboxLabel>
+                      </S.CheckboxItemWrapper>
+                  ))}
+                </S.CheckboxWrapper>
               </S.ActionsBlock>
-            )}
-          </S.ActionsWrapper>
-        </S.Content>
-      )}
-      {value && isSelectable && !options && (
-        <S.Content>
-          <S.Image src={imageUrl} alt="Korpus Pro Preference Item Image" />
-          <S.ActionsWrapper>
-            <S.ActionsBlock $isSelectable={isSelectable}>
-              <S.Title>{title}</S.Title>
-              <S.SelectValue
-                onClick={() => handleTypeSelection(value as string)}
-              >
-                {selectedPreferencesValues[category]?.['type'] === value ? (
-                  <Check size={22} strokeWidth={2} />
-                ) : (
-                  <ArrowRight size={22} strokeWidth={2} />
-                )}
-              </S.SelectValue>
-            </S.ActionsBlock>
-          </S.ActionsWrapper>
-        </S.Content>
-      )}
-    </S.PreferenceItem>
-  );
+            </S.Content>
+        );
+    }
+  };
+
+  return <S.PreferenceItem>{renderContent()}</S.PreferenceItem>;
 }

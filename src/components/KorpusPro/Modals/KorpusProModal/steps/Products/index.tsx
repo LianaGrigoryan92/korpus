@@ -1,7 +1,6 @@
 "use client";
 
 import { useAppDispatch } from '@/store/hooks';
-import { productsData } from './mock';
 import ProductItem from './ProductItem';
 
 // styles
@@ -9,6 +8,7 @@ import * as S from './Products.styled';
 
 import { useCallback, useEffect, useState } from 'react';
 import { updateStepData } from '@/features';
+import {useGetProductsBySubCategoryIdQuery} from "@/features/korpusProProducts";
 
 interface SelectedProduct {
     count: number;
@@ -24,8 +24,10 @@ interface StepProps {
 }
 
 export default function Products({ data, step }: StepProps) {
+  console.log(34444, data.subCategory)
+  const { data: products } = useGetProductsBySubCategoryIdQuery({ subCategoryId: data.subCategory.subCategory.id });
   const [selectedProducts, setSelectedProducts] = useState<SelectedProduct[]>();
-  const dispatch = useAppDispatch();  
+  const dispatch = useAppDispatch();
 
   const handleRemoveProduct = useCallback((productId: string | number) => {
     setSelectedProducts((prevState) => {
@@ -33,7 +35,7 @@ export default function Products({ data, step }: StepProps) {
     });
   }, [])
 
-  const handleSelectProduct = useCallback((productId: string | number, productName: string, count: number) => {
+  const handleSelectProduct = useCallback((productId: string | number, productName: string, productPrice: string, productImage: string, count: number) => {
     console.log({ count })
     setSelectedProducts((prevState) => {
       const isProductSelected = prevState?.find((product) => product.productId === productId);
@@ -43,6 +45,8 @@ export default function Products({ data, step }: StepProps) {
           if (product.productId === productId) {
             return {
               ...product,
+              productPrice,
+              productImage,
               count,
             };
           }
@@ -56,6 +60,7 @@ export default function Products({ data, step }: StepProps) {
         {
           productId,
           productName,
+          productImage,
           count,
         },
       ];
@@ -73,13 +78,13 @@ export default function Products({ data, step }: StepProps) {
     <S.ProductsWrapper>
       <S.Title>Korpuses</S.Title>
       <S.Products>
-        {productsData.map((product) => (
-          <ProductItem 
-            key={product.id} 
-            product={product} 
-            handleSelectProduct={handleSelectProduct} 
+        {products?.map((product) => (
+          <ProductItem
+            key={product.id}
+            product={product}
+            handleSelectProduct={handleSelectProduct}
             handleRemoveProduct={handleRemoveProduct}
-          /> 
+          />
         ))}
       </S.Products>
     </S.ProductsWrapper>

@@ -17,6 +17,9 @@ export const Products = styled.div`
     .item:nth-child(1n) {
         border-right: 1px solid #e4e4e4;
     }
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+    }
 `;
 
 export const Title = styled.h3`

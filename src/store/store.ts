@@ -12,10 +12,14 @@ import { aboutApi } from '@/features/about/about.api';
 import { categoriesApi } from '@/features/korpusProCategories';
 import { subCategoriesApi } from '@/features/korpusProSubCategories';
 import { colorsApi } from '@/features/korpusProColors';
+import {preferencesApi} from "@/features/korpusProPreferences";
+import {facadeApi} from "@/features/korpusProFacade";
+import {facadeMaterialApi} from "@/features/korpusProFacadeMaterial";
+import {facadeColorApi} from "@/features/korpusProFacadeColor";
+import {productsApi as korpusProductsApi} from "@/features/korpusProProducts";
 
 export const store = configureStore({
   reducer: {
-    [productsApi.reducerPath]: productsApi.reducer,
     products: productsReducer,
     modal: modalReducer,
     [aboutApi.reducerPath]: aboutApi.reducer,
@@ -26,14 +30,24 @@ export const store = configureStore({
     subCategories: subCategoriesReducer,
     [colorsApi.reducerPath]: colorsApi.reducer,
     colors: colorsReducer,
+    [preferencesApi.reducerPath]: preferencesApi.reducer,
+    [facadeApi.reducerPath]: facadeApi.reducer,
+    [facadeMaterialApi.reducerPath]: facadeMaterialApi.reducer,
+    [facadeColorApi.reducerPath]: facadeColorApi.reducer,
+    [productsApi.reducerPath]: facadeColorApi.reducer,
+    [korpusProductsApi.reducerPath]: korpusProductsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(productsApi.middleware)
       .concat(aboutApi.middleware)
       .concat(categoriesApi.middleware)
       .concat(subCategoriesApi.middleware)
-      .concat(colorsApi.middleware),
+      .concat(colorsApi.middleware)
+      .concat(preferencesApi.middleware)
+      .concat(facadeApi.middleware)
+      .concat(facadeMaterialApi.middleware)
+      .concat(facadeColorApi.middleware)
+      .concat(korpusProductsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -16,22 +16,20 @@ interface StepProps {
 
 const SubCategory: React.FC<StepProps> = ({ data, step }) => {
   console.log({ subCategories: data });
-  const [selectedSubCategoryId, setSelectedSubCategoryId] = useState<
-    string | number | null
-  >(null);
-  const { data: subCategories } = useGetSubCategoriesQuery({ categoryId: 1 });
+  const [selectedSubCategory, setSelectedSubCategory] = useState<SubCategory>();
+  const { data: subCategories } = useGetSubCategoriesQuery({ categoryId: data.category.categoryId });
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const updatedData = {
       ...data,
-      subCategory: { subCategoryId: selectedSubCategoryId },
+      subCategory: { subCategory: selectedSubCategory },
     };
     dispatch(updateStepData({ data: updatedData, step }));
-  }, [selectedSubCategoryId]);
+  }, [selectedSubCategory]);
 
-  const handleClick = (categoryId: string | number) => {
-    setSelectedSubCategoryId(categoryId);
+  const handleClick = (subCategory: SubCategory) => {
+    setSelectedSubCategory(subCategory);
   };
 
   return (
@@ -41,12 +39,12 @@ const SubCategory: React.FC<StepProps> = ({ data, step }) => {
         {subCategories?.map((subCategory) => (
           <S.SubCategoryItem
             key={subCategory.id}
-            onClick={() => handleClick(subCategory.id)}
-            $active={selectedSubCategoryId === subCategory.id}
+            onClick={() => handleClick(subCategory)}
+            $active={selectedSubCategory?.id === subCategory.id}
             $bgImage={getImageUrl(subCategory.img)}
           >
             <span className="name">{subCategory.name}</span>
-            {selectedSubCategoryId === subCategory.id && (
+            {selectedSubCategory?.id === subCategory.id && (
               <span className="active-name">
                 <Check size={22} />
               </span>

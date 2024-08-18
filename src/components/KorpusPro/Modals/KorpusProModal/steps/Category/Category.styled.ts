@@ -10,6 +10,9 @@ export const Categories = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   height: 100%;
+    @media (max-width: 768px) {
+        grid-template-columns: auto;
+    }
 `;
 
 export const CategoryItem = styled.div<{ $active: boolean; $bgImage: string }>`

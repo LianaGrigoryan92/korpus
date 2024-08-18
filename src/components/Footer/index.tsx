@@ -15,7 +15,7 @@ export default function Footer() {
 
   return (
     <S.Container>
-      {!pathname.includes('korpus-pro') && (
+      {!['/korpus-pro', '/cart'].some(path => pathname.includes(path)) && (
         <S.Image $bgImage={FooterBanner.src} />
       )}
       <S.FooterContent>

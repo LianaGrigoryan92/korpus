@@ -2,13 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import * as S from './Preferences.styled';
-import * as PS from '../../../../PreferenceItem/PreferenceItem.styled';
-import { getImageUrl } from '@/utils/getImageFullUrl';
 import { useAppDispatch } from '@/store/hooks';
-import { preferencesData } from './mock';
-import MockImage from '@/public/images/korpus-pro/preferences/image.png';
 import { updateStepData } from '@/features';
 import PreferenceItem from '@/components/KorpusPro/PreferenceItem';
+import {useGetPreferenceBySubCategoryIdQuery} from "@/features/korpusProPreferences";
 
 interface StepProps {
   data: any;
@@ -23,9 +20,9 @@ export interface PreferenceValues {
 }
 
 const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
+  const { data: preferences } = useGetPreferenceBySubCategoryIdQuery({ subCategoryId: data.subCategory.subCategory.id });
   const dispatch = useAppDispatch();
-  const [selectedPreferencesValues, setSelectedPreferencesValues] =
-    useState<PreferenceValues>({});
+  const [selectedPreferencesValues, setSelectedPreferencesValues] = useState<PreferenceValues>({});
 
   useEffect(() => {
     const updatedData = {
@@ -36,18 +33,20 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
   }, [selectedPreferencesValues]);
 
   const handleChangeTotalHeight = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedPreferencesValues((prevState: any) => ({
-      ...prevState,
-      position: {
-        ...prevState.position,
-        [e.target.name]: e.target.value,
-      },
-    }));
+    if (/^\d*$/.test(e.target.value)) {
+      setSelectedPreferencesValues((prevState) => ({
+        ...prevState,
+        position: {
+          ...prevState.position,
+          [e.target.name]: e.target.value,
+        },
+      }));
+    }
   };
 
   const handleSelectPositionValues = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    name: string,
+      e: React.ChangeEvent<HTMLInputElement>,
+      name: string,
   ) => {
     setSelectedPreferencesValues((prevState: any) => ({
       ...prevState,
@@ -58,134 +57,97 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
     }));
   };
 
-  console.log({ selectedPreferencesValues });
-  return (
-    <S.PreferencesWrapper>
-      {preferencesData.position && (
-        <S.Preference>
-          <S.PreferenceCategory>
-            {preferencesData.position.name}
-          </S.PreferenceCategory>
-          <S.PreferenceContent>
-            <PS.PreferenceItem>
-              <PS.Content>
-                <PS.Image
-                  src={MockImage.src}
-                  alt="Korpus Pro Preference Item Image"
+  const renderGroupedItems = (name: string, type: string | undefined, preferenceItems: any[]) => {
+    const renderedItems = [];
+
+    for (let i = 0; i < preferenceItems.length; i++) {
+      const item = preferenceItems[i];
+
+      switch (type || item.type) {
+        case 'input':
+          renderedItems.push(
+              <S.Preference key={`${item.id}`}>
+                <PreferenceItem
+                    title={item.name}
+                    imageUrl={item.image}
+                    isFixed={item.isFixed}
+                    isSingleValue={item.editable}
+                    options={item.items}
+                    value={item.items[0]}
+                    isSelectable={item.selectable}
+                    defaultOption={item.default}
+                    category={name.trim().toLowerCase()}
+                    selectedPreferencesValues={selectedPreferencesValues}
+                    setSelectedPreferencesValues={setSelectedPreferencesValues}
+                    handleSelectPositionValues={handleSelectPositionValues}
+                    handleChangeTotalHeight={handleChangeTotalHeight}
                 />
-                <PS.ActionsBlock>
-                  <S.InputWrapper>
-                    <S.Label>Total Height*</S.Label>
-                    <S.Input
-                      name="totalHeight"
-                      value={
-                        selectedPreferencesValues['position']?.totalHeight || ''
-                      }
-                      onChange={handleChangeTotalHeight}
-                      placeholder="Type"
-                    />
-                    {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
-                  </S.InputWrapper>
-                </PS.ActionsBlock>
-              </PS.Content>
-            </PS.PreferenceItem>
-            {preferencesData.position.items.map((item) => (
+              </S.Preference>
+          );
+          break;
+        case 'grouped':
+          const nextItem = preferenceItems[i + 1];
+          if (nextItem) {
+            renderedItems.push(
+                <S.Preference key={`${item.id}-${nextItem.id}`}>
+                  <PreferenceItem
+                      title={item.name}
+                      imageUrl={item.image}
+                      isFixed={item.isFixed}
+                      isSingleValue={item.editable}
+                      options={item.items}
+                      value={item.items[0]}
+                      isSelectable={item.selectable}
+                      defaultOption={item.default}
+                      category={name.trim().toLowerCase()}
+                      selectedPreferencesValues={selectedPreferencesValues}
+                      setSelectedPreferencesValues={setSelectedPreferencesValues}
+                      handleSelectPositionValues={handleSelectPositionValues}
+                      secondValue={{
+                        title: nextItem.name,
+                        value: nextItem.items[0],
+                        isFixed: nextItem.isFixed,
+                      }}
+                  />
+                </S.Preference>
+            );
+          }
+          break;
+
+        default:
+          renderedItems.push(
               <PreferenceItem
-                key={item.id}
-                title={item.name}
-                imageUrl={MockImage.src}
-                isFixed={item.isFixed}
-                isSingleValue={!item.editable}
-                options={Array.isArray(item.value) ? item.value : undefined}
-                value={!Array.isArray(item.value) ? item.value : null}
-                isSelectable={item.value instanceof Object}
-                defaultOption={item.default}
-                category={preferencesData.position.name.toLowerCase()}
-                selectedPreferencesValues={selectedPreferencesValues}
-                setSelectedPreferencesValues={setSelectedPreferencesValues}
-                handleSelectPositionValues={handleSelectPositionValues}
-              />
-            ))}
-          </S.PreferenceContent>
-        </S.Preference>
-      )}
-      {preferencesData.totalSize && (
-        <S.Preference>
-          <S.PreferenceCategory>
-            {preferencesData.totalSize.name}
-          </S.PreferenceCategory>
-          <S.PreferenceContent>
-            {preferencesData.totalSize.items.map((item: any) =>
-              Array.isArray(item) ? (
-                <PreferenceItem
-                  key={item[0].id}
-                  title={item[0].name}
-                  imageUrl={MockImage.src}
-                  isFixed={item[0].isFixed}
-                  isSingleValue={!item[0].editable}
-                  options={
-                    Array.isArray(item[0].value) ? item[0].value : undefined
-                  }
-                  value={!Array.isArray(item[0].value) ? item[0].value : null}
-                  isSelectable={item[0].value instanceof Object}
-                  defaultOption={item[0].default}
-                  category={preferencesData.totalSize.name
-                    .toLowerCase()
-                    .replace(' ', '_')}
-                  selectedPreferencesValues={selectedPreferencesValues}
-                  setSelectedPreferencesValues={setSelectedPreferencesValues}
-                  handleSelectPositionValues={handleSelectPositionValues}
-                  secondValue={item[1]}
-                />
-              ) : (
-                <PreferenceItem
                   key={item.id}
                   title={item.name}
-                  imageUrl={MockImage.src}
+                  imageUrl={item.image}
                   isFixed={item.isFixed}
-                  isSingleValue={!item.editable}
-                  options={Array.isArray(item.value) ? item.value : undefined}
-                  value={!Array.isArray(item.value) ? item.value : null}
-                  isSelectable={item.value instanceof Object}
+                  isSingleValue={item.editable}
+                  options={item.items}
+                  value={item.items[0]}
+                  isSelectable={item.selectable}
                   defaultOption={item.default}
-                  category={preferencesData.position.name.toLowerCase()}
+                  category={name.trim().toLowerCase()}
                   selectedPreferencesValues={selectedPreferencesValues}
                   setSelectedPreferencesValues={setSelectedPreferencesValues}
                   handleSelectPositionValues={handleSelectPositionValues}
-                />
-              ),
-            )}
-          </S.PreferenceContent>
-        </S.Preference>
-      )}
-      <S.Divider />
-      {preferencesData.type && (
-        <S.Preference>
-          <S.PreferenceCategory>
-            {preferencesData.type.name}
-          </S.PreferenceCategory>
-          <S.PreferenceContent>
-            {preferencesData.type.items.map((item) => (
-              <PreferenceItem
-                key={item.id}
-                title={item.name}
-                imageUrl={MockImage.src}
-                isFixed={item.isFixed}
-                isSingleValue={!item.editable}
-                options={Array.isArray(item.type) ? item.type : undefined}
-                value={!Array.isArray(item.type) ? item.type : null}
-                isSelectable={true}
-                defaultSelected={item.default ? item.type : undefined}
-                category={'korpusType'}
-                selectedPreferencesValues={selectedPreferencesValues}
-                setSelectedPreferencesValues={setSelectedPreferencesValues}
-                handleSelectPositionValues={handleSelectPositionValues}
               />
-            ))}
-          </S.PreferenceContent>
-        </S.Preference>
-      )}
-    </S.PreferencesWrapper>
+          );
+      }
+    }
+
+    return renderedItems;
+  };
+  return (
+      <S.PreferencesWrapper>
+        {preferences?.map((preference) => (
+            <S.Preference key={preference.id}>
+              <S.PreferenceCategory>{preference.name}</S.PreferenceCategory>
+              <S.PreferenceContent>
+                {renderGroupedItems(preference.name, preference.type, preference.preferenceItems)}
+              </S.PreferenceContent>
+            </S.Preference>
+        ))}
+      </S.PreferencesWrapper>
   );
 };
 

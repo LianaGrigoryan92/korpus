@@ -4,7 +4,7 @@ import { Link, type Locale } from '@/i18n.config';
 import { useLocale } from 'next-intl';
 import LocaleSwitcher from '@/components/LanguageSwitcher';
 import { useClientMediaQuery } from '@/hooks/useClientMediaQuery';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import MobileMenu from './MobileMenu';
 
 // styles
@@ -14,6 +14,7 @@ import { theme } from '@/styles';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [cartItemCount, setCartItemCount] = useState<number>(0);
   const isMobile = useClientMediaQuery('(max-width: 980px)');
   const locale = useLocale() as Locale;
   const [isVisibleCategories, setIsVisibleCategories] =
@@ -30,6 +31,21 @@ export default function Navbar() {
   const handleVisibleCategories = () => {
     setIsVisibleCategories(!isVisibleCategories);
   };
+
+  useEffect(() => {
+    const countCartItems = () => {
+      let count = 0;
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('cartData-')) {
+          count++;
+        }
+      }
+      setCartItemCount(count);
+    };
+
+    countCartItems();
+  });
 
   return (
     <>
@@ -82,7 +98,7 @@ export default function Navbar() {
               <input type={'search'} placeholder="Search" />
               <LocaleSwitcher locale={locale} />
               <Link href={'/profile'}>Profile</Link>
-              <Link href={'/cart'}>Cart (1)</Link>
+              <Link href={'/cart'}>Cart ({cartItemCount})</Link>
             </S.NavItemWrapper>
           </>
         )}
