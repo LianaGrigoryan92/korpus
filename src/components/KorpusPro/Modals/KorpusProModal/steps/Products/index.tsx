@@ -24,7 +24,6 @@ interface StepProps {
 }
 
 export default function Products({ data, step }: StepProps) {
-  console.log(34444, data.subCategory)
   const { data: products } = useGetProductsBySubCategoryIdQuery({ subCategoryId: data.subCategory.subCategory.id });
   const [selectedProducts, setSelectedProducts] = useState<SelectedProduct[]>();
   const dispatch = useAppDispatch();
@@ -45,6 +44,7 @@ export default function Products({ data, step }: StepProps) {
           if (product.productId === productId) {
             return {
               ...product,
+              productName,
               productPrice,
               productImage,
               count,
@@ -60,6 +60,7 @@ export default function Products({ data, step }: StepProps) {
         {
           productId,
           productName,
+          productPrice,
           productImage,
           count,
         },
