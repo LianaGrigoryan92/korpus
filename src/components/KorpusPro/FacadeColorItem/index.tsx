@@ -18,6 +18,7 @@ export default function FacadeColorItem({
    selectedFacadeColorValue,
    onSelect,
 }: FacadeItemProps) {
+    console.log({ imageUrl })
     return (
         <S.FacadeColorItem>
             <S.Content>

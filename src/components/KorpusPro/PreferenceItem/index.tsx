@@ -5,7 +5,6 @@ import { PreferenceValues } from '../Modals/KorpusProModal/steps/Preferences';
 import * as S from './PreferenceItem.styled';
 import { Dispatch, SetStateAction, useEffect, useMemo } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
-import {getImageUrl} from "@/utils/getImageFullUrl";
 import MockImage from "@/public/images/korpus-pro/preferences/image.png";
 
 interface PreferenceItemProps {
@@ -106,7 +105,7 @@ export default function PreferenceItem({
             return (
                     <S.Content>
                         <S.Image
-                            src={imageUrl ? getImageUrl(imageUrl) : MockImage.src}
+                            src={imageUrl || MockImage.src}
                             alt="Korpus Pro Preference Item Image"
                         />
                         <S.ActionsBlock>

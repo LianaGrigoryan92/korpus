@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './FacadeColor.styled';
 import { useAppDispatch } from '@/store/hooks';
-import MockImage from '@/public/images/korpus-pro/preferences/image.png';
 import { updateStepData } from '@/features';
 import { facadeColorData } from './mock';
 import { camelize } from '@/utils/camelize';
@@ -96,7 +95,7 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
           item.colorCategory.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  console.log({ selectedPreferencesValues, data });
+  console.log({ facadeColorTypes });
 
   return (
     <S.FacadePreferencesWrapper>
@@ -110,7 +109,7 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
               <FacadeColorItem
                 key={item.id}
                 title={item.title}
-                imageUrl={MockImage.src}
+                imageUrl={item.image}
                 onSelect={handleFacadeColorPositionValue}
                 value={item.id}
                 selectedFacadeColorValue={selectedPreferencesValues['facadeColor']?.['type'] as unknown as number} // Safely accessing 'type'

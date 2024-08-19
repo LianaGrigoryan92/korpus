@@ -123,9 +123,10 @@ function Cart() {
                                             </S.SubCategoryContent>
                                         </S.SubCategoryTitle>
 
-                                        {expandedSubCategories[projectIndex]?.[subCategoryIndex] && project.products.map((product: any, productIndex: number) => (
+                                        {expandedSubCategories[projectIndex]?.[subCategoryIndex] && project.products.map((product: any, productIndex: number) => {
+                                            return (
                                             <S.CartItem key={productIndex}>
-                                                <S.ItemImage src={product.image} alt={product.productName} />
+                                                <S.ItemImage src={product.productImage} alt={product.productName} />
                                                 <S.ItemDetails>
                                                     <S.ItemTitle>{product.productName}</S.ItemTitle>
                                                     <S.ItemRef>REF. {product.productId}</S.ItemRef>
@@ -144,7 +145,7 @@ function Cart() {
                                                     </S.QuantityDetails>
                                                 </S.ItemDetails>
                                             </S.CartItem>
-                                        ))}
+                                        )})}
                                     </div>
                                 ))}
                             </div>

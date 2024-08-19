@@ -32,7 +32,7 @@ export const preferencesApi = createApi({
                isFixed: prefItem.isFixed,
                selectable: prefItem.selectable,
                type: prefItem.type,
-               image: prefItem.image?.data ? prefItem.image : null,
+               image: prefItem.image?.data ? getImageUrl(prefItem.image) : null,
                items,
              }
             }),

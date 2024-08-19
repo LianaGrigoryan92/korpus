@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {getImageUrl} from "@/utils/getImageFullUrl";
 
 export const facadeApi = createApi({
   reducerPath: 'facadeApi',
@@ -9,19 +10,18 @@ export const facadeApi = createApi({
     getFacades: builder.query<Facade[], void>({
       query: () => {
         return {
-          url: `/facades?sort[0]=id`,
+          url: `/facades?populate=*&sort[0]=id`,
           headers: {
             Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_TOKEN}`,
           },
         };
       },
       transformResponse: (response: { data: any[] }) => {
-        console.log(53333, response)
         if (response.data.length) {
           return response.data.map(item => ({
             id: item.id,
             title: item.attributes.title,
-            image: item.attributes.image,
+            image: getImageUrl(item.attributes.image),
           }));
         }
         return [];

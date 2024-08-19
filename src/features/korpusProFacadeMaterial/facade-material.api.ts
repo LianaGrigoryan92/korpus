@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {getImageUrl} from "@/utils/getImageFullUrl";
 
 export const facadeMaterialApi = createApi({
   reducerPath: 'facadeMaterialApi',
@@ -21,7 +22,7 @@ export const facadeMaterialApi = createApi({
           return response.data.map(item => ({
             id: item.id,
             title: item.attributes.title,
-            image: item.attributes.image,
+            image: getImageUrl(item.attributes.image),
           }));
         }
         return [];
