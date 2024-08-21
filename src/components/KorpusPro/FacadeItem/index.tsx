@@ -23,7 +23,7 @@ export default function FacadeItem({
             <S.Content>
                 <S.Image src={imageUrl} alt="Korpus Pro Preference Item Image" />
                 <S.ActionsWrapper>
-                    <S.ActionsBlock>
+                    <S.ActionsBlock $isSelectable={true}>
                         <S.Title>{title}</S.Title>
                         <S.SelectValue
                             onClick={() => onSelect(value)} // Call onSelect with the value
