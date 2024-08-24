@@ -40,7 +40,7 @@ const Facade: React.FC<StepProps> = ({ data, error, step }) => {
     // @ts-ignore
     setSelectedPreferencesValues((prevState) => ({
       ...prevState,
-      [name]: { facadeMaterialType: value },
+      'type': value,
     }));
   };
 

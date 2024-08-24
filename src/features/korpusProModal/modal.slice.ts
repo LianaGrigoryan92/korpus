@@ -41,6 +41,10 @@ const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
+    firstStep: (state) => {
+      state.step = 1;
+      state.data = initialState.data;
+    },
     nextStep: (state) => {
       state.step += 1;
     },
@@ -76,6 +80,7 @@ const modalSlice = createSlice({
 });
 
 export const {
+  firstStep,
   nextStep,
   customNextStep,
   customPrevStep,

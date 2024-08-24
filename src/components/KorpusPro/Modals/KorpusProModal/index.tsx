@@ -8,6 +8,7 @@ import { RootState } from '@/store/store';
 import {
   customNextStep,
   customPrevStep,
+  firstStep,
   hideModal,
   nextStep,
   prevStep,
@@ -129,7 +130,7 @@ function KorpusProModal() {
     if (step === 5 && !stepData.colorId) {
       return false;
     }
-    if (step === 6 && !stepData.facadeType && !stepData.Without) {
+    if (step === 6 && !stepData.facadeType && stepData.type !== 'without') {
       return false;
     }
     if (step === 7 && !stepData) {
@@ -151,7 +152,7 @@ function KorpusProModal() {
 
     if (validateStep(currentStepData)) {
       console.log('CHECK ALL STEPS DATA', data)
-      if (step === 6 && currentStepData.facadePreferences?.type === 'without') {
+      if (step === 6 && currentStepData?.type === 'without') {
         dispatch(customNextStep(3));
       } else if (step === 9) {
         let index = 1;
@@ -160,9 +161,13 @@ function KorpusProModal() {
         }
         const uniqueKey = `cartData-${index}`;
 
+        console.log(data.subCategory)
+
         const dataToSave = {
-          products: data.products,
-          subCategories: data.subCategory,
+          subCategories: [{
+            ...data.subCategory.subCategory,
+            products: data.products,
+          }, ...data.subCategory.notUsedCategories],
           projectName: data.project.projectName,
         };
 
@@ -210,6 +215,10 @@ function KorpusProModal() {
       ? steps[8]
       : steps[step];
 
+  const handleRestart = () => {
+    dispatch(firstStep())
+  }
+
   return (
     <S.KorpusProModalWrapper>
       <Modal
@@ -246,7 +255,7 @@ function KorpusProModal() {
               {isMobile && (
                 <S.MobileHeaderButtons>
                   <S.CancelButton onClick={handleClose}>Cancel</S.CancelButton>
-                  <S.ModalRestartButton>Restart</S.ModalRestartButton>
+                  <S.ModalRestartButton onClick={handleRestart}>Restart</S.ModalRestartButton>
                 </S.MobileHeaderButtons>
               )}
             </S.ModalStepName>
@@ -271,7 +280,7 @@ function KorpusProModal() {
             />
           </S.ModalBody>
           <S.ModalFooter>
-            {!isMobile && <S.ModalRestartButton>Restart</S.ModalRestartButton>}
+            {!isMobile && <S.ModalRestartButton onClick={handleRestart}>Restart</S.ModalRestartButton>}
             <S.ModalControls>
               <S.ModalBackButton onClick={handlePrev} disabled={step === 1}>
                 Back

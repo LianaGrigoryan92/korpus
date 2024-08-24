@@ -21,9 +21,10 @@ const SubCategory: React.FC<StepProps> = ({ data, step }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    const notUsedCategories = subCategories?.filter(category => category.id !== selectedSubCategory?.id);
     const updatedData = {
       ...data,
-      subCategory: { subCategory: selectedSubCategory },
+      subCategory: { subCategory: selectedSubCategory, notUsedCategories },
     };
     dispatch(updateStepData({ data: updatedData, step }));
   }, [selectedSubCategory]);
