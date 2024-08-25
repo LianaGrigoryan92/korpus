@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import * as S from './SubCategory.styled';
 import { getImageUrl } from '@/utils/getImageFullUrl';
 import { useGetSubCategoriesQuery } from '@/features/korpusProSubCategories';
@@ -12,13 +12,16 @@ interface StepProps {
   data: any;
   error: string;
   step: number;
+  existSubCategories: any;
 }
 
-const SubCategory: React.FC<StepProps> = ({ data, step }) => {
+const SubCategory: React.FC<StepProps> = ({ data, step, existSubCategories }) => {
   console.log({ subCategories: data });
   const [selectedSubCategory, setSelectedSubCategory] = useState<SubCategory>();
-  const { data: subCategories } = useGetSubCategoriesQuery({ categoryId: data.category.categoryId });
+  const { data: subCategoriesData } = useGetSubCategoriesQuery({ categoryId: data.category.categoryId });
   const dispatch = useAppDispatch();
+
+  const subCategories = useMemo(() => existSubCategories?.length ? subCategoriesData?.filter(subCategory => !existSubCategories.includes(subCategory.id)) : subCategoriesData, [subCategoriesData, existSubCategories])
 
   useEffect(() => {
     const notUsedCategories = subCategories?.filter(category => category.id !== selectedSubCategory?.id);

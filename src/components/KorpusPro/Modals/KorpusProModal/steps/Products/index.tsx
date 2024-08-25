@@ -6,7 +6,7 @@ import ProductItem from './ProductItem';
 // styles
 import * as S from './Products.styled';
 
-import { useCallback, useEffect, useState } from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import { updateStepData } from '@/features';
 import {useGetProductsBySubCategoryIdQuery} from "@/features/korpusProProducts";
 
@@ -21,12 +21,16 @@ interface StepProps {
     onPrev: () => void;
     data: any;
     step: number;
+    existProducts: number[];
 }
 
-export default function Products({ data, step }: StepProps) {
-  const { data: products } = useGetProductsBySubCategoryIdQuery({ subCategoryId: data.subCategory.subCategory.id });
+export default function Products({ data, step, existProducts }: StepProps) {
+  console.log(data.subCategory, existProducts)
+  const { data: productsData } = useGetProductsBySubCategoryIdQuery({ subCategoryId: data.subCategory.subCategory.id });
   const [selectedProducts, setSelectedProducts] = useState<SelectedProduct[]>();
   const dispatch = useAppDispatch();
+
+  const products = useMemo(() => existProducts?.length ? productsData?.filter(subCategory => !existProducts.includes(subCategory.id)) : productsData, [productsData, existProducts])
 
   const handleRemoveProduct = useCallback((productId: string | number) => {
     setSelectedProducts((prevState) => {

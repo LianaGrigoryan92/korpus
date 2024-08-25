@@ -2,7 +2,7 @@ import * as S from "./CartItems.styled";
 import Image from "next/image";
 import ArrowIcon from "@/public/images/cart/arrow_back.svg";
 import React from "react";
-import {showModal} from "@/features";
+import {showModal, changeStepCustom} from "@/features";
 import {useRouter} from "next/navigation";
 import {useAppDispatch} from "@/store/hooks";
 
@@ -19,16 +19,45 @@ const CartItems = ({ cartItems, toggleExpandProject, expandedProjects, expandedS
     const router = useRouter();
     const dispatch = useAppDispatch();
 
-    const handleAddNewProjectClick = () => {
+    const handleAddNewProject = () => {
         router.push('/korpus-pro');
         dispatch(showModal());
+    };
+
+    const handleAddNewItem = (project: any) => {
+        router.push('/korpus-pro');
+        const existSubCategories = project.subCategories.filter((subCategory: any) => subCategory?.products?.length).map((subCategory: any) => subCategory.id);
+        dispatch(changeStepCustom({
+            step: 3,
+            category: {
+                categoryId: project.subCategories[0].category.data.id,
+            },
+            projectName: project.projectName,
+            existSubCategories,
+        }));
+    };
+
+    const handleAdd = (subCategory: any, projectName: string) => {
+        console.log(3333, subCategory.products);
+        router.push('/korpus-pro');
+        dispatch(changeStepCustom({
+            step: subCategory?.products?.length ? 9 : 4,
+            category: {
+                categoryId: subCategory.category.data.id,
+            },
+            subCategory: {
+                subCategory
+            },
+            existProducts: subCategory?.products?.length ? subCategory.products.map((product: any) => product.productId) : [],
+            projectName,
+        }));
     };
 
     return (
         <S.CartItems>
             <S.ProjectTitle>
                 Cart
-                <S.Link onClick={handleAddNewProjectClick}>Add new project</S.Link>
+                <S.Link onClick={handleAddNewProject}>Add new project</S.Link>
             </S.ProjectTitle>
             {cartItems.map((project, projectIndex) => (
                 <div key={projectIndex}>
@@ -42,9 +71,9 @@ const CartItems = ({ cartItems, toggleExpandProject, expandedProjects, expandedS
                                 cursor: 'pointer'
                             }}
                         />
-                        {project.projectName || `Project ${projectIndex + 1}`}
+                        {project.projectName}
                         <S.ItemCount>{project.subCategories.reduce((acc: number, curr: any) => acc + (curr.products ? curr.products.length : 0), 0)} item{project.subCategories.length > 1 && 's'}</S.ItemCount>
-                        <S.Link>Add new item</S.Link>
+                        <S.Link onClick={() => handleAddNewItem(project)}>Add new item</S.Link>
                     </S.ProductTitle>
 
                     {expandedProjects[projectIndex] && project.subCategories && project.subCategories.map((subCategory: any, subCategoryIndex: number) => {
@@ -66,7 +95,7 @@ const CartItems = ({ cartItems, toggleExpandProject, expandedProjects, expandedS
                                     </S.SubCategoryContent>
                                     <S.SubCategoryContent>
                                         <S.TotalPrice>Total price: {subCategory.products?.reduce((acc: number, curr: any) => acc += parseFloat(curr?.productPrice) * curr.count, 0) || 0} AMD</S.TotalPrice>
-                                        <S.Link>Add</S.Link>
+                                        <S.Link onClick={() => handleAdd(subCategory, project.projectName)}>Add</S.Link>
                                     </S.SubCategoryContent>
                                 </S.SubCategoryTitle>
 

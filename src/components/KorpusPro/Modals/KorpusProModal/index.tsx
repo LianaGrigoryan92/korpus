@@ -11,7 +11,7 @@ import {
   firstStep,
   hideModal,
   nextStep,
-  prevStep,
+  prevStep, StepData,
 } from '@/features';
 import * as S from './KorpusProModal.styled';
 import Category from './steps/Category';
@@ -31,6 +31,8 @@ interface StepProps {
   error: string;
   data: any;
   step: number;
+  existSubCategories: number[];
+  existProducts: number[];
 }
 
 const tabNames = [
@@ -93,7 +95,7 @@ const steps: { [key: number]: React.ComponentType<StepProps> } = {
 function KorpusProModal() {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { step, data, isVisible } = useAppSelector(
+  const { step, data, isVisible, existSubCategories, existProducts } = useAppSelector(
     (state: RootState) => state.modal,
   );
 
@@ -152,27 +154,64 @@ function KorpusProModal() {
 
     if (validateStep(currentStepData)) {
       console.log('CHECK ALL STEPS DATA', data)
-      if (step === 6 && currentStepData?.type === 'without') {
+      if (step === 6 && (currentStepData as StepData)?.type === 'without') {
         dispatch(customNextStep(3));
       } else if (step === 9) {
         let index = 1;
+        let existingKey = null;
+        let storedData = null;
+
         while (localStorage.getItem(`cartData-${index}`)) {
+          const item = localStorage.getItem(`cartData-${index}`);
+
+          if (item) {
+            storedData = JSON.parse(item);
+            if (storedData.projectName === data.project) {
+              existingKey = `cartData-${index}`;
+              break;
+            }
+          }
           index++;
         }
-        const uniqueKey = `cartData-${index}`;
 
-        console.log(data.subCategory)
+        if (storedData && existingKey) {
+          console.log('3333');
+          const subCategoryIndex = storedData.subCategories.findIndex(
+              (subCat: any) => subCat.id === data.subCategory.subCategory.id
+          );
 
-        const dataToSave = {
-          subCategories: [{
-            ...data.subCategory.subCategory,
-            products: data.products,
-          }, ...data.subCategory.notUsedCategories],
-          projectName: data.project.projectName,
-        };
+          const existingProducts = storedData.subCategories[subCategoryIndex] ? storedData.subCategories[subCategoryIndex]?.products ?? [] : [];
 
-        localStorage.setItem(uniqueKey, JSON.stringify(dataToSave));
+          const products = [...existingProducts, ...data.products];
 
+          if (subCategoryIndex !== -1) {
+            storedData.subCategories[subCategoryIndex] = {
+              ...data.subCategory.subCategory,
+              products,
+            };
+          } else {
+            storedData.subCategories.push({
+              ...data.subCategory.subCategory,
+              products,
+            });
+          }
+
+          localStorage.setItem(existingKey, JSON.stringify(storedData));
+        } else {
+          const notUsedCategories = data.subCategory.notUsedCategories.map((category: any) => ({
+            ...category,
+            products: [],
+          }))
+          const dataToSave = {
+            subCategories: [{
+              ...data.subCategory.subCategory,
+              products: data.products,
+            }, ...notUsedCategories],
+            projectName: data.project.projectName,
+          };
+
+          localStorage.setItem(`cartData-${index}`, JSON.stringify(dataToSave));
+        }
         router.push('/cart');
       } else {
         dispatch(nextStep());
@@ -277,6 +316,8 @@ function KorpusProModal() {
               error={error}
               data={data}
               step={step}
+              existSubCategories={existSubCategories}
+              existProducts={existProducts}
             />
           </S.ModalBody>
           <S.ModalFooter>

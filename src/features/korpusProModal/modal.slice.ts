@@ -1,7 +1,7 @@
 // src/store/modalSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface StepData {
+export interface StepData {
   [key: string]: any;
 }
 
@@ -16,8 +16,10 @@ interface ModalState {
     facade: StepData;
     facadeMaterialType: StepData;
     facadeColor: StepData;
-    products: StepData;
+    products: StepData[];
   };
+  existSubCategories: number[],
+  existProducts: number[],
   isVisible: boolean;
 }
 
@@ -32,8 +34,10 @@ const initialState: ModalState = {
     facade: {},
     facadeMaterialType: {},
     facadeColor: {},
-    products: {},
+    products: [],
   },
+  existSubCategories: [],
+  existProducts: [],
   isVisible: false,
 };
 
@@ -53,6 +57,18 @@ const modalSlice = createSlice({
     },
     customNextStep: (state, action: PayloadAction<number>) => {
       state.step += action.payload;
+    },
+    changeStepCustom: (state, action: PayloadAction<any>) => {
+      state.isVisible = true;
+      state.step = action.payload.step;
+      state.existSubCategories = action.payload.existSubCategories || [];
+      state.existProducts = action.payload.existProducts || [];
+      state.data = {
+        ...initialState.data,
+        project: action.payload.projectName,
+        category: action.payload.category,
+        subCategory: action.payload.subCategory,
+      };
     },
     customPrevStep: (state, action: PayloadAction<number>) => {
       state.step -= action.payload;
@@ -88,5 +104,6 @@ export const {
   updateStepData,
   showModal,
   hideModal,
+  changeStepCustom,
 } = modalSlice.actions;
 export default modalSlice.reducer;
