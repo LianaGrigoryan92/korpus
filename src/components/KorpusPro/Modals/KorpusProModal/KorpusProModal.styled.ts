@@ -20,6 +20,9 @@ export const ModalHeader = styled.div`
   align-items: center;
   gap: 25px;
   padding: 24px;
+  @media (max-width: 768px) {
+    padding: 5px 10px;
+  }
 `;
 
 export const ModalStepName = styled.h2`
@@ -36,8 +39,13 @@ export const ModalStepName = styled.h2`
     align-items: center;
     justify-content: space-between;
     gap: 60px;
-    width: 100%;
+    width: 100%;  
+    white-space: nowrap;
   }
+
+    @media (max-width: 768px) {
+        font-size: 18px;
+    }
 `;
 
 export const ModalStepCategories = styled.div`
@@ -48,6 +56,8 @@ export const ModalStepCategories = styled.div`
       width: 100%;
       white-space: nowrap;
       overflow-x: auto;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #E4E4E4;
       &::-webkit-scrollbar {
           display: none;
       }
@@ -69,6 +79,9 @@ export const ModalBody = styled.div`
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 export const ModalFooter = styled.div`

@@ -13,13 +13,6 @@ export const Content = styled.div`
   width: 100%;
 `;
 
-export const ActionsWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  gap: 18px;
-`;
-
 export const SelectValue = styled.div`
   cursor: pointer;
 `;
@@ -34,12 +27,24 @@ export const ActionsBlock = styled.div<{ $isSelectable?: boolean }>`
   gap: 5px;
   max-width: ${({ $isSelectable }) => ($isSelectable ? '100%' : '156px')};
   width: 100%;
+
+    @media (max-width: 768px) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: unset;
+    }
 `;
 
 export const Image = styled.img`
   max-width: 118px;
   max-height: 118px;
   width: 100%;
+    @media (max-width: 768px) {
+        max-width: 90px;
+        max-height: 90px;
+    }
 `;
 
 export const Title = styled.h4`

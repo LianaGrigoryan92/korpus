@@ -40,6 +40,10 @@ export const Image = styled.img`
   max-width: 118px;
   max-height: 118px;
   width: 100%;
+    @media (max-width: 768px) {
+        max-width: 90px;
+        max-height: 90px;
+    }
 `;
 
 export const Title = styled.h4`
@@ -47,6 +51,10 @@ export const Title = styled.h4`
   font-weight: 500;
   line-height: 16px;
   color: #1a1a1a;
+
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export const CheckboxWrapper = styled.div`
@@ -87,6 +95,10 @@ export const ValueWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+  color: #A3A3A3;
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export const Selected = styled.div`
@@ -112,13 +124,10 @@ export const Label = styled.label`
   line-height: 16px;
   text-align: left;
   color: #1a1a1a;
-`;
 
-export const ErrorMessage = styled.span`
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-  display: block;
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export const Input = styled.input`
@@ -128,6 +137,9 @@ export const Input = styled.input`
   color: #1a1a1a;
   padding: 18px 0;
   border-bottom: 1px solid #e4e4e4;
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export const Divider = styled.div`

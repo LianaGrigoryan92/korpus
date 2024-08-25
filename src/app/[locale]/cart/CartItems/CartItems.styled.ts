@@ -10,6 +10,10 @@ export const ProjectTitle = styled.div`
     font-size: 16px;
     font-weight: 600;
     padding: 10px 0 40px 0;
+    @media (max-width: 768px) {
+        justify-content: space-between;
+        font-size: 22px;
+    }
 `;
 
 export const ProductTitle = styled.div`
@@ -22,6 +26,14 @@ export const ProductTitle = styled.div`
     font-size: 16px;
     font-weight: 500;
     justify-content: space-between;
+`;
+
+export const ProductChild = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
 `;
 
 export const SubCategoryTitle = styled.div`
@@ -58,6 +70,8 @@ export const Link = styled.a`
     cursor: pointer;
     @media (max-width: 768px) {
         margin-left: unset;
+        color: #414141;
+        font-size: 14px;
     }
 `;
 

@@ -62,17 +62,19 @@ const CartItems = ({ cartItems, toggleExpandProject, expandedProjects, expandedS
             {cartItems.map((project, projectIndex) => (
                 <div key={projectIndex}>
                     <S.ProductTitle onClick={() => toggleExpandProject(projectIndex)}>
-                        <Image
-                            src={ArrowIcon}
-                            alt="Arrow icon"
-                            style={{
-                                transform: expandedProjects[projectIndex] ? 'rotate(180deg)' : 'rotate(0deg)',
-                                transition: 'transform 0.3s ease',
-                                cursor: 'pointer'
-                            }}
-                        />
-                        {project.projectName}
-                        <S.ItemCount>{project.subCategories.reduce((acc: number, curr: any) => acc + (curr.products ? curr.products.length : 0), 0)} item{project.subCategories.length > 1 && 's'}</S.ItemCount>
+                        <S.ProductChild>
+                            <Image
+                                src={ArrowIcon}
+                                alt="Arrow icon"
+                                style={{
+                                    transform: expandedProjects[projectIndex] ? 'rotate(180deg)' : 'rotate(0deg)',
+                                    transition: 'transform 0.3s ease',
+                                    cursor: 'pointer'
+                                }}
+                            />
+                            {project.projectName}
+                            <S.ItemCount>{project.subCategories.reduce((acc: number, curr: any) => acc + (curr.products ? curr.products.length : 0), 0)} item{project.subCategories.length > 1 && 's'}</S.ItemCount>
+                        </S.ProductChild>
                         <S.Link onClick={() => handleAddNewItem(project)}>Add new item</S.Link>
                     </S.ProductTitle>
 

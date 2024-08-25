@@ -22,11 +22,10 @@ export default function FacadeItem({
         <S.FacadeItem>
             <S.Content>
                 <S.Image src={imageUrl} alt="Korpus Pro Preference Item Image" />
-                <S.ActionsWrapper>
                     <S.ActionsBlock>
                         <S.Title>{title}</S.Title>
                         <S.SelectValue
-                            onClick={() => onSelect(value)} // Call onSelect with the value
+                            onClick={() => onSelect(value)}
                         >
                             {selectedFacadeValue === value ? (
                                 <Check size={22} strokeWidth={2} />
@@ -35,7 +34,6 @@ export default function FacadeItem({
                             )}
                         </S.SelectValue>
                     </S.ActionsBlock>
-                </S.ActionsWrapper>
             </S.Content>
         </S.FacadeItem>
     );

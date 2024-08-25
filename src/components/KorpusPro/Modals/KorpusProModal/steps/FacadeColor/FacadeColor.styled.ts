@@ -19,6 +19,9 @@ export const FacadePreferenceCategory = styled.h3`
   line-height: 20px;
   color: #1a1a1a;
   margin-bottom: 16px;
+    @media (max-width: 768px) {
+        font-size: 22px;
+    }
 `;
 
 export const FacadePreferenceContent = styled.div`
@@ -43,6 +46,9 @@ export const Title = styled.h4`
   font-weight: 500;
   line-height: 16px;
   color: #1a1a1a;
+    @media (max-width: 768px) {
+        font-size: 22px;
+    }
 `;
 
 export const CheckboxWrapper = styled.div`
@@ -112,7 +118,8 @@ export const ColorsWrapper = styled.div`
 `;
 
 export const ColorItem = styled.div`
-  border: 1px solid #e4e4e4;
+  border-right: 1px solid #e4e4e4;
+  border-top: 1px solid #e4e4e4;
   padding: 12px;
   cursor: pointer;
 `;
@@ -122,6 +129,12 @@ export const Color = styled.div<{ $color: string }>`
   width: 100%;
   height: 236px;
   background-color: ${({ $color }) => $color};
+    @media (max-width: 768px) {
+        max-width: 164px;
+        max-height: 164px;
+        width: 100%;
+        height: 236px;   
+    }
 `;
 
 export const ColorInfo = styled.div`

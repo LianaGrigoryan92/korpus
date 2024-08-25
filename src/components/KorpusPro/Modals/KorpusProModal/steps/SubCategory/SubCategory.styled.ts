@@ -70,6 +70,7 @@ export const SubCategoryItem = styled.div<{
 }>`
   height: 274px;
   width: 100%;
+  padding-bottom: 100%;
   background-image: ${({ $active, $bgImage }) =>
     $active
       ? `linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 53.43%, rgba(0, 0, 0, 1) 100%), url(${$bgImage})`

@@ -54,6 +54,9 @@ const tabNamesMobile = [
   'Choose korpus color',
   'Facade',
   'Facade', // Repeated for step 7
+  'Facade', // Repeated for step 8
+  'Facade', // Repeated for step 9
+  'Korpuses',
 ];
 
 // Create an array of unique categories

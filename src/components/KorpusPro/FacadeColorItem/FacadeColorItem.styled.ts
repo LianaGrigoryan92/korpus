@@ -40,6 +40,10 @@ export const Image = styled.img`
   max-width: 118px;
   max-height: 118px;
   width: 100%;
+    @media (max-width: 768px) {
+        max-width: 90px;
+        max-height: 90px;
+    }
 `;
 
 export const Title = styled.h4`

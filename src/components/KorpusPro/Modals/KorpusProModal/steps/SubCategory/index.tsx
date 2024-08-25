@@ -7,6 +7,7 @@ import { useGetSubCategoriesQuery } from '@/features/korpusProSubCategories';
 import { Check } from 'lucide-react';
 import { updateStepData } from '@/features';
 import { useAppDispatch } from '@/store/hooks';
+import {useClientMediaQuery} from "@/hooks/useClientMediaQuery";
 
 interface StepProps {
   data: any;
@@ -20,6 +21,7 @@ const SubCategory: React.FC<StepProps> = ({ data, step, existSubCategories }) =>
   const [selectedSubCategory, setSelectedSubCategory] = useState<SubCategory>();
   const { data: subCategoriesData } = useGetSubCategoriesQuery({ categoryId: data.category.categoryId });
   const dispatch = useAppDispatch();
+  const isMobile = useClientMediaQuery('(max-width: 768px)');
 
   const subCategories = useMemo(() => existSubCategories?.length ? subCategoriesData?.filter(subCategory => !existSubCategories.includes(subCategory.id)) : subCategoriesData, [subCategoriesData, existSubCategories])
 
@@ -39,7 +41,7 @@ const SubCategory: React.FC<StepProps> = ({ data, step, existSubCategories }) =>
   return (
     <S.CategoriesWrapper>
       <S.SubCategories>
-        <S.SubCategoriesTitle>Type</S.SubCategoriesTitle>
+        {!isMobile && <S.SubCategoriesTitle>Type</S.SubCategoriesTitle>}
         {subCategories?.map((subCategory) => (
           <S.SubCategoryItem
             key={subCategory.id}
