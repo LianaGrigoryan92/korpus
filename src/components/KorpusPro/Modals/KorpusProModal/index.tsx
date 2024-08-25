@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Modal from 'react-modal';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -126,7 +126,7 @@ function KorpusProModal() {
     if (step === 3 && !stepData.subCategory) {
       return false;
     }
-    if (step === 4 && (!stepData.position['Total Height*'] || !stepData['total size'] || !stepData.type)) {
+    if (step === 4 && (!stepData?.position?.['Total Height*'] || !stepData?.['total size'] || !stepData?.type)) {
       return false;
     }
     if (step === 5 && !stepData.colorId) {
@@ -258,6 +258,12 @@ function KorpusProModal() {
     dispatch(firstStep())
   }
 
+  const isNextButtonDisabled = useMemo(() => {
+    const stepKeys = Object.keys(data) as Array<keyof typeof data>;
+    const currentStepData = data[stepKeys[step - 1]];
+    return !validateStep(currentStepData);
+  }, [data, step]);
+
   return (
     <S.KorpusProModalWrapper>
       <Modal
@@ -326,8 +332,11 @@ function KorpusProModal() {
               <S.ModalBackButton onClick={handlePrev} disabled={step === 1}>
                 Back
               </S.ModalBackButton>
-              <S.ModalNextButton onClick={handleNext}>
-                {step === 9 ? 'Continue to card' : 'Next'}
+              <S.ModalNextButton
+                  disabled={isNextButtonDisabled}
+                  onClick={handleNext}
+              >
+                {step === 9 ? 'Continue to cart' : 'Next'}
               </S.ModalNextButton>
             </S.ModalControls>
           </S.ModalFooter>
