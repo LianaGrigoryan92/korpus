@@ -14,10 +14,13 @@ const styles = css`
     box-sizing: border-box;
   }
 
-  body {
-    background-color: white;
-    font-family: 'Graphik Trial', sans-serif;
-  }
+    body {
+        background-color: white;
+        font-family: 'Graphik Trial', sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
 
   button {
     font-family: 'Graphik Trial', sans-serif;

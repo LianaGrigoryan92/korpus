@@ -126,7 +126,7 @@ function KorpusProModal() {
     if (step === 2 && !stepData.categoryId) {
       return false;
     }
-    if (step === 3 && !stepData.subCategory) {
+    if (step === 3 && !stepData?.subCategory) {
       return false;
     }
     if (step === 4 && (!stepData?.position?.['Total Height*'] || !stepData?.['total size'] || !stepData?.type)) {
