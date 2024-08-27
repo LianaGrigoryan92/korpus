@@ -178,7 +178,6 @@ function KorpusProModal() {
         }
 
         if (storedData && existingKey) {
-          console.log('3333');
           const subCategoryIndex = storedData.subCategories.findIndex(
               (subCat: any) => subCat.id === data.subCategory.subCategory.id
           );
