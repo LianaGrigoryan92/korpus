@@ -5,7 +5,7 @@ import * as S from './Preferences.styled';
 import { useAppDispatch } from '@/store/hooks';
 import { updateStepData } from '@/features';
 import PreferenceItem from '@/components/KorpusPro/PreferenceItem';
-import {useGetPreferenceBySubCategoryIdQuery} from "@/features/korpusProPreferences";
+import { useGetPreferenceBySubCategoryIdQuery } from '@/features/korpusProPreferences';
 
 interface StepProps {
   data: any;
@@ -63,6 +63,8 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
     for (let i = 0; i < preferenceItems.length; i++) {
       const item = preferenceItems[i];
 
+      const globalType = type || item.type;
+
       switch (type || item.type) {
         case 'input':
           renderedItems.push(
@@ -71,16 +73,15 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
                     title={item.name}
                     imageUrl={item.image}
                     isFixed={item.isFixed}
-                    isSingleValue={item.editable}
                     options={item.items}
                     value={item.items[0]}
-                    isSelectable={item.selectable}
                     defaultOption={item.default}
                     category={name.trim().toLowerCase()}
                     selectedPreferencesValues={selectedPreferencesValues}
                     setSelectedPreferencesValues={setSelectedPreferencesValues}
                     handleSelectPositionValues={handleSelectPositionValues}
                     handleChangeTotalHeight={handleChangeTotalHeight}
+                    itemType={globalType}
                 />
               </S.Preference>
           );
@@ -94,10 +95,8 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
                       title={item.name}
                       imageUrl={item.image}
                       isFixed={item.isFixed}
-                      isSingleValue={item.editable}
                       options={item.items}
                       value={item.items[0]}
-                      isSelectable={item.selectable}
                       defaultOption={item.default}
                       category={name.trim().toLowerCase()}
                       selectedPreferencesValues={selectedPreferencesValues}
@@ -108,6 +107,7 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
                         value: nextItem.items[0],
                         isFixed: nextItem.isFixed,
                       }}
+                      itemType={globalType}
                   />
                 </S.Preference>
             );
@@ -121,15 +121,14 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
                   title={item.name}
                   imageUrl={item.image}
                   isFixed={item.isFixed}
-                  isSingleValue={item.editable}
                   options={item.items}
                   value={item.items[0]}
-                  isSelectable={item.selectable}
                   defaultOption={item.default}
                   category={name.trim().toLowerCase()}
                   selectedPreferencesValues={selectedPreferencesValues}
                   setSelectedPreferencesValues={setSelectedPreferencesValues}
                   handleSelectPositionValues={handleSelectPositionValues}
+                  itemType={item.isFixed ? 'fixed' : globalType}
               />
           );
       }
@@ -137,6 +136,7 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
 
     return renderedItems;
   };
+
   return (
       <S.PreferencesWrapper>
         {preferences?.map((preference) => (
