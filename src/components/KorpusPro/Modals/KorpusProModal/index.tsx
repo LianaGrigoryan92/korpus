@@ -208,6 +208,11 @@ function KorpusProModal() {
             subCategories: [{
               ...data.subCategory.subCategory,
               products: data.products,
+              height: data.preferences.position['Total Height*'],
+              korpusColorId: data.korpusColor.colorId,
+              facadeColorType: data.facadeColor.type,
+              lacquerPercentage: data.facadeColor.lacquerPercentage,
+              facadeHex: data.facadeColor.color,
             }, ...notUsedCategories],
             projectName: data.project.projectName,
           };

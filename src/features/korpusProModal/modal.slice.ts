@@ -68,6 +68,8 @@ const modalSlice = createSlice({
         project: action.payload.projectName,
         category: action.payload.category,
         subCategory: action.payload.subCategory,
+        korpusColor: action.payload.korpusColor,
+        facadeColor: action.payload.facadeColor,
       };
     },
     customPrevStep: (state, action: PayloadAction<number>) => {

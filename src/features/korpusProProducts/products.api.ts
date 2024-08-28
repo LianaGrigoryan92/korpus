@@ -7,8 +7,8 @@ export const productsApi = createApi({
     baseUrl: process.env.NEXT_PUBLIC_STRAPI_API_URL,
   }),
   endpoints: (builder) => ({
-    getProductsBySubCategoryId: builder.query<Product[], { subCategoryId: string | number, height: number, korpusColorId: string | number, facadeColorType?: number | string }>({
-      query: ({ subCategoryId, height, korpusColorId, facadeColorType }) => ({
+    getProductsBySubCategoryId: builder.query<Product[], { subCategoryId: string | number, height?: number, korpusColorId?: string | number, facadeColorType?: number | string, lacquerPercentage?: number, facadeHex?: string }>({
+      query: ({ subCategoryId, height, korpusColorId, facadeColorType, lacquerPercentage, facadeHex }) => ({
         url: `/products`,
         headers: {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_TOKEN}`,
@@ -18,10 +18,12 @@ export const productsApi = createApi({
           'populate[image]': 'true',
           'sort[0]': 'id',
           'filters[sub_categories][id][$eq]': subCategoryId,
-          'filters[$or][0][minHeight][$lte]': height,
-          'filters[$or][0][maxHeight][$gte]': height,
+          ...(height && {'filters[$or][0][minHeight][$lte]': height}),
+          ...(height && {'filters[$or][0][maxHeight][$gte]': height}),
           'filters[korpus_colors][id][$eq]': korpusColorId,
           ...(facadeColorType && { 'filters[facade_color_types][id][$eq]': facadeColorType }),
+          ...(lacquerPercentage && { 'filters[lacquerPercentages][title][$eq]': lacquerPercentage }),
+          ...(facadeHex && { 'filters[facadeColor][hex][$eq]': facadeHex }),
         },
       }),
       transformResponse: (response: { data: any[] }, meta, arg) => {

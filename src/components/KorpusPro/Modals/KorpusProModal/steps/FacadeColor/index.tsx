@@ -77,12 +77,12 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
   };
 
   // Handle color selection
-  const handleClick = (colorId: string | number) => {
+  const handleClick = (colorId: string | number, hex: string) => {
     setSelectedColorId(colorId);
     setSelectedPreferencesValues((prevState: any) => ({
       ['facadeColor']: {
         ...prevState['facadeColor'],
-        ['color']: colorId,
+        ['color']: hex,
       },
     }));
   };
@@ -150,7 +150,7 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
           />
           <S.ColorsWrapper>
             {filteredColors?.map((color) => (
-                <S.ColorItem key={color.id} onClick={() => handleClick(color.id)}>
+                <S.ColorItem key={color.id} onClick={() => handleClick(color.id, color.hex)}>
                   <S.Color $color={color.hex} />
                   <S.ColorInfo>
                     <S.ColorInfoWrapper>

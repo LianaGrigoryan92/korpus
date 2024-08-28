@@ -38,7 +38,7 @@ const CartItems = ({ cartItems, toggleExpandProject, expandedProjects, expandedS
     };
 
     const handleAdd = (subCategory: any, projectName: string) => {
-        console.log(3333, subCategory.products);
+        console.log(3333, subCategory);
         router.push('/korpus-pro');
         dispatch(changeStepCustom({
             step: subCategory?.products?.length ? 9 : 4,
@@ -50,6 +50,15 @@ const CartItems = ({ cartItems, toggleExpandProject, expandedProjects, expandedS
             },
             existProducts: subCategory?.products?.length ? subCategory.products.map((product: any) => product.productId) : [],
             projectName,
+            // height: subCategory.preferences.position['Total Height*'],
+            korpusColor: {
+                colorId: subCategory.korpusColorId,
+            },
+            facadeColor: {
+                type: subCategory.facadeColorType,
+                lacquerPercentage: subCategory.lacquerPercentage,
+                color: subCategory.facadeHex,
+            },
         }));
     };
 

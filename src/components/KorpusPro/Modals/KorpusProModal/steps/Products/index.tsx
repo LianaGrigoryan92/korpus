@@ -28,9 +28,11 @@ export default function Products({ data, step, existProducts }: StepProps) {
   console.log({data})
   const { data: productsData } = useGetProductsBySubCategoryIdQuery({
     subCategoryId: data.subCategory.subCategory.id,
-    height: data.preferences.position['Total Height*'],
+    height: data.preferences?.position?.['Total Height*'],
     korpusColorId: data.korpusColor.colorId,
     facadeColorType: data.facadeColor.type,
+    lacquerPercentage: data.facadeColor.lacquerPercentage,
+    facadeHex: data.facadeColor.color,
   });
   const [selectedProducts, setSelectedProducts] = useState<SelectedProduct[]>();
   const dispatch = useAppDispatch();
