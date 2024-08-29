@@ -1,7 +1,4 @@
-'use client';
-
 import { camelize } from '@/utils/camelize';
-import { PreferenceValues } from '../Modals/KorpusProModal/steps/Preferences';
 import * as S from './PreferenceItem.styled';
 import { Dispatch, SetStateAction, useEffect, useMemo } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
@@ -14,9 +11,8 @@ interface PreferenceItemProps {
     isFixed?: boolean;
     options: string[];
     defaultOption?: string | number;
-    category: string;
     defaultSelected?: string;
-    selectedPreferencesValues: PreferenceValues;
+    selectedPreferencesValues: any;
     setSelectedPreferencesValues: Dispatch<SetStateAction<any>>;
     handleSelectPositionValues: (e: any, name: string) => void;
     handleChangeTotalHeight?: (e: any) => void;
@@ -36,7 +32,6 @@ export default function PreferenceItem({
    isFixed,
    defaultOption,
    defaultSelected,
-   category,
    selectedPreferencesValues,
    setSelectedPreferencesValues,
    handleSelectPositionValues,
@@ -52,27 +47,11 @@ export default function PreferenceItem({
 
         if (
             defaultOption &&
-            !updatedPreferences[category]?.[camelizedTitle] &&
-            (!updatedPreferences[category] ||
-                updatedPreferences[category][camelizedTitle] !== defaultOption.toString())
+            !updatedPreferences[camelizedTitle] &&
+            itemType !== 'singleSelect' &&
+            !isFixed
         ) {
-            updatedPreferences[category] = {
-                ...updatedPreferences[category],
-                [camelizedTitle]: defaultOption.toString(),
-            };
-            shouldUpdate = true;
-        }
-
-        if (
-            !updatedPreferences[category]?.['type'] &&
-            defaultSelected &&
-            itemType === 'singleSelect' &&
-            updatedPreferences[category]?.['type'] !== defaultSelected
-        ) {
-            updatedPreferences[category] = {
-                ...updatedPreferences[category],
-                type: defaultSelected,
-            };
+            updatedPreferences[camelizedTitle] = defaultOption.toString();
             shouldUpdate = true;
         }
 
@@ -83,7 +62,6 @@ export default function PreferenceItem({
         defaultOption,
         defaultSelected,
         camelizedTitle,
-        category,
         selectedPreferencesValues,
         setSelectedPreferencesValues,
         itemType,
@@ -92,7 +70,7 @@ export default function PreferenceItem({
     const handleTypeSelection = (value: string) => {
         setSelectedPreferencesValues((prevState: any) => ({
             ...prevState,
-            [category]: { ...prevState[category], type: value },
+            type: value,
         }));
     };
 
@@ -109,9 +87,9 @@ export default function PreferenceItem({
                             <S.InputWrapper>
                                 <S.Label>Total Height*</S.Label>
                                 <S.Input
-                                    name={title}
+                                    name="height"
                                     maxLength={4}
-                                    value={selectedPreferencesValues[category]?.[title] || ''}
+                                    value={selectedPreferencesValues['height'] || ''}
                                     onChange={handleChangeTotalHeight as any}
                                     placeholder="Type"
                                 />
@@ -127,7 +105,7 @@ export default function PreferenceItem({
                             <S.ActionsBlock>
                                 <S.Title>{title}</S.Title>
                                 <S.SelectValue onClick={() => handleTypeSelection(value as string)}>
-                                    {selectedPreferencesValues[category]?.['type'] === value ? (
+                                    {selectedPreferencesValues['type'] === value ? (
                                         <Check size={22} strokeWidth={2} />
                                     ) : (
                                         <ArrowRight size={22} strokeWidth={2} />
@@ -181,11 +159,10 @@ export default function PreferenceItem({
                                             name={camelizedTitle}
                                             type="checkbox"
                                             checked={
-                                                selectedPreferencesValues[category]?.[camelizedTitle] ===
-                                                option.toString()
+                                                selectedPreferencesValues[camelizedTitle] === option.toString()
                                             }
                                             value={option}
-                                            onChange={(e) => handleSelectPositionValues(e, category)}
+                                            onChange={(e) => handleSelectPositionValues(e, camelizedTitle)}
                                         />
                                         <S.CheckboxLabel>{option}</S.CheckboxLabel>
                                     </S.CheckboxItemWrapper>

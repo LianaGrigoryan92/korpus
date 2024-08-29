@@ -6,6 +6,7 @@ import { useAppDispatch } from '@/store/hooks';
 import { updateStepData } from '@/features';
 import PreferenceItem from '@/components/KorpusPro/PreferenceItem';
 import { useGetPreferenceBySubCategoryIdQuery } from '@/features/korpusProPreferences';
+import {camelize} from "@/utils/camelize";
 
 interface StepProps {
   data: any;
@@ -13,16 +14,10 @@ interface StepProps {
   step: number;
 }
 
-export interface PreferenceValues {
-  [key: string]: {
-    [key: string]: string;
-  };
-}
-
 const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
   const { data: preferences } = useGetPreferenceBySubCategoryIdQuery({ subCategoryId: data.subCategory.subCategory.id });
   const dispatch = useAppDispatch();
-  const [selectedPreferencesValues, setSelectedPreferencesValues] = useState<PreferenceValues>({});
+  const [selectedPreferencesValues, setSelectedPreferencesValues] = useState({});
 
   useEffect(() => {
     const updatedData = {
@@ -36,13 +31,11 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
     if (/^\d*$/.test(e.target.value)) {
       setSelectedPreferencesValues((prevState) => ({
         ...prevState,
-        position: {
-          ...prevState.position,
-          [e.target.name]: e.target.value,
-        },
+        'height': e.target.value,
       }));
     }
   };
+
 
   const handleSelectPositionValues = (
       e: React.ChangeEvent<HTMLInputElement>,
@@ -50,10 +43,7 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
   ) => {
     setSelectedPreferencesValues((prevState: any) => ({
       ...prevState,
-      [name]: {
-        ...prevState[name],
-        [e.target.name]: e.target.value,
-      },
+      'type': e.target.value,
     }));
   };
 
@@ -76,7 +66,6 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
                     options={item.items}
                     value={item.items[0]}
                     defaultOption={item.default}
-                    category={name.trim().toLowerCase()}
                     selectedPreferencesValues={selectedPreferencesValues}
                     setSelectedPreferencesValues={setSelectedPreferencesValues}
                     handleSelectPositionValues={handleSelectPositionValues}
@@ -98,7 +87,6 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
                       options={item.items}
                       value={item.items[0]}
                       defaultOption={item.default}
-                      category={name.trim().toLowerCase()}
                       selectedPreferencesValues={selectedPreferencesValues}
                       setSelectedPreferencesValues={setSelectedPreferencesValues}
                       handleSelectPositionValues={handleSelectPositionValues}
@@ -122,9 +110,8 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
                   imageUrl={item.image}
                   isFixed={item.isFixed}
                   options={item.items}
-                  value={item.items[0]}
+                  value={camelize(item.name)}
                   defaultOption={item.default}
-                  category={name.trim().toLowerCase()}
                   selectedPreferencesValues={selectedPreferencesValues}
                   setSelectedPreferencesValues={setSelectedPreferencesValues}
                   handleSelectPositionValues={handleSelectPositionValues}

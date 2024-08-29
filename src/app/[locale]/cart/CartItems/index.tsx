@@ -50,7 +50,7 @@ const CartItems = ({ cartItems, toggleExpandProject, expandedProjects, expandedS
             },
             existProducts: subCategory?.products?.length ? subCategory.products.map((product: any) => product.productId) : [],
             projectName,
-            // height: subCategory.preferences.position['Total Height*'],
+            preferences: subCategory.preferences,
             korpusColor: {
                 colorId: subCategory.korpusColorId,
             },

@@ -129,7 +129,7 @@ function KorpusProModal() {
     if (step === 3 && !stepData?.subCategory) {
       return false;
     }
-    if (step === 4 && (!stepData?.position?.['Total Height*'] || !stepData?.['total size'] || !stepData?.type)) {
+    if (step === 4 && (!stepData['height'] || !stepData?.type)) {
       return false;
     }
     if (step === 5 && !stepData.colorId) {
@@ -208,11 +208,11 @@ function KorpusProModal() {
             subCategories: [{
               ...data.subCategory.subCategory,
               products: data.products,
-              height: data.preferences.position['Total Height*'],
               korpusColorId: data.korpusColor.colorId,
               facadeColorType: data.facadeColor.type,
               lacquerPercentage: data.facadeColor.lacquerPercentage,
               facadeHex: data.facadeColor.color,
+              preferences: data.preferences,
             }, ...notUsedCategories],
             projectName: data.project.projectName,
           };

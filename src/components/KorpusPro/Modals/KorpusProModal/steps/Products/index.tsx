@@ -26,13 +26,25 @@ interface StepProps {
 
 export default function Products({ data, step, existProducts }: StepProps) {
   console.log({data})
+  const { height, ...preferences } = data.preferences;
+  const dynamicPreferencesParams = useMemo(() => {
+    const params: { [key: string]: any } = {};
+
+    Object.entries(preferences || {}).forEach(([key, value]) => {
+        params[`filters[preferenceProduct][${key}][$eq]`] = `size ${value}`;
+    });
+
+    return params;
+  }, [data.preferences]);
+
   const { data: productsData } = useGetProductsBySubCategoryIdQuery({
     subCategoryId: data.subCategory.subCategory.id,
-    height: data.preferences?.position?.['Total Height*'],
+    height,
     korpusColorId: data.korpusColor.colorId,
     facadeColorType: data.facadeColor.type,
     lacquerPercentage: data.facadeColor.lacquerPercentage,
     facadeHex: data.facadeColor.color,
+    ...dynamicPreferencesParams,
   });
   const [selectedProducts, setSelectedProducts] = useState<SelectedProduct[]>();
   const dispatch = useAppDispatch();

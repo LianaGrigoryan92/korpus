@@ -7,8 +7,8 @@ export const productsApi = createApi({
     baseUrl: process.env.NEXT_PUBLIC_STRAPI_API_URL,
   }),
   endpoints: (builder) => ({
-    getProductsBySubCategoryId: builder.query<Product[], { subCategoryId: string | number, height?: number, korpusColorId?: string | number, facadeColorType?: number | string, lacquerPercentage?: number, facadeHex?: string }>({
-      query: ({ subCategoryId, height, korpusColorId, facadeColorType, lacquerPercentage, facadeHex }) => ({
+    getProductsBySubCategoryId: builder.query<Product[], { subCategoryId: string | number, height?: number, korpusColorId?: string | number, facadeColorType?: number | string, lacquerPercentage?: number, facadeHex?: string, [key: string]: any  }>({
+      query: ({ subCategoryId, height, korpusColorId, facadeColorType, lacquerPercentage, facadeHex, ...dynamicPreferencesParams }) => ({
         url: `/products`,
         headers: {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_TOKEN}`,
@@ -24,6 +24,7 @@ export const productsApi = createApi({
           ...(facadeColorType && { 'filters[facade_color_types][id][$eq]': facadeColorType }),
           ...(lacquerPercentage && { 'filters[lacquerPercentages][title][$eq]': lacquerPercentage }),
           ...(facadeHex && { 'filters[facadeColor][hex][$eq]': facadeHex }),
+          ...dynamicPreferencesParams,
         },
       }),
       transformResponse: (response: { data: any[] }, meta, arg) => {
