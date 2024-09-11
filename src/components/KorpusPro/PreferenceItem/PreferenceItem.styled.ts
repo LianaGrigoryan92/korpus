@@ -28,10 +28,12 @@ export const ActionsBlock = styled.div<{ $isSelectable?: boolean }>`
     display: flex;
     gap: 5px;
     width: 100%;
-    max-width: unset;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: ${({ $isSelectable }) => ($isSelectable ? 'row' : 'column')};
+    justify-content: ${({ $isSelectable }) =>
+            $isSelectable ? 'space-between' : 'flex-start'};
+    align-items: ${({ $isSelectable }) =>
+            $isSelectable ? 'center' : 'flex-start'};
+    max-width: ${({ $isSelectable }) => ($isSelectable ? '100%' : 'unset')};
 `;
 
 export const Image = styled.img`
