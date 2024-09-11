@@ -41,9 +41,10 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
       e: React.ChangeEvent<HTMLInputElement>,
       name: string,
   ) => {
+    console.log(name);
     setSelectedPreferencesValues((prevState: any) => ({
       ...prevState,
-      'type': e.target.value,
+      [name]: e.target.value,
     }));
   };
 

@@ -25,15 +25,13 @@ export const SelectValue = styled.div`
 `;
 
 export const ActionsBlock = styled.div<{ $isSelectable?: boolean }>`
-  display: flex;
-  flex-direction: ${({ $isSelectable }) => ($isSelectable ? 'row' : 'column')};
-  justify-content: ${({ $isSelectable }) =>
-    $isSelectable ? 'space-between' : 'flex-start'};
-  align-items: ${({ $isSelectable }) =>
-    $isSelectable ? 'center' : 'flex-start'};
-  gap: 5px;
-  max-width: ${({ $isSelectable }) => ($isSelectable ? '100%' : '156px')};
-  width: 100%;
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    max-width: unset;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 `;
 
 export const Image = styled.img`
@@ -140,11 +138,4 @@ export const Input = styled.input`
     @media (max-width: 768px) {
         font-size: 14px;
     }
-`;
-
-export const Divider = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: #e6e6e6;
-  margin: 16px 0;
 `;

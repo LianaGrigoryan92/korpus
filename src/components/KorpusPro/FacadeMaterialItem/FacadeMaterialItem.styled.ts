@@ -26,21 +26,12 @@ export const SelectValue = styled.div`
 
 export const ActionsBlock = styled.div<{ $isSelectable?: boolean }>`
   display: flex;
-  flex-direction: ${({ $isSelectable }) => ($isSelectable ? 'row' : 'column')};
-  justify-content: ${({ $isSelectable }) =>
-    $isSelectable ? 'space-between' : 'flex-start'};
-  align-items: ${({ $isSelectable }) =>
-    $isSelectable ? 'center' : 'flex-start'};
   gap: 5px;
-  max-width: ${({ $isSelectable }) => ($isSelectable ? '100%' : '156px')};
   width: 100%;
-
-    @media (max-width: 768px) {
-        max-width: unset;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
+  max-width: unset;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const Image = styled.img`
