@@ -35,13 +35,28 @@ export default function Category() {
               <span>Service</span>
             </S.CategoryItem>
             {isServiceIframeOpen && (
-                <iframe
-                    src="https://cloud.bazissoft.ru/cutting/ru/#/client/auth/login?user=8782"
-                    frameBorder="0"
-                    height="100%"
-                    width="100%"
-                    style={{ position: 'absolute', top: 0, left: 0, zIndex: 10 }}
-                />
+                <div style={{
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  zIndex: 10
+                }}>
+                  <iframe
+                      src="https://cloud.bazissoft.ru/cutting/ru/#/client/auth/login?user=8782"
+                      frameBorder="0"
+                      style={{
+                        width: '50%',
+                        height: '50%',
+                        zIndex: 10,
+                        backgroundColor: '#fff',
+                      }}
+                  />
+                </div>
             )}
             <S.CategoryItem
                 $bgImage={ModulesCategoryImg.src}
