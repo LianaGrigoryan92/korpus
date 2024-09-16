@@ -8,6 +8,7 @@ export const CategoryContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;
   gap: 32px;
+  position: relative;
 
   @media (max-width: 980px) {
     grid-template-rows: 1fr;
@@ -60,7 +61,7 @@ export const CategoryItem = styled.div<{ $bgImage: string }>`
 
 export const ServiceBlock = styled.div`
     position: absolute;
-    top: 20%;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;

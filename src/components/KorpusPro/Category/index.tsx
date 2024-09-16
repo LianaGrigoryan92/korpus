@@ -38,14 +38,14 @@ export default function Category() {
                 <S.ServiceBlock>
                   <iframe
                       src="https://cloud.bazissoft.ru/cutting/ru/#/client/auth/login?user=8782"
-                      frameBorder="0"
                       style={{
-                        position: 'fixed',
+                        position: 'absolute',
                         width: '100%',
                         height: '100%',
                         zIndex: 10,
                         backgroundColor: '#fff',
-                        maxWidth: '1320px'
+                        maxWidth: '1320px',
+                        top: 0,
                       }}
                   />
                 </S.ServiceBlock>
