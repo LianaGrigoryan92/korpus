@@ -141,7 +141,10 @@ function KorpusProModal() {
     if (step === 7 && !stepData) {
       return false;
     }
-    if (step === 8 && (!stepData.color || !stepData.colorId || !stepData.lacquerPercentage || !stepData.type)) {
+
+    const checkLogicFacadeColor = stepData?.haveLacquer ? !stepData.color || !stepData.colorId || !stepData.lacquerPercentage || !stepData?.type : !stepData?.type;
+
+    if (step === 8 && checkLogicFacadeColor) {
       return false;
     }
     if (step === 9 && !Array.isArray(stepData)) {

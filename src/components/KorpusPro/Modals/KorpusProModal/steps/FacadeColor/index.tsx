@@ -28,13 +28,18 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
   const [selectedPreferencesValues, setSelectedPreferencesValues] =
     useState<PreferenceValues>({});
 
+    const { lacquerPercentages, facadeColors } = facadeColorTypes?.find(facadeColorType => facadeColorType.id === +selectedPreferencesValues?.facadeColor?.type) || {} as unknown as FacadeColor;
+
   useEffect(() => {
     const updatedData = {
       ...data,
-      facadeColor: selectedPreferencesValues.facadeColor,
+      facadeColor: {
+        ...selectedPreferencesValues.facadeColor,
+        haveLacquer: !!lacquerPercentages?.length,
+      }
     };
     dispatch(updateStepData({ data: updatedData, step }));
-  }, [selectedPreferencesValues]);
+  }, [selectedPreferencesValues, lacquerPercentages]);
 
   const handleSelectPositionValues = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -87,8 +92,6 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
     }));
   };
 
-  const { lacquerPercentages, facadeColors } = facadeColorTypes?.find(facadeColorType => facadeColorType.id === +selectedPreferencesValues?.facadeColor?.type) || {} as unknown as FacadeColor;
-
   const filteredColors = facadeColors?.filter(
       (item) =>
           item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -118,7 +121,7 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
           </S.FacadePreferenceContent>
         </S.FacadePreference>
       )}
-      {selectedPreferencesValues?.facadeColor?.type && <>
+      {selectedPreferencesValues?.facadeColor?.type && lacquerPercentages?.length > 0 && <>
         <S.Divider />
         <S.Title>{facadeColorData.lacquerPercentage.name}</S.Title>
         <S.CheckboxWrapper>
