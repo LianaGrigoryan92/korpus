@@ -129,7 +129,7 @@ function KorpusProModal() {
     if (step === 3 && !stepData?.subCategory) {
       return false;
     }
-    if (step === 4 && (!stepData['height'] || !stepData?.type)) {
+    if (step === 4 && stepData && (!stepData['height'] || !stepData?.type)) {
       return false;
     }
     if (step === 5 && !stepData.colorId) {

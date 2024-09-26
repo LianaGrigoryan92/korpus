@@ -2,7 +2,6 @@ import { camelize } from '@/utils/camelize';
 import * as S from './PreferenceItem.styled';
 import { Dispatch, SetStateAction, useEffect, useMemo } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
-import MockImage from "@/public/images/korpus-pro/preferences/image.png";
 
 interface PreferenceItemProps {
     imageUrl: string;
@@ -14,8 +13,7 @@ interface PreferenceItemProps {
     defaultSelected?: string;
     selectedPreferencesValues: any;
     setSelectedPreferencesValues: Dispatch<SetStateAction<any>>;
-    handleSelectPositionValues: (e: any, name: string) => void;
-    handleChangeTotalHeight?: (e: any) => void;
+    handleSelectPositionValues: (e: any) => void;
     secondValue?: {
         title: string;
         value: string | number | null;
@@ -35,7 +33,6 @@ export default function PreferenceItem({
    selectedPreferencesValues,
    setSelectedPreferencesValues,
    handleSelectPositionValues,
-   handleChangeTotalHeight,
    secondValue,
    itemType,
 }: PreferenceItemProps) {
@@ -51,7 +48,7 @@ export default function PreferenceItem({
             itemType !== 'singleSelect' &&
             !isFixed
         ) {
-            updatedPreferences[camelizedTitle] = defaultOption.toString();
+            updatedPreferences[camelizedTitle] = [defaultOption.toString()];
             shouldUpdate = true;
         }
 
@@ -76,27 +73,6 @@ export default function PreferenceItem({
 
     const renderContent = () => {
         switch (itemType) {
-            case 'input':
-                return (
-                    <S.Content>
-                        <S.Image
-                            src={imageUrl || MockImage.src}
-                            alt="Korpus Pro Preference Item Image"
-                        />
-                        <S.ActionsBlock>
-                            <S.InputWrapper>
-                                <S.Label>Total Height*</S.Label>
-                                <S.Input
-                                    name="height"
-                                    maxLength={4}
-                                    value={selectedPreferencesValues['height'] || ''}
-                                    onChange={handleChangeTotalHeight as any}
-                                    placeholder="Type"
-                                />
-                            </S.InputWrapper>
-                        </S.ActionsBlock>
-                    </S.Content>
-                );
             case 'singleSelect':
                 return (
                     <S.Content>
@@ -149,27 +125,27 @@ export default function PreferenceItem({
             default:
                 return (
                     <S.Content>
-                        <S.Image src={imageUrl} alt="Korpus Pro Preference Item Image" />
-                        <S.ActionsBlock>
-                            <S.Title>{title}</S.Title>
-                            <S.CheckboxWrapper>
-                                {options.map((option) => (
-                                    <S.CheckboxItemWrapper key={option}>
-                                        <S.CheckboxItem
-                                            name={camelizedTitle}
-                                            type="checkbox"
-                                            checked={
-                                                selectedPreferencesValues[camelizedTitle] === option.toString()
-                                            }
-                                            value={option}
-                                            onChange={(e) => handleSelectPositionValues(e, camelizedTitle)}
-                                        />
-                                        <S.CheckboxLabel>{option}</S.CheckboxLabel>
-                                    </S.CheckboxItemWrapper>
-                                ))}
-                            </S.CheckboxWrapper>
-                        </S.ActionsBlock>
-                    </S.Content>
+                    <S.Image src={imageUrl} alt="Korpus Pro Preference Item Image" />
+                    <S.ActionsBlock>
+                      <S.Title>{title}</S.Title>
+                      <S.CheckboxWrapper>
+                        {options.map((option) => (
+                          <S.CheckboxItemWrapper key={option}>
+                            <S.CheckboxItem
+                              name={camelizedTitle}
+                              type="checkbox"
+                              checked={
+                                selectedPreferencesValues[camelizedTitle]?.includes(option.toString())
+                              }
+                              value={option}
+                              onChange={handleSelectPositionValues}
+                            />
+                            <S.CheckboxLabel>{option}</S.CheckboxLabel>
+                          </S.CheckboxItemWrapper>
+                        ))}
+                      </S.CheckboxWrapper>
+                    </S.ActionsBlock>
+                  </S.Content>
                 );
         }
     };

@@ -14,7 +14,7 @@ interface StepProps {
   step: number;
 }
 
-const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
+const Preferences: React.FC<StepProps> = ({ data, step }) => {
   const { data: preferences } = useGetPreferenceBySubCategoryIdQuery({ subCategoryId: data.subCategory.subCategory.id });
   const dispatch = useAppDispatch();
   const [selectedPreferencesValues, setSelectedPreferencesValues] = useState({});
@@ -27,25 +27,32 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
     dispatch(updateStepData({ data: updatedData, step }));
   }, [selectedPreferencesValues]);
 
-  const handleChangeTotalHeight = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (/^\d*$/.test(e.target.value)) {
-      setSelectedPreferencesValues((prevState) => ({
-        ...prevState,
-        'height': e.target.value,
-      }));
-    }
-  };
-
-
   const handleSelectPositionValues = (
       e: React.ChangeEvent<HTMLInputElement>,
-      name: string,
   ) => {
-    console.log(name);
-    setSelectedPreferencesValues((prevState: any) => ({
-      ...prevState,
-      [name]: e.target.value,
-    }));
+    const { name, value, checked } = e.target;
+
+    let modifiedName = name.replace(/[^a-zA-Z0-9 ]/g, '');
+
+    if (modifiedName === 'totalHeight') {
+      modifiedName = 'height';
+    }
+
+    setSelectedPreferencesValues((prevState: any) => {
+      const updatedValues = prevState[name] || [];
+      
+      if (checked) {
+        return {
+          ...prevState,
+          [modifiedName]: [...updatedValues, value],
+        };
+      } else {
+        return {
+          ...prevState,
+          [modifiedName]: updatedValues.filter((v: string) => v !== value),
+        };
+      }
+    });
   };
 
   const renderGroupedItems = (name: string, type: string | undefined, preferenceItems: any[]) => {
@@ -57,25 +64,6 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
       const globalType = type || item.type;
 
       switch (type || item.type) {
-        case 'input':
-          renderedItems.push(
-              <S.Preference key={`${item.id}`}>
-                <PreferenceItem
-                    title={item.name}
-                    imageUrl={item.image}
-                    isFixed={item.isFixed}
-                    options={item.items}
-                    value={item.items[0]}
-                    defaultOption={item.default}
-                    selectedPreferencesValues={selectedPreferencesValues}
-                    setSelectedPreferencesValues={setSelectedPreferencesValues}
-                    handleSelectPositionValues={handleSelectPositionValues}
-                    handleChangeTotalHeight={handleChangeTotalHeight}
-                    itemType={globalType}
-                />
-              </S.Preference>
-          );
-          break;
         case 'grouped':
           const nextItem = preferenceItems[i + 1];
           if (nextItem) {

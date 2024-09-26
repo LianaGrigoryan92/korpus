@@ -31,7 +31,14 @@ export default function Products({ data, step, existProducts }: StepProps) {
     const params: { [key: string]: any } = {};
 
     Object.entries(preferences || {}).forEach(([key, value]) => {
-        params[`filters[preferenceProduct][${key}][$eq]`] = `size ${value}`;
+        console.log(1223, value);
+        if (Array.isArray(value)) {
+          value.forEach((itm, index) => {
+            params[`filters[preferenceProduct][${key}][$in][${index}]`] = `size ${itm}`;
+          })
+           } else {
+          params[`filters[preferenceProduct][${key}][$eq]`] = `size ${value}`;
+        }
     });
 
     return params;
