@@ -7,8 +7,8 @@ export const productsApi = createApi({
     baseUrl: process.env.NEXT_PUBLIC_STRAPI_API_URL,
   }),
   endpoints: (builder) => ({
-    getProductsBySubCategoryId: builder.query<Product[], { subCategoryId: string | number, height?: number, korpusColorId?: string | number, facadeColorType?: number | string, lacquerPercentage?: number, facadeHex?: string, [key: string]: any  }>({
-      query: ({ subCategoryId, height, korpusColorId, facadeColorType, lacquerPercentage, facadeHex, ...dynamicPreferencesParams }) => ({
+    getProductsBySubCategoryId: builder.query<Product[], { subCategoryId: string | number, minHeight?: number, maxHeight?: number, korpusColorId?: string | number, facadeColorType?: number | string, lacquerPercentage?: number, facadeHex?: string, [key: string]: any  }>({
+      query: ({ subCategoryId, minHeight, maxHeight, korpusColorId, facadeColorType, lacquerPercentage, facadeHex, ...dynamicPreferencesParams }) => ({
         url: `/products`,
         headers: {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_TOKEN}`,
@@ -18,8 +18,8 @@ export const productsApi = createApi({
           'populate[image]': 'true',
           'sort[0]': 'id',
           'filters[sub_categories][id][$eq]': subCategoryId,
-          ...(height && {'filters[$or][0][minHeight][$lte]': height}),
-          ...(height && {'filters[$or][0][maxHeight][$gte]': height}),
+          ...(minHeight && {'filters[$or][0][minHeight][$lte]': minHeight}),
+          ...(maxHeight && {'filters[$or][0][maxHeight][$gte]': maxHeight}),
           'filters[korpus_colors][id][$eq]': korpusColorId,
           ...(facadeColorType && { 'filters[facade_color_types][id][$eq]': facadeColorType }),
           ...(lacquerPercentage && { 'filters[lacquerPercentages][title][$eq]': lacquerPercentage }),

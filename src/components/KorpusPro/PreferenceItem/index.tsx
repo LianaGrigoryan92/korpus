@@ -1,6 +1,6 @@
 import { camelize } from '@/utils/camelize';
 import * as S from './PreferenceItem.styled';
-import { Dispatch, SetStateAction, useEffect, useMemo } from 'react';
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 
 interface PreferenceItemProps {
@@ -13,13 +13,15 @@ interface PreferenceItemProps {
     defaultSelected?: string;
     selectedPreferencesValues: any;
     setSelectedPreferencesValues: Dispatch<SetStateAction<any>>;
-    handleSelectPositionValues: (e: any) => void;
+    handleSelectPositionValues: (e: any, type?: string) => void;
     secondValue?: {
         title: string;
         value: string | number | null;
         isFixed?: boolean;
     };
     itemType?: string;
+    minHeight?: number;
+    maxHeight?: number;
 }
 
 export default function PreferenceItem({
@@ -35,8 +37,17 @@ export default function PreferenceItem({
    handleSelectPositionValues,
    secondValue,
    itemType,
+   minHeight,
+   maxHeight,
 }: PreferenceItemProps) {
     const camelizedTitle = useMemo(() => camelize(title), [title]);
+    const [range, setRange] = useState(minHeight);
+
+    const handleRangeStateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newRange = Number(e.target.value);
+        setRange(newRange);
+        handleSelectPositionValues(e, `${itemType}`);
+    };
 
     useEffect(() => {
         const updatedPreferences = { ...selectedPreferencesValues };
@@ -73,6 +84,27 @@ export default function PreferenceItem({
 
     const renderContent = () => {
         switch (itemType) {
+            case 'range': 
+            return (
+                <S.Content>
+                <S.Image src={imageUrl} alt="Korpus Pro Preference Item Image" />
+                <S.ActionsBlock>
+                    <S.Title>{title}</S.Title>
+                    <S.PriceRangeWrapper>
+                        <S.PriceRangeInput
+                            type="range"
+                            id="range"
+                            name={camelizedTitle}
+                            min={minHeight}
+                            max={maxHeight}
+                            value={range}
+                            onChange={handleRangeStateChange}
+                        />
+                        <S.PriceRangeValue>{range}</S.PriceRangeValue>
+                    </S.PriceRangeWrapper>
+                </S.ActionsBlock>
+            </S.Content>
+            );
             case 'singleSelect':
                 return (
                     <S.Content>
