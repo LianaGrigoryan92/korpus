@@ -46,7 +46,8 @@ export default function Products({ data, step, existProducts }: StepProps) {
 
   const { data: productsData } = useGetProductsBySubCategoryIdQuery({
     subCategoryId: data.subCategory.subCategory.id,
-    height,
+    minHeight: data.subCategory.subCategory.minHeight,
+    maxHeight: height,
     korpusColorId: data.korpusColor.colorId,
     facadeColorType: data.facadeColor.type,
     lacquerPercentage: data.facadeColor.lacquerPercentage,

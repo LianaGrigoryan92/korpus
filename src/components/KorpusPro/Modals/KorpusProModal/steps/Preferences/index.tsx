@@ -17,7 +17,9 @@ interface StepProps {
 const Preferences: React.FC<StepProps> = ({ data, step }) => {
   const { data: preferences } = useGetPreferenceBySubCategoryIdQuery({ subCategoryId: data.subCategory.subCategory.id });
   const dispatch = useAppDispatch();
-  const [selectedPreferencesValues, setSelectedPreferencesValues] = useState({});
+  const [selectedPreferencesValues, setSelectedPreferencesValues] = useState({
+    height: data.subCategory.subCategory.minHeight,
+  });
 
   useEffect(() => {
     const updatedData = {
@@ -29,6 +31,7 @@ const Preferences: React.FC<StepProps> = ({ data, step }) => {
 
   const handleSelectPositionValues = (
       e: React.ChangeEvent<HTMLInputElement>,
+      type?: string,
   ) => {
     const { name, value, checked } = e.target;
 
@@ -40,7 +43,14 @@ const Preferences: React.FC<StepProps> = ({ data, step }) => {
 
     setSelectedPreferencesValues((prevState: any) => {
       const updatedValues = prevState[name] || [];
-      
+
+      if (type === 'range') {
+        return {
+          ...prevState,
+          [modifiedName]: +value,
+        };
+      }
+
       if (checked) {
         return {
           ...prevState,
@@ -105,6 +115,8 @@ const Preferences: React.FC<StepProps> = ({ data, step }) => {
                   setSelectedPreferencesValues={setSelectedPreferencesValues}
                   handleSelectPositionValues={handleSelectPositionValues}
                   itemType={item.isFixed ? 'fixed' : globalType}
+                  minHeight={data.subCategory.subCategory.minHeight}
+                  maxHeight={data.subCategory.subCategory.maxHeight}
               />
           );
       }

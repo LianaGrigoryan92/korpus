@@ -141,3 +141,52 @@ export const Input = styled.input`
         font-size: 14px;
     }
 `;
+
+export const PriceRangeWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  width: 100%;
+`;
+
+export const PriceRangeInput = styled.input`
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #e4e4e4;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #1a1a1a;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  &::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #1a1a1a;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+`;
+
+export const PriceRangeValue = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+  min-width: 50px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+`;

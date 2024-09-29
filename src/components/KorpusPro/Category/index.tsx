@@ -42,11 +42,24 @@ export default function Category() {
                         position: 'absolute',
                         width: '100%',
                         height: '100%',
-                        zIndex: 10,
+                        zIndex: 1,
                         backgroundColor: '#fff',
                         maxWidth: '1320px',
                         top: 0,
                       }}
+                  />
+                  <div
+                    onClick={() => window.open('https://your-link.com', '_blank')}
+                    style={{
+                      position: 'absolute',
+                      zIndex: 10,
+                      top: '13%',
+                      left: '42%',
+                      transform: 'translateX(-50%)',
+                      width: '300px',
+                      height: '50px',
+                      cursor: 'pointer',
+                    }}
                   />
                 </S.ServiceBlock>
             )}
