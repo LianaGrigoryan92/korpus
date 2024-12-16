@@ -3,6 +3,6 @@
 import styled from 'styled-components';
 
 export const KorpusProLayoutWrapper = styled.div`
-  margin-top: 144px;
+  margin-top: 100px;
   overflow: hidden;
 `;
