@@ -58,7 +58,7 @@ export default function Navbar() {
         ) : (
           <>
             <S.NavItemWrapper>
-              <S.NavItem className="products" onClick={handleVisibleCategories}>
+              {/* <S.NavItem className="products" onClick={handleVisibleCategories}>
                 Products
                 <S.ProductCategories $isVisible={isVisibleCategories}>
                   <S.CategoryItem>
@@ -90,15 +90,15 @@ export default function Navbar() {
                     <ArrowRight size={24} color={theme.palette.common.black} />
                   </S.CategoryItem>
                 </S.ProductCategories>
-              </S.NavItem>
+              </S.NavItem> */}
               <Link href={'/about'}>About</Link>
               <Link href={'/korpus-pro'}>KorpusPro</Link>
             </S.NavItemWrapper>
             <S.NavItemWrapper>
-              <input type={'search'} placeholder="Search" />
+              {/* <input type={'search'} placeholder="Search" /> */}
               <LocaleSwitcher locale={locale} />
-              <Link href={'/profile'}>Profile</Link>
-              <Link href={'/cart'}>Cart ({cartItemCount})</Link>
+              {/* <Link href={'/profile'}>Profile</Link> */}
+              {/* <Link href={'/cart'}>Cart ({cartItemCount})</Link> */}
             </S.NavItemWrapper>
           </>
         )}

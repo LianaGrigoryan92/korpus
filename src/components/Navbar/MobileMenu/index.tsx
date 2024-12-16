@@ -26,10 +26,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onClose }) => {
         <S.Logo src={Logo.src} alt="logo" />
         <S.MenuListContainer>
           <S.MenuList>
-            <S.MenuItem>
+            {/* <S.MenuItem>
               Products{' '}
               <ArrowRight size={24} color={theme.palette.common.black} />
-            </S.MenuItem>
+            </S.MenuItem> */}
             <S.MenuItem>
               About <ArrowRight size={24} color={theme.palette.common.black} />
             </S.MenuItem>
@@ -38,13 +38,13 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onClose }) => {
               <ArrowRight size={24} color={theme.palette.common.black} />
             </S.MenuItem>
           </S.MenuList>
-          <S.Search type="search" placeholder="Search" />
+          {/* <S.Search type="search" placeholder="Search" /> */}
           <S.MenuList>
             <LocaleSwitcher locale={locale} />
-            <S.MenuItem>
+            {/* <S.MenuItem>
               Profile{' '}
               <ArrowRight size={24} color={theme.palette.common.black} />
-            </S.MenuItem>
+            </S.MenuItem> */}
           </S.MenuList>
         </S.MenuListContainer>
       </S.MobileMenuContent>

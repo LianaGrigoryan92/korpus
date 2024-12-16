@@ -32,14 +32,14 @@ function Home({
           height={376}
         />
       </S.ContentWrapper>
-      <SliderLayout>
+      {/* <SliderLayout>
         <ShopCategories />
-      </SliderLayout>
-      <MainLayout>
+      </SliderLayout> */}
+      {/* <MainLayout>
         <BlogsSection />
         <ProductSection />
         <BenefitSection />
-      </MainLayout>
+      </MainLayout> */}
     </S.HomeWrapper>
   );
 }

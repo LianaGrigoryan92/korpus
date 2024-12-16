@@ -15,9 +15,9 @@ export default function Footer() {
 
   return (
     <S.Container>
-      {!['/korpus-pro', '/cart'].some(path => pathname.includes(path)) && (
+      {/* {!['/korpus-pro', '/cart'].some(path => pathname.includes(path)) && (
         <S.Image $bgImage={FooterBanner.src} />
-      )}
+      )} */}
       <S.FooterContent>
         {!isMobile && (
           <S.FooterLeftSide>
@@ -33,10 +33,8 @@ export default function Footer() {
             {!isMobile && (
               <>
                 <S.FooterNavList>
-                  <S.FooterNavItem>
-                    <Link href="/about">About</Link>
-                  </S.FooterNavItem>
-                  <S.FooterNavItem>
+                  {/* TODO about is must be here */}
+                  {/* <S.FooterNavItem>
                     <Link href="/services">Services</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
@@ -44,21 +42,18 @@ export default function Footer() {
                   </S.FooterNavItem>
                   <S.FooterNavItem>
                     <Link href="/carriers">Carriers</Link>
-                  </S.FooterNavItem>
+                  </S.FooterNavItem> */}
                 </S.FooterNavList>
                 <S.FooterNavList>
+                <S.FooterNavItem>
+                    <Link href="/about">About</Link>
+                  </S.FooterNavItem>
                   <S.FooterNavItem>
                     <Link href="/contact">Contact</Link>
                   </S.FooterNavItem>
-                  <S.FooterNavItem>
+                  {/* <S.FooterNavItem>
                     <Link href="/shipping">Shipping & Delivery</Link>
-                  </S.FooterNavItem>
-                  <S.FooterNavItem>
-                    <Link href="/refund">Return & Refund</Link>
-                  </S.FooterNavItem>
-                  <S.FooterNavItem>
-                    <Link href="/faq">FAQ</Link>
-                  </S.FooterNavItem>
+                  </S.FooterNavItem> */}
                 </S.FooterNavList>
                 <S.FooterNavList>
                   <S.FooterNavItem>
@@ -66,6 +61,12 @@ export default function Footer() {
                   </S.FooterNavItem>
                   <S.FooterNavItem>
                     <Link href="/privacy">Privacy policy</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/refund">Return & Refund</Link>
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/faq">FAQ</Link>
                   </S.FooterNavItem>
                 </S.FooterNavList>
               </>

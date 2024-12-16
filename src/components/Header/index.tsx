@@ -6,12 +6,15 @@ import { Navbar } from '@/components';
 // styles
 import * as S from './Header.styled';
 import Logo from '@/public/images/logo.png';
+import Link from 'next/link';
 
 function Header() {
   return (
     <S.Container>
       <S.Header>
-        <Image src={Logo} alt="logo" />
+        <Link href={'/'}>
+          <Image src={Logo} alt="logo" />
+        </Link>
         <Navbar />
       </S.Header>
     </S.Container>
