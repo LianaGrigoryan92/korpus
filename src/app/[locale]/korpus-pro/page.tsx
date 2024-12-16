@@ -1,13 +1,14 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
 
 // styles & images
 import * as S from './page.styled';
-import { getLocale } from 'next-intl/server';
+import { useParams } from 'next/navigation';
 // import { KorpusProCategories, MainLayout } from '@/components';
 
 async function KorpusPro() {
-  const locale = await getLocale();
-  console.log({ locale });
+  const { locale } = useParams();
   return (
     <S.KorpusProContainer>
       {/* <MainLayout> */}
