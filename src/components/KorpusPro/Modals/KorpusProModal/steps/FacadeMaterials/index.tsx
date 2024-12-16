@@ -18,12 +18,6 @@ interface StepProps {
   step: number;
 }
 
-export interface PreferenceValues {
-  [key: string]: {
-    [key: string]: string;
-  };
-}
-
 const FacadeMaterialType: React.FC<StepProps> = ({ data, error, step }) => {
   const { data: facadeMaterials } = useGetFacadeMaterialsByFacadeIdQuery({ facadeId: data.facade.facadeType });
   const dispatch = useAppDispatch();

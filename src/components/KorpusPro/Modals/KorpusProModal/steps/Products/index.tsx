@@ -6,7 +6,7 @@ import ProductItem from './ProductItem';
 // styles
 import * as S from './Products.styled';
 
-import { useCallback, useEffect, useState } from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import { updateStepData } from '@/features';
 import {useGetProductsBySubCategoryIdQuery} from "@/features/korpusProProducts";
 
@@ -21,12 +21,43 @@ interface StepProps {
     onPrev: () => void;
     data: any;
     step: number;
+    existProducts: number[];
 }
 
-export default function Products({ data, step }: StepProps) {
-  const { data: products } = useGetProductsBySubCategoryIdQuery({ subCategoryId: data.subCategory.subCategory.id });
+export default function Products({ data, step, existProducts }: StepProps) {
+  console.log({data})
+  const { height, ...preferences } = data.preferences;
+  const dynamicPreferencesParams = useMemo(() => {
+    const params: { [key: string]: any } = {};
+
+    Object.entries(preferences || {}).forEach(([key, value]) => {
+        console.log(1223, value);
+        if (Array.isArray(value)) {
+          value.forEach((itm, index) => {
+            params[`filters[preferenceProduct][${key}][$in][${index}]`] = `size ${itm}`;
+          })
+           } else {
+          params[`filters[preferenceProduct][${key}][$eq]`] = `size ${value}`;
+        }
+    });
+
+    return params;
+  }, [data.preferences]);
+
+  const { data: productsData } = useGetProductsBySubCategoryIdQuery({
+    subCategoryId: data.subCategory.subCategory.id,
+    minHeight: data.subCategory.subCategory.minHeight,
+    maxHeight: height,
+    korpusColorId: data.korpusColor.colorId,
+    facadeColorType: data.facadeColor.type,
+    lacquerPercentage: data.facadeColor.lacquerPercentage,
+    facadeHex: data.facadeColor.color,
+    ...dynamicPreferencesParams,
+  });
   const [selectedProducts, setSelectedProducts] = useState<SelectedProduct[]>();
   const dispatch = useAppDispatch();
+
+  const products = useMemo(() => existProducts?.length ? productsData?.filter(subCategory => !existProducts.includes(subCategory.id)) : productsData, [productsData, existProducts])
 
   const handleRemoveProduct = useCallback((productId: string | number) => {
     setSelectedProducts((prevState) => {

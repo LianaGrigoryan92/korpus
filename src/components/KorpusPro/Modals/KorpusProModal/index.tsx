@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Modal from 'react-modal';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -8,9 +8,10 @@ import { RootState } from '@/store/store';
 import {
   customNextStep,
   customPrevStep,
+  firstStep,
   hideModal,
   nextStep,
-  prevStep,
+  prevStep, StepData,
 } from '@/features';
 import * as S from './KorpusProModal.styled';
 import Category from './steps/Category';
@@ -30,6 +31,8 @@ interface StepProps {
   error: string;
   data: any;
   step: number;
+  existSubCategories: number[];
+  existProducts: number[];
 }
 
 const tabNames = [
@@ -51,6 +54,9 @@ const tabNamesMobile = [
   'Choose korpus color',
   'Facade',
   'Facade', // Repeated for step 7
+  'Facade', // Repeated for step 8
+  'Facade', // Repeated for step 9
+  'Korpuses',
 ];
 
 // Create an array of unique categories
@@ -92,7 +98,7 @@ const steps: { [key: number]: React.ComponentType<StepProps> } = {
 function KorpusProModal() {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { step, data, isVisible } = useAppSelector(
+  const { step, data, isVisible, existSubCategories, existProducts } = useAppSelector(
     (state: RootState) => state.modal,
   );
 
@@ -120,22 +126,25 @@ function KorpusProModal() {
     if (step === 2 && !stepData.categoryId) {
       return false;
     }
-    if (step === 3 && !stepData.subCategory) {
+    if (step === 3 && !stepData?.subCategory) {
       return false;
     }
-    if (step === 4 && (!stepData.position['Total Height*'] || !stepData['total size'] || !stepData.type)) {
+    if (step === 4 && stepData && (!stepData['height'] || !stepData?.type)) {
       return false;
     }
     if (step === 5 && !stepData.colorId) {
       return false;
     }
-    if (step === 6 && !stepData.facadeType && !stepData.Without) {
+    if (step === 6 && !stepData.facadeType && stepData.type !== 'without') {
       return false;
     }
     if (step === 7 && !stepData) {
       return false;
     }
-    if (step === 8 && (!stepData.color || !stepData.colorId || !stepData.lacquerPercentage || !stepData.type)) {
+
+    const checkLogicFacadeColor = stepData?.haveLacquer ? !stepData.color || !stepData.colorId || !stepData.lacquerPercentage || !stepData?.type : !stepData?.type;
+
+    if (step === 8 && checkLogicFacadeColor) {
       return false;
     }
     if (step === 9 && !Array.isArray(stepData)) {
@@ -151,23 +160,68 @@ function KorpusProModal() {
 
     if (validateStep(currentStepData)) {
       console.log('CHECK ALL STEPS DATA', data)
-      if (step === 6 && currentStepData.facadePreferences?.type === 'without') {
+      if (step === 6 && (currentStepData as StepData)?.type === 'without') {
         dispatch(customNextStep(3));
       } else if (step === 9) {
         let index = 1;
+        let existingKey = null;
+        let storedData = null;
+
         while (localStorage.getItem(`cartData-${index}`)) {
+          const item = localStorage.getItem(`cartData-${index}`);
+
+          if (item) {
+            storedData = JSON.parse(item);
+            if (storedData.projectName === data.project) {
+              existingKey = `cartData-${index}`;
+              break;
+            }
+          }
           index++;
         }
-        const uniqueKey = `cartData-${index}`;
 
-        const dataToSave = {
-          products: data.products,
-          subCategories: data.subCategory,
-          projectName: data.project.projectName,
-        };
+        if (storedData && existingKey) {
+          const subCategoryIndex = storedData.subCategories.findIndex(
+              (subCat: any) => subCat.id === data.subCategory.subCategory.id
+          );
 
-        localStorage.setItem(uniqueKey, JSON.stringify(dataToSave));
+          const existingProducts = storedData.subCategories[subCategoryIndex] ? storedData.subCategories[subCategoryIndex]?.products ?? [] : [];
 
+          const products = [...existingProducts, ...data.products];
+
+          if (subCategoryIndex !== -1) {
+            storedData.subCategories[subCategoryIndex] = {
+              ...data.subCategory.subCategory,
+              products,
+            };
+          } else {
+            storedData.subCategories.push({
+              ...data.subCategory.subCategory,
+              products,
+            });
+          }
+
+          localStorage.setItem(existingKey, JSON.stringify(storedData));
+        } else {
+          const notUsedCategories = data.subCategory.notUsedCategories.map((category: any) => ({
+            ...category,
+            products: [],
+          }))
+          const dataToSave = {
+            subCategories: [{
+              ...data.subCategory.subCategory,
+              products: data.products,
+              korpusColorId: data.korpusColor.colorId,
+              facadeColorType: data.facadeColor.type,
+              lacquerPercentage: data.facadeColor.lacquerPercentage,
+              facadeHex: data.facadeColor.color,
+              preferences: data.preferences,
+            }, ...notUsedCategories],
+            projectName: data.project.projectName,
+          };
+
+          localStorage.setItem(`cartData-${index}`, JSON.stringify(dataToSave));
+        }
         router.push('/cart');
       } else {
         dispatch(nextStep());
@@ -210,6 +264,16 @@ function KorpusProModal() {
       ? steps[8]
       : steps[step];
 
+  const handleRestart = () => {
+    dispatch(firstStep())
+  }
+
+  const isNextButtonDisabled = useMemo(() => {
+    const stepKeys = Object.keys(data) as Array<keyof typeof data>;
+    const currentStepData = data[stepKeys[step - 1]];
+    return !validateStep(currentStepData);
+  }, [data, step]);
+
   return (
     <S.KorpusProModalWrapper>
       <Modal
@@ -246,7 +310,7 @@ function KorpusProModal() {
               {isMobile && (
                 <S.MobileHeaderButtons>
                   <S.CancelButton onClick={handleClose}>Cancel</S.CancelButton>
-                  <S.ModalRestartButton>Restart</S.ModalRestartButton>
+                  <S.ModalRestartButton onClick={handleRestart}>Restart</S.ModalRestartButton>
                 </S.MobileHeaderButtons>
               )}
             </S.ModalStepName>
@@ -268,16 +332,21 @@ function KorpusProModal() {
               error={error}
               data={data}
               step={step}
+              existSubCategories={existSubCategories}
+              existProducts={existProducts}
             />
           </S.ModalBody>
           <S.ModalFooter>
-            {!isMobile && <S.ModalRestartButton>Restart</S.ModalRestartButton>}
+            {!isMobile && <S.ModalRestartButton onClick={handleRestart}>Restart</S.ModalRestartButton>}
             <S.ModalControls>
               <S.ModalBackButton onClick={handlePrev} disabled={step === 1}>
                 Back
               </S.ModalBackButton>
-              <S.ModalNextButton onClick={handleNext}>
-                {step === 9 ? 'Continue to card' : 'Next'}
+              <S.ModalNextButton
+                  disabled={isNextButtonDisabled}
+                  onClick={handleNext}
+              >
+                {step === 9 ? 'Continue to cart' : 'Next'}
               </S.ModalNextButton>
             </S.ModalControls>
           </S.ModalFooter>

@@ -25,21 +25,25 @@ export const SelectValue = styled.div`
 `;
 
 export const ActionsBlock = styled.div<{ $isSelectable?: boolean }>`
-  display: flex;
-  flex-direction: ${({ $isSelectable }) => ($isSelectable ? 'row' : 'column')};
-  justify-content: ${({ $isSelectable }) =>
-    $isSelectable ? 'space-between' : 'flex-start'};
-  align-items: ${({ $isSelectable }) =>
-    $isSelectable ? 'center' : 'flex-start'};
-  gap: 5px;
-  max-width: ${({ $isSelectable }) => ($isSelectable ? '100%' : '156px')};
-  width: 100%;
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    flex-direction: ${({ $isSelectable }) => ($isSelectable ? 'row' : 'column')};
+    justify-content: ${({ $isSelectable }) =>
+            $isSelectable ? 'space-between' : 'flex-start'};
+    align-items: ${({ $isSelectable }) =>
+            $isSelectable ? 'center' : 'flex-start'};
+    max-width: ${({ $isSelectable }) => ($isSelectable ? '100%' : 'unset')};
 `;
 
 export const Image = styled.img`
   max-width: 118px;
   max-height: 118px;
   width: 100%;
+    @media (max-width: 768px) {
+        max-width: 90px;
+        max-height: 90px;
+    }
 `;
 
 export const Title = styled.h4`
@@ -47,6 +51,10 @@ export const Title = styled.h4`
   font-weight: 500;
   line-height: 16px;
   color: #1a1a1a;
+
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export const CheckboxWrapper = styled.div`
@@ -87,6 +95,10 @@ export const ValueWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+  color: #A3A3A3;
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export const Selected = styled.div`
@@ -112,13 +124,10 @@ export const Label = styled.label`
   line-height: 16px;
   text-align: left;
   color: #1a1a1a;
-`;
 
-export const ErrorMessage = styled.span`
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-  display: block;
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export const Input = styled.input`
@@ -128,11 +137,56 @@ export const Input = styled.input`
   color: #1a1a1a;
   padding: 18px 0;
   border-bottom: 1px solid #e4e4e4;
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
-export const Divider = styled.div`
+export const PriceRangeWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
   width: 100%;
-  height: 1px;
-  background-color: #e6e6e6;
-  margin: 16px 0;
+`;
+
+export const PriceRangeInput = styled.input`
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #e4e4e4;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #1a1a1a;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  &::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #1a1a1a;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+`;
+
+export const PriceRangeValue = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+  min-width: 50px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;

@@ -67,7 +67,7 @@ function About() {
             }}
           />
           <S.AboutLastImages>
-            {data?.about_info_block.lastImage.data.map((image: any) => (
+            {data?.about_info_block.lastImage?.data?.map((image: any) => (
               <S.AboutLastImage
                 key={image}
                 src={getImageUrl({ data: image })}
@@ -77,7 +77,7 @@ function About() {
         </S.AboutLastContent>
         <S.Questions>
           <S.QuestionsBLock>
-            {data?.about_questions.questions.map(
+            {data?.about_questions.questions?.map(
               (item: QuestionItem, index: number) => (
                 <Accordion
                   key={item.id}

@@ -8,6 +8,7 @@ export const CategoryContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;
   gap: 32px;
+  position: relative;
 
   @media (max-width: 980px) {
     grid-template-rows: 1fr;
@@ -57,3 +58,16 @@ export const CategoryItem = styled.div<{ $bgImage: string }>`
     }
   }
 `;
+
+export const ServiceBlock = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    padding: 0 60px';
+`

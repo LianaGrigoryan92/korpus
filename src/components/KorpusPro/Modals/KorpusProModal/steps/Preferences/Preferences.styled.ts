@@ -18,6 +18,9 @@ export const PreferenceCategory = styled.h3`
   line-height: 20px;
   color: #1a1a1a;
   margin-bottom: 16px;
+    @media (max-width: 768px) {
+        font-size: 22px;
+    }
 `;
 
 export const PreferenceContent = styled.div`

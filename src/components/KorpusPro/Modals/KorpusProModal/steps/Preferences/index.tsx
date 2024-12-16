@@ -5,7 +5,8 @@ import * as S from './Preferences.styled';
 import { useAppDispatch } from '@/store/hooks';
 import { updateStepData } from '@/features';
 import PreferenceItem from '@/components/KorpusPro/PreferenceItem';
-import {useGetPreferenceBySubCategoryIdQuery} from "@/features/korpusProPreferences";
+import { useGetPreferenceBySubCategoryIdQuery } from '@/features/korpusProPreferences';
+import {camelize} from "@/utils/camelize";
 
 interface StepProps {
   data: any;
@@ -13,16 +14,12 @@ interface StepProps {
   step: number;
 }
 
-export interface PreferenceValues {
-  [key: string]: {
-    [key: string]: string;
-  };
-}
-
-const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
+const Preferences: React.FC<StepProps> = ({ data, step }) => {
   const { data: preferences } = useGetPreferenceBySubCategoryIdQuery({ subCategoryId: data.subCategory.subCategory.id });
   const dispatch = useAppDispatch();
-  const [selectedPreferencesValues, setSelectedPreferencesValues] = useState<PreferenceValues>({});
+  const [selectedPreferencesValues, setSelectedPreferencesValues] = useState({
+    height: data.subCategory.subCategory.minHeight,
+  });
 
   useEffect(() => {
     const updatedData = {
@@ -32,29 +29,40 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
     dispatch(updateStepData({ data: updatedData, step }));
   }, [selectedPreferencesValues]);
 
-  const handleChangeTotalHeight = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (/^\d*$/.test(e.target.value)) {
-      setSelectedPreferencesValues((prevState) => ({
-        ...prevState,
-        position: {
-          ...prevState.position,
-          [e.target.name]: e.target.value,
-        },
-      }));
-    }
-  };
-
   const handleSelectPositionValues = (
       e: React.ChangeEvent<HTMLInputElement>,
-      name: string,
+      type?: string,
   ) => {
-    setSelectedPreferencesValues((prevState: any) => ({
-      ...prevState,
-      [name]: {
-        ...prevState[name],
-        [e.target.name]: e.target.value,
-      },
-    }));
+    const { name, value, checked } = e.target;
+
+    let modifiedName = name.replace(/[^a-zA-Z0-9 ]/g, '');
+
+    if (modifiedName === 'totalHeight') {
+      modifiedName = 'height';
+    }
+
+    setSelectedPreferencesValues((prevState: any) => {
+      const updatedValues = prevState[name] || [];
+
+      if (type === 'range') {
+        return {
+          ...prevState,
+          [modifiedName]: +value,
+        };
+      }
+
+      if (checked) {
+        return {
+          ...prevState,
+          [modifiedName]: [...updatedValues, value],
+        };
+      } else {
+        return {
+          ...prevState,
+          [modifiedName]: updatedValues.filter((v: string) => v !== value),
+        };
+      }
+    });
   };
 
   const renderGroupedItems = (name: string, type: string | undefined, preferenceItems: any[]) => {
@@ -63,28 +71,9 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
     for (let i = 0; i < preferenceItems.length; i++) {
       const item = preferenceItems[i];
 
+      const globalType = type || item.type;
+
       switch (type || item.type) {
-        case 'input':
-          renderedItems.push(
-              <S.Preference key={`${item.id}`}>
-                <PreferenceItem
-                    title={item.name}
-                    imageUrl={item.image}
-                    isFixed={item.isFixed}
-                    isSingleValue={item.editable}
-                    options={item.items}
-                    value={item.items[0]}
-                    isSelectable={item.selectable}
-                    defaultOption={item.default}
-                    category={name.trim().toLowerCase()}
-                    selectedPreferencesValues={selectedPreferencesValues}
-                    setSelectedPreferencesValues={setSelectedPreferencesValues}
-                    handleSelectPositionValues={handleSelectPositionValues}
-                    handleChangeTotalHeight={handleChangeTotalHeight}
-                />
-              </S.Preference>
-          );
-          break;
         case 'grouped':
           const nextItem = preferenceItems[i + 1];
           if (nextItem) {
@@ -94,12 +83,9 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
                       title={item.name}
                       imageUrl={item.image}
                       isFixed={item.isFixed}
-                      isSingleValue={item.editable}
                       options={item.items}
                       value={item.items[0]}
-                      isSelectable={item.selectable}
                       defaultOption={item.default}
-                      category={name.trim().toLowerCase()}
                       selectedPreferencesValues={selectedPreferencesValues}
                       setSelectedPreferencesValues={setSelectedPreferencesValues}
                       handleSelectPositionValues={handleSelectPositionValues}
@@ -108,6 +94,7 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
                         value: nextItem.items[0],
                         isFixed: nextItem.isFixed,
                       }}
+                      itemType={globalType}
                   />
                 </S.Preference>
             );
@@ -121,15 +108,15 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
                   title={item.name}
                   imageUrl={item.image}
                   isFixed={item.isFixed}
-                  isSingleValue={item.editable}
                   options={item.items}
-                  value={item.items[0]}
-                  isSelectable={item.selectable}
+                  value={camelize(item.name)}
                   defaultOption={item.default}
-                  category={name.trim().toLowerCase()}
                   selectedPreferencesValues={selectedPreferencesValues}
                   setSelectedPreferencesValues={setSelectedPreferencesValues}
                   handleSelectPositionValues={handleSelectPositionValues}
+                  itemType={item.isFixed ? 'fixed' : globalType}
+                  minHeight={data.subCategory.subCategory.minHeight}
+                  maxHeight={data.subCategory.subCategory.maxHeight}
               />
           );
       }
@@ -137,6 +124,7 @@ const Preferences: React.FC<StepProps> = ({ data, error, step }) => {
 
     return renderedItems;
   };
+
   return (
       <S.PreferencesWrapper>
         {preferences?.map((preference) => (

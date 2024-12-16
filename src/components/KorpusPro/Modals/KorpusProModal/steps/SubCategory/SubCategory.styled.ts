@@ -60,7 +60,6 @@ export const SubCategories = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 100%;
   width: 100%;
 `;
 
@@ -79,6 +78,10 @@ export const SubCategoryItem = styled.div<{
   background-size: cover;
   position: relative;
   cursor: pointer;
+  
+  @media (max-width: 768px) {
+    padding-bottom: 100%;
+  }
 
   .name {
     position: absolute;

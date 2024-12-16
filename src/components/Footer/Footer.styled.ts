@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
+
 export const Container = styled.footer`
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
 `;
 
 export const Image = styled.div<{ $bgImage: string }>`

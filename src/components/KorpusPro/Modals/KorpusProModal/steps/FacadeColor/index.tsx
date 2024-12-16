@@ -28,13 +28,18 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
   const [selectedPreferencesValues, setSelectedPreferencesValues] =
     useState<PreferenceValues>({});
 
+    const { lacquerPercentages, facadeColors } = facadeColorTypes?.find(facadeColorType => facadeColorType.id === +selectedPreferencesValues?.facadeColor?.type) || {} as unknown as FacadeColor;
+
   useEffect(() => {
     const updatedData = {
       ...data,
-      facadeColor: selectedPreferencesValues.facadeColor,
+      facadeColor: {
+        ...selectedPreferencesValues.facadeColor,
+        haveLacquer: !!lacquerPercentages?.length,
+      }
     };
     dispatch(updateStepData({ data: updatedData, step }));
-  }, [selectedPreferencesValues]);
+  }, [selectedPreferencesValues, lacquerPercentages]);
 
   const handleSelectPositionValues = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -77,17 +82,15 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
   };
 
   // Handle color selection
-  const handleClick = (colorId: string | number) => {
+  const handleClick = (colorId: string | number, hex: string) => {
     setSelectedColorId(colorId);
     setSelectedPreferencesValues((prevState: any) => ({
       ['facadeColor']: {
         ...prevState['facadeColor'],
-        ['color']: colorId,
+        ['color']: hex,
       },
     }));
   };
-
-  const { lacquerPercentages, facadeColors } = facadeColorTypes?.find(facadeColorType => facadeColorType.id === +selectedPreferencesValues?.facadeColor?.type) || {} as unknown as FacadeColor;
 
   const filteredColors = facadeColors?.filter(
       (item) =>
@@ -118,7 +121,7 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
           </S.FacadePreferenceContent>
         </S.FacadePreference>
       )}
-      {selectedPreferencesValues?.facadeColor?.type && <>
+      {selectedPreferencesValues?.facadeColor?.type && lacquerPercentages?.length > 0 && <>
         <S.Divider />
         <S.Title>{facadeColorData.lacquerPercentage.name}</S.Title>
         <S.CheckboxWrapper>
@@ -150,7 +153,7 @@ const FacadeColor: React.FC<StepProps> = ({ data, error, step }) => {
           />
           <S.ColorsWrapper>
             {filteredColors?.map((color) => (
-                <S.ColorItem key={color.id} onClick={() => handleClick(color.id)}>
+                <S.ColorItem key={color.id} onClick={() => handleClick(color.id, color.hex)}>
                   <S.Color $color={color.hex} />
                   <S.ColorInfo>
                     <S.ColorInfoWrapper>
