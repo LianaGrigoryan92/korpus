@@ -1,7 +1,10 @@
 'use client';
 import styled from 'styled-components';
 
-export const HomeWrapper = styled.div``;
+export const HomeWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
 
 export const ContentWrapper = styled.div`
   background-image: url('/images/home/bg.png');

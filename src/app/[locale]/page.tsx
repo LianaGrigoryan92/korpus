@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { unstable_setRequestLocale } from 'next-intl/server';
 
 // styles & images
@@ -8,12 +7,7 @@ import KorpusBannerLogo from '@/public/images/home/banner-korpus-logo.svg';
 
 // components
 import {
-  SliderLayout,
-  ShopCategories,
-  BlogsSection,
-  MainLayout,
-  BenefitSection,
-  ProductSection,
+    Banner, MainLayout, OurServices,
 } from '@/components';
 
 function Home({
@@ -23,15 +17,10 @@ function Home({
 
   return (
     <S.HomeWrapper>
-      <S.ContentWrapper>
-        <Image
-          src={KorpusBannerLogo.src}
-          alt="korpus-banner-logo"
-          priority
-          width={1320}
-          height={376}
-        />
-      </S.ContentWrapper>
+      <MainLayout>
+        <Banner />
+        <OurServices />
+      </MainLayout>
       {/* <SliderLayout>
         <ShopCategories />
       </SliderLayout> */}

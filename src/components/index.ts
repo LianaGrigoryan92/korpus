@@ -12,3 +12,4 @@ export { default as ProductSection } from './Products/ProductsSection';
 export { default as ProductItem } from './KorpusPro/Category';
 export { default as KorpusProModal } from './KorpusPro/Modals/KorpusProModal';
 export { default as KorpusProCategories } from './KorpusPro/Category';
+export * from './NewHome';
