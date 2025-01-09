@@ -7,7 +7,7 @@ import KorpusBannerLogo from '@/public/images/home/banner-korpus-logo.svg';
 
 // components
 import {
-    Banner, MainLayout, OurServices,
+    Banner, MainLayout, OurCoreValues, OurServices, ContactBlock
 } from '@/components';
 
 function Home({
@@ -20,6 +20,8 @@ function Home({
       <MainLayout>
         <Banner />
         <OurServices />
+        <OurCoreValues />
+        <ContactBlock />
       </MainLayout>
       {/* <SliderLayout>
         <ShopCategories />

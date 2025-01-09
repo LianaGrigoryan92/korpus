@@ -8,7 +8,7 @@ export const ServiceItemContainer = styled.div<{ $isReverse: boolean, $isComing:
     align-items: center;
     flex-direction: ${({ $isReverse }) => ($isReverse ? 'row-reverse' : 'row')};
     justify-content: space-between;
-    position: relative; /* Ensure the overlay is positioned correctly */
+    position: relative;
 
     ${({ $isComing }) =>
             $isComing &&
@@ -77,16 +77,28 @@ export const ServiceItemTextReadButton = styled.button`
     }
 `;
 
-export const ServiceItemImageWrapper = styled.div<{ $isExpanded: boolean }>`
+export const ServiceItemImageWrapper = styled.div<{ $isExpanded: boolean, $hoverImage: string | null, $image: string }>`
     max-width: 618px;
+    background-image: url(${({ $image }) => $image ?? ""});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100%;
     height: ${({ $isExpanded }) => $isExpanded ? '485px' : '286px'};
     transition: all 0.5s ease-in-out;
+
+
+    &:hover {
+        background-image: url(${({ $hoverImage, $image }) => $hoverImage ?? $image});
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 `;
 
-export const ServiceItemImage = styled.img`
-    max-width: 618px;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-`;
+// export const ServiceItemImage = styled.img`
+//     max-width: 618px;
+//     width: 100%;
+//     height: 100%;
+//     object-fit: cover;
+// `;

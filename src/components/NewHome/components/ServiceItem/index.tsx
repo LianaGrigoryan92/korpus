@@ -10,6 +10,7 @@ interface IProps {
     title: string
     description: string
     image: string
+    hoverImage: string | null
     isComing: boolean
     isReverse: boolean
 }
@@ -18,6 +19,7 @@ export const ServiceItem = ({
     isComing,
     title,
     image,
+    hoverImage,
     description,
     isReverse
     }: IProps) => {
@@ -37,8 +39,12 @@ export const ServiceItem = ({
                     <S.ComingSoon $isReverse={isReverse}>Coming Soon</S.ComingSoon>
                 )}
             </S.ServiceItemContent>
-            <S.ServiceItemImageWrapper $isExpanded={isExpanded}>
-                <S.ServiceItemImage  src={image} alt={`${title} service image`}/>
+            <S.ServiceItemImageWrapper $isExpanded={isExpanded} $hoverImage={hoverImage} $image={image}>
+                {/*<S.ServiceItemImage*/}
+                {/*    src={image}*/}
+                {/*    alt={`${title} service image`}*/}
+
+                {/*/>*/}
             </S.ServiceItemImageWrapper>
         </S.ServiceItemContainer>
     );

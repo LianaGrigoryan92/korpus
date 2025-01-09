@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const HomeWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    margin-bottom: 100px;
 `;
 
 export const ContentWrapper = styled.div`

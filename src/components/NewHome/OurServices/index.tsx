@@ -3,7 +3,7 @@ import React from 'react';
 // styled
 import * as S from './OurServices.styled';
 import { ServiceItem } from "@/components/NewHome/components";
-import {mockServices} from "@/components/NewHome/OurServices/mockServices";
+import { mockServices } from "@/components/NewHome/OurServices/mockServices";
 
 export const OurServices = () => {
     return (
@@ -15,6 +15,7 @@ export const OurServices = () => {
                     title={service.title}
                     description={service.description}
                     image={service.image}
+                    hoverImage={service.hoverImage}
                     isComing={service.isComing}
                     isReverse={index % 2 !== 0}
                 />

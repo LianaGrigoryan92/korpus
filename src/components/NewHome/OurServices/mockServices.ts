@@ -4,6 +4,7 @@ export const mockServices = [
         title: 'Cutting',
         description: "Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.",
         image: '/images/services/cutting.jfif',
+        hoverImage: '/images/services/hover/cutting.jfif',
         isComing: false,
     },
     {
@@ -11,6 +12,7 @@ export const mockServices = [
         title: 'Edging',
         description: "Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.",
         image: '/images/services/edging.jfif',
+        hoverImage: '/images/services/hover/edging.jfif',
         isComing: false,
     },
     {
@@ -18,6 +20,7 @@ export const mockServices = [
         title: 'Wood Processing',
         description: "Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.",
         image: '/images/services/processing.jfif',
+        hoverImage: '/images/services/hover/processing.jfif',
         isComing: true,
     },
     {
@@ -25,13 +28,15 @@ export const mockServices = [
         title: 'Coating',
         description: "Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.",
         image: '/images/services/coating.jfif',
+        hoverImage: '/images/services/hover/coating.jfif',
         isComing: true,
     },
     {
         id: 5,
         title: 'Ready-made Modules',
         description: "Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.",
-        image: '/images/services/coating.jfif',
+        image: '/images/services/ready-made-modules.png',
+        hoverImage: null,
         isComing: true,
     },
 ]
