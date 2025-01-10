@@ -4,10 +4,11 @@ import axios from 'axios';
 export async function POST(request: Request) {
   try {
     const body = await request.json(); // Получаем данные из запроса
+    console.log({ body });
 
     const response = await axios.post(
-      'https://cloud.bazissoft.ru/api-cutting/client/login?lang=en&md5Pass=false',
-      body,
+      'https://cloud.bazissoft.ru/api-cutting/client/login?lang=ru&md5Pass=false',
+      { ...body, userId: 8782 },
       {
         headers: {
           'Content-Type': 'application/json',
@@ -15,7 +16,6 @@ export async function POST(request: Request) {
         },
       },
     );
-
     // Возвращаем данные с сервера API
     return NextResponse.json(response.data);
   } catch (error: any) {

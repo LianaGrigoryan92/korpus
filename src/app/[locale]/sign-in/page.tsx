@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as S from './page.styled';
 import { MainLayout } from '@/components';
+import { useRouter } from 'next/navigation';
 
 interface FormData {
-  email: string;
+  login: string;
   password: string;
 }
 
@@ -18,10 +19,11 @@ function SignIn() {
   } = useForm<FormData>();
   const [signInSuccess, setSignInSuccess] = useState(false); // Success state
   const [errorMessage, setErrorMessage] = useState(''); // Error state
+  const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
     const requestBody = {
-      email: data.email,
+      login: data.login,
       password: data.password,
     };
 
@@ -41,7 +43,6 @@ function SignIn() {
       }
 
       const result = await response.json();
-      console.log('Response:', result);
 
       // Set success state
       setSignInSuccess(true);
@@ -50,6 +51,12 @@ function SignIn() {
       console.error('Error:', error);
     }
   };
+
+  useEffect(() => {
+    if (signInSuccess) {
+      router.push('/korpus-pro');
+    }
+  }, [signInSuccess]);
 
   return (
     <S.SignUp>
@@ -67,7 +74,7 @@ function SignIn() {
               <S.Input
                 placeholder="Email *"
                 type="email"
-                {...register('email', {
+                {...register('login', {
                   required: 'Email is required',
                   pattern: {
                     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -75,8 +82,8 @@ function SignIn() {
                   },
                 })}
               />
-              {errors.email && (
-                <S.ErrorMessage>{String(errors.email.message)}</S.ErrorMessage>
+              {errors.login && (
+                <S.ErrorMessage>{String(errors.login.message)}</S.ErrorMessage>
               )}
 
               {/* Password */}
