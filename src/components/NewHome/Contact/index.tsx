@@ -21,12 +21,12 @@ export const ContactBlock = () => {
                 </S.ContactInfo>
                 <S.SocialButtons>
                     <S.SocialItemButton>
-                        <Link href={'https://google.com/'}>
+                        <Link href={'https://www.facebook.com/korpus.am/'} target={'_blank'}>
                             <Image src={FacebookIcon.src} alt="Social Button" width={27} height={27} />
                         </Link>
                     </S.SocialItemButton>
                     <S.SocialItemButton>
-                        <Link href={'https://google.com/'}>
+                        <Link href={'https://www.instagram.com/korpus.am'} target={'_blank'}>
                             <Image src={InstagramIcon.src} alt="Social Button" width={27} height={27} />
                         </Link>
                     </S.SocialItemButton>
