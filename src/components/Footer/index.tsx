@@ -12,13 +12,14 @@ import { useClientMediaQuery } from '@/hooks/useClientMediaQuery';
 export default function Footer() {
   const isMobile = useClientMediaQuery('(max-width: 980px)');
   const pathname = usePathname();
+  const hide = ['sign-in', 'sign-up'].includes(pathname.split('/')[2]);
 
   return (
     <S.Container>
       {/* {!['/korpus-pro', '/cart'].some(path => pathname.includes(path)) && (
         <S.Image $bgImage={FooterBanner.src} />
       )} */}
-      <S.FooterContent>
+      {!hide && <S.FooterContent>
         {!isMobile && (
           <S.FooterLeftSide>
             <S.Logo src={Logo.src} alt="Korpus Logo" />
@@ -49,7 +50,13 @@ export default function Footer() {
                     <Link href="/about">About</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/contact">Contact</Link>
+                    <Link href="#" onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollBy({
+                        top: -350,
+                        behavior: 'smooth',
+                      });
+                    }}>Contact Us</Link>
                   </S.FooterNavItem>
                   {/* <S.FooterNavItem>
                     <Link href="/shipping">Shipping & Delivery</Link>
@@ -87,7 +94,7 @@ export default function Footer() {
                     <Link href="/carriers">Carriers</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/contact">Contact</Link>
+                    <Link href="/contact">Contact Us</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
                     <Link href="/shipping">Shipping & Delivery</Link>
@@ -109,19 +116,19 @@ export default function Footer() {
             )}
             <S.FooterNavList>
               <S.FooterNavItem>
-                <Link href="/email">
-                  info@korpus.com
+                <Link href="mailto:info@korpus.am">
+                  info@korpus.am
                   <ArrowUpRight size={22} color="#A3A3A3" />
                 </Link>
               </S.FooterNavItem>
               <S.FooterNavItem>
-                <Link href="/instagram">
+                <Link href="https://www.instagram.com/korpus.am" target='_blank'>
                   Instagram
                   <ArrowUpRight size={22} color="#A3A3A3" />
                 </Link>
               </S.FooterNavItem>
               <S.FooterNavItem>
-                <Link href="/facebook">
+                <Link href="https://www.facebook.com/korpus.am/" target='_blank'>
                   Facebook
                   <ArrowUpRight size={22} color="#A3A3A3" />
                 </Link>
@@ -142,7 +149,7 @@ export default function Footer() {
             <S.Text>All right Reserved.</S.Text>
           </S.TextWrapper>
         </S.FooterRightSide>
-      </S.FooterContent>
+      </S.FooterContent>}
     </S.Container>
   );
 }

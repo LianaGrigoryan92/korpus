@@ -11,6 +11,8 @@ import MobileMenu from './MobileMenu';
 import * as S from './Navbar.styled';
 import { ArrowRight } from 'lucide-react';
 import { theme } from '@/styles';
+import {Button} from "./Navbar.styled";
+import {useRouter} from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -19,6 +21,7 @@ export default function Navbar() {
   const locale = useLocale() as Locale;
   const [isVisibleCategories, setIsVisibleCategories] =
     useState<boolean>(false);
+  const router = useRouter();
 
   const handleOpenMenu = () => {
     setIsMenuOpen(true);
@@ -31,6 +34,10 @@ export default function Navbar() {
   const handleVisibleCategories = () => {
     setIsVisibleCategories(!isVisibleCategories);
   };
+
+  const handleClickSignInButton = () => {
+    router.push('/sign-in');
+  }
 
   useEffect(() => {
     const countCartItems = () => {
@@ -97,6 +104,7 @@ export default function Navbar() {
             <S.NavItemWrapper>
               {/* <input type={'search'} placeholder="Search" /> */}
               <LocaleSwitcher locale={locale} />
+              <Button onClick={handleClickSignInButton}>Sign In</Button>
               {/* <Link href={'/profile'}>Profile</Link> */}
               {/* <Link href={'/cart'}>Cart ({cartItemCount})</Link> */}
             </S.NavItemWrapper>

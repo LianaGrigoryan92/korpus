@@ -59,36 +59,41 @@ function SignIn() {
   }, [signInSuccess]);
 
   return (
-    <S.SignUp>
+    <S.SignIn>
       <MainLayout>
         <S.SignUpWrapper>
-          <S.Title>SIGN IN</S.Title>
-
           {signInSuccess ? (
             <S.SuccessMessage>
               Sign-in successful! You are now logged in.
             </S.SuccessMessage>
           ) : (
             <S.SignUpForm onSubmit={handleSubmit(onSubmit)}>
+              <S.Title>Hey, welcome to <br />
+                the Korpus</S.Title>
               {/* Email */}
-              <S.Input
-                placeholder="Email *"
-                type="email"
-                {...register('login', {
-                  required: 'Email is required',
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: 'Invalid email address',
-                  },
-                })}
-              />
-              {errors.login && (
-                <S.ErrorMessage>{String(errors.login.message)}</S.ErrorMessage>
-              )}
+              <S.Wrap>
+                <S.Label $isError={!!errors.login}>Email</S.Label>
+                <S.Input
+                    placeholder="Type"
+                    type="email"
+                    {...register('login', {
+                      required: 'Email is required',
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: 'Invalid email address',
+                      },
+                    })}
+                />
+                {errors.login && (
+                    <S.ErrorMessage>{String(errors.login.message)}</S.ErrorMessage>
+                )}
+              </S.Wrap>
 
+              <S.Wrap>
               {/* Password */}
+              <S.Label $isError={!!errors.password}>Password</S.Label>
               <S.Input
-                placeholder="Password *"
+                placeholder="Type"
                 type="password"
                 {...register('password', {
                   required: 'Password is required',
@@ -106,14 +111,14 @@ function SignIn() {
 
               {/* Error Message */}
               {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
-
+              </S.Wrap>
               {/* Submit Button */}
-              <S.SubmitButton type="submit">SIGN IN</S.SubmitButton>
+              <S.SubmitButton type="submit">Sign In</S.SubmitButton>
             </S.SignUpForm>
           )}
         </S.SignUpWrapper>
       </MainLayout>
-    </S.SignUp>
+    </S.SignIn>
   );
 }
 

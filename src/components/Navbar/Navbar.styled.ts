@@ -22,12 +22,21 @@ export const NavItem = styled.div`
 
 export const Button = styled.button`
   outline: none;
-  border: none;
-  background: transparent;
-  color: ${({ theme }) => theme.palette.common.black};
-  font-size: 17px;
+  background: ${({ theme }) => theme.palette.common.black};
+  color: white;
+  font-size: 16px;
   font-weight: 500;
-  line-height: 18px;
+  border: 2px double black;
+  padding: 10px 16px 12px;
+  border-radius: 18px;
+  transition: all 0.3s;
+
+
+    &:hover {
+      background: transparent;
+      color: ${({ theme }) => theme.palette.common.black};
+      transition: all 0.3s;
+  }  
 
   @media (max-width: 768px) {
     font-size: 14px;
