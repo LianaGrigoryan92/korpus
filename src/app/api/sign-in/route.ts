@@ -16,6 +16,7 @@ export async function POST(request: Request) {
         },
       },
     );
+    console.log({response});
     // Возвращаем данные с сервера API
     return NextResponse.json(response.data);
   } catch (error: any) {

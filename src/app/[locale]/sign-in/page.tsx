@@ -38,12 +38,12 @@ function SignIn() {
 
       if (!response.ok) {
         const errorResponse = await response.json();
-        setErrorMessage(errorResponse.message || 'Sign-in failed!');
+        setErrorMessage(errorResponse.message);
         throw new Error('Failed to sign in');
       }
 
       const result = await response.json();
-
+      console.log(result);
       // Set success state
       setSignInSuccess(true);
       setErrorMessage('');
@@ -54,6 +54,7 @@ function SignIn() {
 
   useEffect(() => {
     if (signInSuccess) {
+      localStorage.setItem('user', 'loggedIn');
       router.push('/korpus-pro');
     }
   }, [signInSuccess]);

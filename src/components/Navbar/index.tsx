@@ -14,7 +14,7 @@ import { theme } from '@/styles';
 import {Button} from "./Navbar.styled";
 import {useRouter} from "next/navigation";
 
-export default function Navbar() {
+export default function Navbar({ isLoggedIn }: { isLoggedIn?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [cartItemCount, setCartItemCount] = useState<number>(0);
   const isMobile = useClientMediaQuery('(max-width: 980px)');
@@ -37,6 +37,10 @@ export default function Navbar() {
 
   const handleClickSignInButton = () => {
     router.push('/sign-in');
+  }
+
+  const handleClickProfileButton = () => {
+    router.push('/korpus-pro');
   }
 
   useEffect(() => {
@@ -104,7 +108,10 @@ export default function Navbar() {
             <S.NavItemWrapper>
               {/* <input type={'search'} placeholder="Search" /> */}
               <LocaleSwitcher locale={locale} />
-              <Button onClick={handleClickSignInButton}>Sign In</Button>
+              {!isLoggedIn
+                  ? <Button onClick={handleClickSignInButton}>Sign In</Button>
+                  : <Button onClick={handleClickProfileButton}>Profile</Button>
+              }
               {/* <Link href={'/profile'}>Profile</Link> */}
               {/* <Link href={'/cart'}>Cart ({cartItemCount})</Link> */}
             </S.NavItemWrapper>

@@ -8,10 +8,17 @@ import * as S from './Header.styled';
 import Logo from '@/public/images/logo.png';
 import Link from 'next/link';
 import {usePathname} from "next/navigation";
+import {useEffect, useState} from "react";
 
 function Header() {
   const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const hide = ['sign-in', 'sign-up'].includes(pathname.split('/')[2]);
+
+  useEffect(() => {
+      const isLoggedIn = !!localStorage.getItem('user');
+      setIsLoggedIn(isLoggedIn);
+  }, [])
 
   return (
       <>
@@ -20,7 +27,7 @@ function Header() {
         <Link href={'/'}>
           <Image src={Logo} alt="logo" />
         </Link>
-        <Navbar />
+        <Navbar isLoggedIn={isLoggedIn} />
       </S.Header>
     </S.Container>
     }
