@@ -3,14 +3,14 @@
 import styled from 'styled-components';
 
 export const SignIn = styled.div`
-    background: black;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  background: black;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Title = styled.h2`
@@ -26,31 +26,46 @@ export const SignUpWrapper = styled.div`
   width: 100%;
 `;
 
+export const Text = styled.p`
+  text-align: center;
+  font-size: 16px;
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+
+  a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+  }
+`;
+
 export const SignUpForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid #f2f2f2;
+  padding: 24px;
+  max-width: 424px;
+  width: 424px;
+
+  label {
     display: flex;
-    flex-direction: column;
-    background: white;
-    border: 1px solid #F2F2F2;
-    padding: 24px;
-    max-width: 424px;
-    width: 424px;
-    
-    label {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 export const Label = styled.label<{ $isError: boolean }>`
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 18px;
-    color: ${({ $isError }) => $isError ? '#DA1937' : '#1A1A1A'};
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  color: ${({ $isError }) => ($isError ? '#DA1937' : '#1A1A1A')};
 `;
 
 export const Wrap = styled.div`
-    margin-bottom: 24px;
+  margin-bottom: 24px;
 `;
 
 export const Input = styled.input`
@@ -58,13 +73,13 @@ export const Input = styled.input`
   font-size: 16px;
   font-weight: 400;
   line-height: 16px;
-  border-bottom: 1px solid #E4E4E4;
+  border-bottom: 1px solid #e4e4e4;
   border-radius: 4px;
-    width: 100%;
-    
+  width: 100%;
+
   &::placeholder {
-      color: #747474;
-  }  
+    color: #747474;
+  }
 `;
 
 export const Select = styled.select`
@@ -84,11 +99,10 @@ export const SubmitButton = styled.button`
   color: #fff;
   background-color: #000;
   border: none;
-  font-weight: 400; 
+  font-weight: 400;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  margin-top: 24px;
 
   &:hover {
     background-color: #3f3f3f;
@@ -98,7 +112,7 @@ export const SubmitButton = styled.button`
 
 export const ErrorMessage = styled.div`
   font-size: 14px;
-  color: #BD162F;
+  color: #bd162f;
   line-height: 20px;
   margin-bottom: 10px;
   font-weight: 400;
@@ -108,7 +122,7 @@ export const ErrorMessage = styled.div`
 
 export const SuccessMessage = styled.div`
   font-size: 16px;
-  color: green;
+  color: white;
   text-align: center;
   margin-top: 20px;
 `;

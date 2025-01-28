@@ -7,6 +7,7 @@ import 'react-phone-input-2/lib/style.css';
 import Link from 'next/link';
 import * as S from './page.styled';
 import { MainLayout } from '@/components';
+import { useRouter } from 'next/navigation';
 
 interface FormData {
   clientType: string;
@@ -27,6 +28,7 @@ function SignUp() {
     control,
     formState: { errors },
   } = useForm<FormData>();
+  const router = useRouter();
   const [clientType, setClientType] = useState('Individual'); // Default type: Individual
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Success state
 
@@ -70,6 +72,7 @@ function SignUp() {
 
       // Set success state
       setRegistrationSuccess(true);
+      router.push('/sign-in');
     } catch (error) {
       console.error('Error:', error);
       alert('Registration failed!');
@@ -81,37 +84,32 @@ function SignUp() {
       <MainLayout>
         <S.SignUpWrapper>
           <S.Title>REGISTRATION</S.Title>
+          <S.SignUpForm onSubmit={handleSubmit(onSubmit)}>
+            {/* Client Type */}
+            <S.Title>
+              Hey, welcome to <br />
+              the Korpus
+            </S.Title>
+            <label>
+              <S.Select
+                {...register('clientType')}
+                value={clientType}
+                onChange={(e) => setClientType(e.target.value)}
+              >
+                <option value="Individual">Individual</option>
+                <option value="Legal entity">Legal entity</option>
+              </S.Select>
+            </label>
 
-          {registrationSuccess ? (
-            <S.SuccessMessage>
-              Registration successful! A confirmation email has been sent to
-              your email address. Please check your inbox to activate your
-              account.
-              <br />
-              <Link href="/sign-in">
-                <S.LinkText>Click here to login</S.LinkText>
-              </Link>
-            </S.SuccessMessage>
-          ) : (
-            <S.SignUpForm onSubmit={handleSubmit(onSubmit)}>
-              {/* Client Type */}
-              <label>
-                Client type *
-                <S.Select
-                  {...register('clientType')}
-                  value={clientType}
-                  onChange={(e) => setClientType(e.target.value)}
-                >
-                  <option value="Individual">Individual</option>
-                  <option value="Legal entity">Legal entity</option>
-                </S.Select>
-              </label>
-
-              {/* Conditional Fields for Legal Entity */}
-              {clientType === 'Legal entity' && (
-                <>
+            {/* Conditional Fields for Legal Entity */}
+            {clientType === 'Legal entity' && (
+              <>
+                <S.Wrap>
+                  <S.Label $isError={!!errors.companyName}>
+                    Company Name
+                  </S.Label>
                   <S.Input
-                    placeholder="Company name"
+                    placeholder="Type"
                     {...register('companyName', {
                       required:
                         clientType === 'Legal entity' &&
@@ -123,9 +121,11 @@ function SignUp() {
                       {String(errors.companyName.message)}
                     </S.ErrorMessage>
                   )}
-
+                </S.Wrap>
+                <S.Wrap>
+                  <S.Label $isError={!!errors.tin}>TIN</S.Label>
                   <S.Input
-                    placeholder="TIN"
+                    placeholder="Type"
                     {...register('tin', {
                       required:
                         clientType === 'Legal entity' && 'TIN is required',
@@ -136,12 +136,27 @@ function SignUp() {
                       {String(errors.tin.message)}
                     </S.ErrorMessage>
                   )}
-                </>
-              )}
+                </S.Wrap>
+              </>
+            )}
 
-              {/* Surname */}
+            {/* Name */}
+            <S.Wrap>
+              <S.Label $isError={!!errors.name}>Name</S.Label>
               <S.Input
-                placeholder="Surname *"
+                placeholder="Type"
+                {...register('name', { required: 'Name is required' })}
+              />
+              {errors.name && (
+                <S.ErrorMessage>{String(errors.name.message)}</S.ErrorMessage>
+              )}
+            </S.Wrap>
+
+            {/* Surname */}
+            <S.Wrap>
+              <S.Label $isError={!!errors.surname}>Surname</S.Label>
+              <S.Input
+                placeholder="Type"
                 {...register('surname', { required: 'Surname is required' })}
               />
               {errors.surname && (
@@ -149,22 +164,19 @@ function SignUp() {
                   {String(errors.surname.message)}
                 </S.ErrorMessage>
               )}
+            </S.Wrap>
 
-              {/* Name */}
+            {/* Middle Name */}
+            <S.Wrap>
+              <S.Label $isError={!!errors.patronymic}>Middle Name</S.Label>
+              <S.Input placeholder="Type" {...register('patronymic')} />
+            </S.Wrap>
+
+            {/* Email */}
+            <S.Wrap>
+              <S.Label $isError={!!errors.email}>Email</S.Label>
               <S.Input
-                placeholder="Name *"
-                {...register('name', { required: 'Name is required' })}
-              />
-              {errors.name && (
-                <S.ErrorMessage>{String(errors.name.message)}</S.ErrorMessage>
-              )}
-
-              {/* Patronymic */}
-              <S.Input placeholder="Middle name" {...register('patronymic')} />
-
-              {/* Email */}
-              <S.Input
-                placeholder="Email *"
+                placeholder="Type"
                 type="email"
                 {...register('email', {
                   required: 'Email is required',
@@ -177,8 +189,10 @@ function SignUp() {
               {errors.email && (
                 <S.ErrorMessage>{String(errors.email.message)}</S.ErrorMessage>
               )}
-
-              {/* Phone */}
+            </S.Wrap>
+            {/* Phone */}
+            <S.Wrap>
+              <S.Label $isError={!!errors.phone}>Phone Number</S.Label>
               <Controller
                 name="phone"
                 control={control}
@@ -190,16 +204,23 @@ function SignUp() {
                     country="am"
                     value={field.value}
                     onChange={(phone) => field.onChange(phone)}
-                    placeholder="Phone number"
+                    buttonStyle={{
+                      border: 'none',
+                      background: 'transparent',
+                      fontSize: '16px',
+                      paddingBottom: '14px',
+                    }}
                     containerStyle={{
-                      marginBottom: '15px',
+                      marginTop: '12px',
                     }}
                     specialLabel=""
                     inputStyle={{
-                      border: '1px solid #ccc',
+                      background: 'transparent',
+                      border: 'none',
                       width: '100%',
-                      padding: '10px 10px 10px 50px',
+                      padding: '10px 10px 20px 50px',
                       fontSize: '16px',
+                      borderBottom: '1px solid #e4e4e4',
                       marginBottom: '15px',
                     }}
                   />
@@ -208,10 +229,12 @@ function SignUp() {
               {errors.phone && (
                 <S.ErrorMessage>{String(errors.phone.message)}</S.ErrorMessage>
               )}
-
+            </S.Wrap>
+            <S.Wrap>
               {/* Password */}
+              <S.Label $isError={!!errors.password}>Password</S.Label>
               <S.Input
-                placeholder="Password *"
+                placeholder="Type"
                 type="password"
                 {...register('password', {
                   required: 'Password is required',
@@ -226,11 +249,10 @@ function SignUp() {
                   {String(errors.password.message)}
                 </S.ErrorMessage>
               )}
-
-              {/* Submit Button */}
-              <S.SubmitButton type="submit">CREATE AN ACCOUNT</S.SubmitButton>
-            </S.SignUpForm>
-          )}
+            </S.Wrap>
+            {/* Submit Button */}
+            <S.SubmitButton type="submit">Sign Up</S.SubmitButton>
+          </S.SignUpForm>
         </S.SignUpWrapper>
       </MainLayout>
     </S.SignUp>

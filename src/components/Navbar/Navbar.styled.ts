@@ -27,16 +27,39 @@ export const Button = styled.button`
   font-size: 16px;
   font-weight: 500;
   border: 2px double black;
-  padding: 10px 16px 12px;
+  padding: 10px 16px 10px;
   border-radius: 18px;
   transition: all 0.3s;
 
+  &:hover {
+    background: transparent;
+    color: ${({ theme }) => theme.palette.common.black};
+    transition: all 0.3s;
+  }
 
-    &:hover {
-      background: transparent;
-      color: ${({ theme }) => theme.palette.common.black};
-      transition: all 0.3s;
-  }  
+  @media (max-width: 768px) {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+`;
+
+export const LogOutButton = styled.button`
+  outline: none;
+  background: transparent;
+  color: ${({ theme }) => theme.palette.common.black};
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px double black;
+  padding: 10px 16px 10px;
+  border-radius: 18px;
+  transition: all 0.3s;
+
+  &:hover {
+    background: ${({ theme }) => theme.palette.common.black};
+    color: white;
+    transition: all 0.3s;
+  }
 
   @media (max-width: 768px) {
     font-size: 14px;

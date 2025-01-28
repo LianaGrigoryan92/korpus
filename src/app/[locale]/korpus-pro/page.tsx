@@ -1,46 +1,31 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-
-// styles & images
+import React, { useEffect, useState } from 'react';
 import * as S from './page.styled';
 import { useParams } from 'next/navigation';
-import md5 from 'md5';
-// import { KorpusProCategories, MainLayout } from '@/components';
 
-const url =
-  'https://cloud.bazissoft.ru/cutting/ru/#/client/auth/login?user=0&email=логин&password=пароль&md5';
+interface User {
+  userId: number;
+  login: string;
+  password: string;
+  accessToken: string;
+  refreshToken: string;
+}
 
-async function KorpusPro() {
+const KorpusPro = () => {
   const { locale } = useParams();
-  const user = {
-    login: 'kahoga3317@cctoolz.com',
-    password: 'Arthur110458',
-    userId: 8782,
-  };
+  const [user, setUser] = useState<User | null>(null);
 
-  // useEffect(() => {
-  //   try {
-  //     const response = fetch('/api/sign-in', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         login: 'kahoga3317@cctoolz.com',
-  //         password: 'Arthur110458',
-  //         userId: 8782,
-  //       }),
-  //     });
+  useEffect(() => {
+    const localUser = localStorage.getItem('user');
+    if (localUser) {
+      const user = JSON.parse(localUser);
+      setUser(user);
+    }
+  }, []);
 
-  //     console.log('Response:', response);
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // }, []);
   return (
     <S.KorpusProContainer>
-      {/* <MainLayout> */}
       <S.FrameLayout>
         <S.FrameWrapper>
           <iframe
@@ -56,11 +41,8 @@ async function KorpusPro() {
           />
         </S.FrameWrapper>
       </S.FrameLayout>
-      {/* <S.Title>Korpus Pro</S.Title>
-        <KorpusProCategories /> */}
-      {/* </MainLayout> */}
     </S.KorpusProContainer>
   );
-}
+};
 
 export default KorpusPro;

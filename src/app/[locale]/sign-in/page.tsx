@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import * as S from './page.styled';
 import { MainLayout } from '@/components';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface FormData {
   login: string;
@@ -43,7 +44,16 @@ function SignIn() {
       }
 
       const result = await response.json();
-      console.log(result);
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          login: requestBody.login,
+          password: requestBody.password,
+          accessToken: result.token.access,
+          refreshToken: result.token.refresh,
+          userId: 8782,
+        }),
+      );
       // Set success state
       setSignInSuccess(true);
       setErrorMessage('');
@@ -54,8 +64,7 @@ function SignIn() {
 
   useEffect(() => {
     if (signInSuccess) {
-      localStorage.setItem('user', 'loggedIn');
-      router.push('/korpus-pro');
+      window.location.href = '/korpus-pro';
     }
   }, [signInSuccess]);
 
@@ -69,52 +78,62 @@ function SignIn() {
             </S.SuccessMessage>
           ) : (
             <S.SignUpForm onSubmit={handleSubmit(onSubmit)}>
-              <S.Title>Hey, welcome to <br />
-                the Korpus</S.Title>
+              <S.Title>
+                Hey, welcome to <br />
+                the Korpus
+              </S.Title>
               {/* Email */}
               <S.Wrap>
                 <S.Label $isError={!!errors.login}>Email</S.Label>
                 <S.Input
-                    placeholder="Type"
-                    type="email"
-                    {...register('login', {
-                      required: 'Email is required',
-                      pattern: {
-                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                        message: 'Invalid email address',
-                      },
-                    })}
+                  placeholder="Type"
+                  type="email"
+                  {...register('login', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: 'Invalid email address',
+                    },
+                  })}
                 />
                 {errors.login && (
-                    <S.ErrorMessage>{String(errors.login.message)}</S.ErrorMessage>
+                  <S.ErrorMessage>
+                    {String(errors.login.message)}
+                  </S.ErrorMessage>
                 )}
               </S.Wrap>
 
               <S.Wrap>
-              {/* Password */}
-              <S.Label $isError={!!errors.password}>Password</S.Label>
-              <S.Input
-                placeholder="Type"
-                type="password"
-                {...register('password', {
-                  required: 'Password is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Password must be at least 6 characters long',
-                  },
-                })}
-              />
-              {errors.password && (
-                <S.ErrorMessage>
-                  {String(errors.password.message)}
-                </S.ErrorMessage>
-              )}
+                {/* Password */}
+                <S.Label $isError={!!errors.password}>Password</S.Label>
+                <S.Input
+                  placeholder="Type"
+                  type="password"
+                  {...register('password', {
+                    required: 'Password is required',
+                    minLength: {
+                      value: 6,
+                      message: 'Password must be at least 6 characters long',
+                    },
+                  })}
+                />
+                {errors.password && (
+                  <S.ErrorMessage>
+                    {String(errors.password.message)}
+                  </S.ErrorMessage>
+                )}
 
-              {/* Error Message */}
-              {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+                {/* Error Message */}
+                {errorMessage && (
+                  <S.ErrorMessage>{errorMessage}</S.ErrorMessage>
+                )}
               </S.Wrap>
+
               {/* Submit Button */}
               <S.SubmitButton type="submit">Sign In</S.SubmitButton>
+              <S.Text>
+                Don't have an account? <Link href={'/sign-up'}>Sign Up</Link>
+              </S.Text>
             </S.SignUpForm>
           )}
         </S.SignUpWrapper>
