@@ -48,7 +48,7 @@ export const mockServices = [
     isComing: true,
     bgPos: 'center',
     bgSize: '',
-    hoverBgPos: '',
-    hoverBgSize: '',
+    hoverBgPos: '150px -100px',
+    hoverBgSize: '420',
   },
 ];
