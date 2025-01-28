@@ -46,7 +46,9 @@ export const ServiceItem = ({
           </S.ServiceItemTextReadButton>
         </S.ServiceItemText>
         {isComing && (
-          <S.ComingSoon $isReverse={isReverse}>Coming Soon</S.ComingSoon>
+          <S.ComingWrapper $isReverse={isReverse}>
+            <S.ComingSoon $isReverse={isReverse}>Coming Soon</S.ComingSoon>
+          </S.ComingWrapper>
         )}
       </S.ServiceItemContent>
       <S.ServiceItemImageWrapper

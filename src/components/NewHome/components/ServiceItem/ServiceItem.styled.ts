@@ -1,6 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
+import css from 'styled-jsx/css';
 
 export const ServiceItemContainer = styled.div<{
   $isReverse: boolean;
@@ -60,13 +61,33 @@ export const ServiceItemText = styled.div<{
 `;
 
 export const ComingSoon = styled.p<{ $isReverse: boolean }>`
-  color: #000000;
-  font-weight: 600;
-  font-size: 18px;
+  font-family: 'Graphik Cond Trial';
+  color: #fff;
+  font-weight: 500;
+  font-size: 20px;
   line-height: 24px;
   position: relative;
   text-align: ${({ $isReverse }) => ($isReverse ? 'right' : 'left')};
   z-index: 100000;
+  background-color: #000;
+  max-width: 212px;
+  width: 100%;
+  text-transform: uppercase;
+  padding: 10px 30px;
+  border-bottom-right-radius: ${({ $isReverse }) =>
+    $isReverse ? '0' : '70px'};
+  border-top-left-radius: ${({ $isReverse }) => ($isReverse ? '0' : '65px')};
+  border-bottom-left-radius: ${({ $isReverse }) =>
+    !$isReverse ? '0' : '70px'};
+  border-top-right-radius: ${({ $isReverse }) => (!$isReverse ? '0' : '65px')};
+  display: flex;
+  justify-content: center;
+`;
+
+export const ComingWrapper = styled.div<{ $isReverse: boolean }>`
+  display: flex;
+  justify-content: ${({ $isReverse }) =>
+    $isReverse ? 'flex-end' : 'flex-start'};
 `;
 
 export const ServiceItemTextReadButton = styled.button`

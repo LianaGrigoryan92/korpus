@@ -19,7 +19,6 @@ function Header() {
     const isLoggedIn = !!localStorage.getItem('user');
     setIsLoggedIn(isLoggedIn);
   }, []);
-  console.log({ isLoggedIn });
 
   return (
     <>

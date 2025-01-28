@@ -34,7 +34,7 @@ export const OurServices = () => {
           '/images/services/ready-made-modules.png',
           '/images/services/2.jpeg',
         ]}
-        isComing={false}
+        isComing={true}
         isReverse={false}
       />
     </S.Container>

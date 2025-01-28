@@ -10,8 +10,7 @@ import MobileMenu from './MobileMenu';
 // styles
 import * as S from './Navbar.styled';
 import { Button } from './Navbar.styled';
-import { useParams, usePathname, useRouter } from 'next/navigation';
-import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar({ isLoggedIn }: { isLoggedIn?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -21,8 +20,7 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn?: boolean }) {
   const [isVisibleCategories, setIsVisibleCategories] =
     useState<boolean>(false);
   const router = useRouter();
-  const pathname = usePathname();
-  console.log({ pathname });
+
   const handleOpenMenu = () => {
     setIsMenuOpen(true);
   };
