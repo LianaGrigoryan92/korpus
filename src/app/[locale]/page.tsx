@@ -3,11 +3,14 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 
 // styles & images
 import * as S from './page.styled';
-import KorpusBannerLogo from '@/public/images/home/banner-korpus-logo.svg';
 
 // components
 import {
-    Banner, MainLayout, OurCoreValues, OurServices, ContactBlock
+  Banner,
+  MainLayout,
+  OurCoreValues,
+  OurServices,
+  ContactBlock,
 } from '@/components';
 
 function Home({

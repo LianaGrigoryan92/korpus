@@ -1,7 +1,6 @@
 'use client';
 
 import styled from 'styled-components';
-import css from 'styled-jsx/css';
 
 export const ServiceItemContainer = styled.div<{
   $isReverse: boolean;
