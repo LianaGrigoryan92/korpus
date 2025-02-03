@@ -22,6 +22,10 @@ function SignIn() {
   const [errorMessage, setErrorMessage] = useState(''); // Error state
   const router = useRouter();
 
+  useEffect(() => {
+    router.push('/korpus-pro')
+  }, []);
+
   const onSubmit = async (data: FormData) => {
     const requestBody = {
       login: data.login,

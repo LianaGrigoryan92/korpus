@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import Link from 'next/link';
 import * as S from './page.styled';
 import { MainLayout } from '@/components';
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 interface FormData {
   clientType: string;
@@ -28,10 +28,12 @@ function SignUp() {
     control,
     formState: { errors },
   } = useForm<FormData>();
-  const router = useRouter();
   const [clientType, setClientType] = useState('Individual'); // Default type: Individual
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Success state
-
+  const router = useRouter();
+  useEffect(() => {
+    router.push('/korpus-pro')
+  }, []);
   const onSubmit = async (data: FormData) => {
     const requestBody = {
       id: 0,
