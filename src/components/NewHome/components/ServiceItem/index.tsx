@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { truncateText } from '@/utils/truncateText';
+import { useTranslations } from 'next-intl';
 
 // styled
 import * as S from './ServiceItem.styled';
@@ -32,6 +33,7 @@ export const ServiceItem = ({
   hoverBgSize,
 }: IProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+    const t = useTranslations('Services');
 
   return (
     <S.ServiceItemContainer $isReverse={isReverse} $isComing={isComing}>
@@ -42,12 +44,12 @@ export const ServiceItem = ({
           <S.ServiceItemTextReadButton
             onClick={() => setIsExpanded(!isExpanded)}
           >
-            {isExpanded ? 'Read Less' : 'Read More'}
+            {isExpanded ? t('read_less') : t('read_more')}
           </S.ServiceItemTextReadButton>
         </S.ServiceItemText>
         {isComing && (
           <S.ComingWrapper $isReverse={isReverse}>
-            <S.ComingSoon $isReverse={isReverse}>Coming Soon</S.ComingSoon>
+            <S.ComingSoon $isReverse={isReverse}>{t('button')}</S.ComingSoon>
           </S.ComingWrapper>
         )}
       </S.ServiceItemContent>

@@ -32,10 +32,10 @@ export const Banner = () => {
                 <S.BannerTitle>Furniture</S.BannerTitle>
                 <S.BannerGif><Image src={EdgingGif.src} alt="Edging" width={560} height={102} /></S.BannerGif>
             </S.BannerContent>
-            <S.BannerContent>
+            {/* <S.BannerContent>
                 <S.BannerGif><Image src={ProcessingGif.src} alt="Processing" width={594} height={102} /></S.BannerGif>
                 <S.BannerTitle>together</S.BannerTitle>
-            </S.BannerContent>
+            </S.BannerContent> */}
             <S.BannerContent>
                 <S.BannerTitle>with</S.BannerTitle>
                 <S.BannerGif><Image src={CoatingGif.src} alt="Coating" width={510} height={102} /></S.BannerGif>

@@ -8,6 +8,7 @@ import { truncateText } from '@/utils/truncateText';
 import * as S from './ServiceItem.styled';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useTranslations } from 'next-intl';
 
 interface IProps {
   title: string;
@@ -25,6 +26,7 @@ export const ServiceItemSlider = ({
   isReverse,
 }: IProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const t = useTranslations('Services');
 
   const sliderSettings = {
     slidesToShow: 1,
@@ -43,11 +45,11 @@ export const ServiceItemSlider = ({
           <S.ServiceItemTextReadButton
             onClick={() => setIsExpanded(!isExpanded)}
           >
-            {isExpanded ? 'Read Less' : 'Read More'}
+            {isExpanded ? t('read_less') : t('read_more')}
           </S.ServiceItemTextReadButton>
         </S.ServiceItemText>
         {isComing && (
-          <S.ComingSoon $isReverse={isReverse}>Coming Soon</S.ComingSoon>
+          <S.ComingSoon $isReverse={isReverse}>{t('button')}</S.ComingSoon>
         )}
       </S.ServiceItemContent>
       <S.SliderWrapper>

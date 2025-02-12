@@ -69,7 +69,7 @@ export const ComingSoon = styled.p<{ $isReverse: boolean }>`
   text-align: ${({ $isReverse }) => ($isReverse ? 'right' : 'left')};
   z-index: 100000;
   background-color: #000;
-  max-width: 212px;
+  max-width: 250px;
   width: 100%;
   text-transform: uppercase;
   padding: 10px 30px;
@@ -112,6 +112,7 @@ export const ServiceItemImageWrapper = styled.div<{
   $hoverbgSize?: string;
   $hoverbgPos?: string;
 }>`
+  position: relative;
   max-width: 618px;
   background-image: url(${({ $image }) => $image ?? ''});
   background-size: ${({ $bgSize }) => ($bgSize ? `${$bgSize}px` : '600px')};
@@ -121,16 +122,28 @@ export const ServiceItemImageWrapper = styled.div<{
   height: ${({ $isExpanded }) => ($isExpanded ? '485px' : '286px')};
   transition: all 0.5s ease-in-out;
   z-index: 1100;
+  overflow: hidden;
 
-  &:hover {
+
+
+ &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
     background-image: url(${(props) => props.$hoverImage ?? props.$image});
-    background-size: ${({ $hoverbgSize }) =>
-      $hoverbgSize ? `${$hoverbgSize}px` : '500px'};
-    background-position: ${({ $hoverbgPos }) => $hoverbgPos ?? '50px -200px'};
+    background-size: 100%;
+    background-position: 9px -220px;;
     background-repeat: no-repeat;
+    transition: left 0.5s ease-in-out;
+  }
+
+  &:hover::before {
+    left: 0; /* Move into view */
   }
 `;
-
 // export const ServiceItemImage = styled.img`
 //     max-width: 618px;
 //     width: 100%;

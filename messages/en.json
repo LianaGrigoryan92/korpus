@@ -5,5 +5,71 @@
     "career_banner_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has \u2028been the industry's standard dummy text ever since the 1500s, when an unknown printer\u2028took a galley of type and",
     "career_title": "Lorem ipsum dolor set",
     "career_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n"
+  },
+
+  "Services":{
+    "service_title":"Our Services",
+    "cutting_title":"Cutting",
+    "cutting_description": "We provide high-precision cutting services using advanced CNC machines from the renowned Italian company Biesse. Known for its innovative technology and accuracy, Biesse ensures superior results. Our specialized team is equipped to handle projects of any complexity, offering both saw-based and nesting (CNC routing) cutting solutions.",
+    "edging_title":"Edging",
+    "edging_description":"We offer premium edging services using the latest-generation Biesse machines. Our materials, including edge bands and adhesives, are exclusively sourced from leading European manufacturers, ensuring: a flawless finish, high resistance to heat and moisture, long-lasting durability. We guarantee quality that remains consistent over time, resisting external influences and wear.",
+    "wood_title":"Wood Processing",
+    "wood_description":"Precision and innovation in detail processing, including drilling and milling services.",
+    "coating_title":"Coating",
+    "coating_description":"Professional painting services using cutting-edge Cefla technology and high-end Italian materials. We deliver smooth surfaces, durable coatings, and exceptional quality.",
+    "button":"Coming Soon",
+    "read_less":"Read Less",
+    "read_more":"Read More",
+    "ready_mode_title": "Ready-made Modules",
+    "ready_mode_description": "Soon, we will introduce pre-assembled furniture modules, fully equipped with accessories for maximum convenience and functionality."
+  },
+
+
+  "CoreValues":{
+    "core_title":"OUR CORE VALUES",
+    "core_title_customer":"Customer-Centric Approach",
+    "core_description_customer":"Customer satisfaction and convenience are the pillars of our business. Our goal is to continuously enhance service quality and efficiency by offering solutions that optimize workflow and create new opportunities.",
+    "core_title_accessibility":"Accessibility",
+    "core_description_accessibility":"High-quality, internationally standardized products are no longer a luxury—they are accessible. We offer the best price-quality ratio, making comfort available to a broader audience.",
+    "core_title_qa":"Quality Assurance",
+    "core_description_qa":"Every component, from raw materials to technology and machinery, is carefully selected and applied in strict compliance with international standards. This approach enables us not only to meet but exceed customer expectations, positioning us as a leading representative in the industry.",
+    "core_title_responsibility":"Responsibility",
+    "core_description_responsibility":"We use eco-friendly materials that meet environmental standards, reducing negative impact on nature while ensuring the safety of our employees and consumers."
+  },
+
+  "Contact":{
+    "collaborate":"Let’s Collaborate.",
+    "call_number":"Call us",
+    "email_adress":"Say hi ",
+    "adress":"Visit us Yerevan, Tevosyan 13/11",
+    "contact_title":"Get in touch with us.",
+    "contact_title2":"We are here to assist you"
+  },
+
+  "ContactForm":{
+    "name":"Name",
+    "phone":"Phone",
+    "email":"Email",
+    "message":"Message",
+    "submit":"Submit",
+    "type":"Type"
+  },
+  "Header":{
+    "about":"About"
+  },
+  "Footer":{
+    "about":"About",
+    "terms":"Terms & conditions",
+    "privacy":"Privacy policy",
+    "refund":"Return & Refund",
+    "shop":"Shop",
+    "services":"Services",
+    "carriers":"Carriers",
+    "contact":"Contact Us",
+    "shipping":"Shipping & Delivery"
+
   }
 }
+
+
+
