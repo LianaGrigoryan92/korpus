@@ -6,26 +6,26 @@ import Image from 'next/image';
 // styled & images
 import * as S from './OurCoreValues.styled';
 import OurCoreValuesGif from '@/public/images/gif/ourcorevalues.gif';
+import { useTranslations } from 'next-intl';
 
 export const OurCoreValues = () => {
+      const t = useTranslations('CoreValues');
   return (
     <S.Container>
-      <S.Title>Our Core Values</S.Title>
+      <S.Title>{t('core_title')}</S.Title>
       <S.InfoContent>
         <S.InfoBlockContainerLeft>
           <S.InfoBlock>
             <S.InfoItem>
-              <S.InfoItemTitle>Customer Focus</S.InfoItemTitle>
+              <S.InfoItemTitle>{t('core_title_customer')}</S.InfoItemTitle>
               <S.InfoItemDescription>
-                Your comfort and satisfaction are at the heart of our business
-                model
+              {t('core_description_customer')}
               </S.InfoItemDescription>
             </S.InfoItem>
             <S.InfoItem>
-              <S.InfoItemTitle>Affordability</S.InfoItemTitle>
+              <S.InfoItemTitle>{t('core_title_accessibility')}</S.InfoItemTitle>
               <S.InfoItemDescription>
-                Luxury doesn’t have to break the bank. We provide cost-effective
-                options for everyone.
+              {t('core_description_accessibility')}
               </S.InfoItemDescription>
             </S.InfoItem>
           </S.InfoBlock>
@@ -39,17 +39,15 @@ export const OurCoreValues = () => {
         <S.InfoBlockContainerRight>
           <S.InfoBlock>
             <S.InfoItem>
-              <S.InfoItemTitle>Quality Assurance</S.InfoItemTitle>
+              <S.InfoItemTitle>{t('core_title_qa')}</S.InfoItemTitle>
               <S.InfoItemDescription>
-                We handpick every piece to ensure it meets the highest quality
-                standards
+              {t('core_description_qa')}
               </S.InfoItemDescription>
             </S.InfoItem>
             <S.InfoItem>
-              <S.InfoItemTitle>Sustainability</S.InfoItemTitle>
+              <S.InfoItemTitle>{t('core_title_responsibility')}</S.InfoItemTitle>
               <S.InfoItemDescription>
-                Committed to eco-friendly practices, we only source materials
-                from sustainable vendors.
+              {t('core_description_responsibility')}
               </S.InfoItemDescription>
             </S.InfoItem>
           </S.InfoBlock>

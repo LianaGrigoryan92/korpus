@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 // styled
 import * as S from "./ContactForm.styled";
 import {Label} from "./ContactForm.styled";
+import { useTranslations } from 'next-intl';
 
 type FormData = {
     name: string;
@@ -15,6 +16,7 @@ type FormData = {
 };
 
 export const ContactForm = () => {
+    const t = useTranslations('ContactForm');
     const {
         register,
         handleSubmit,
@@ -30,10 +32,10 @@ export const ContactForm = () => {
             <S.Form onSubmit={handleSubmit(onSubmit)}>
                 {/* Name Field */}
                 <S.FormField>
-                    <S.Label htmlFor="name">Name</S.Label>
+                    <S.Label htmlFor="name">{t('name')}</S.Label>
                     <S.Input
                         id="name"
-                        placeholder="Type"
+                        placeholder={t('type')}
                         {...register("name", { required: "Name is required" })}
                     />
                     {errors.name && <S.ErrorMessage>{errors.name.message}</S.ErrorMessage>}
@@ -41,10 +43,10 @@ export const ContactForm = () => {
 
                 {/* Phone Field */}
                 <S.FormField>
-                    <S.Label htmlFor="phone">Phone</S.Label>
+                    <S.Label htmlFor="phone">{t('phone')}</S.Label>
                     <S.Input
                         id="phone"
-                        placeholder="Type"
+                        placeholder={t('type')}
                         {...register("phone", {
                             required: "Phone number is required",
                             pattern: {
@@ -58,11 +60,11 @@ export const ContactForm = () => {
 
                 {/* Email Field */}
                 <S.FormField>
-                    <S.Label htmlFor="email">Email</S.Label>
+                    <S.Label htmlFor="email">{t('email')}</S.Label>
                     <S.Input
                         id="email"
                         type="email"
-                        placeholder="Type"
+                        placeholder={t('type')}
                         {...register("email", {
                             required: "Email is required",
                             pattern: {
@@ -76,10 +78,10 @@ export const ContactForm = () => {
 
                 {/* Message Field */}
                 <S.FormField>
-                    <S.Label htmlFor="message">Message</S.Label>
+                    <S.Label htmlFor="message">{t('message')}</S.Label>
                     <S.TextArea
                         id="message"
-                        placeholder="Type"
+                        placeholder={t('type')}
                         {...register("message", { required: "Message is required" })}
                     />
                     {errors.message && (
@@ -88,7 +90,7 @@ export const ContactForm = () => {
                 </S.FormField>
 
                 {/* Submit Button */}
-                <S.SubmitButton type="submit">Submit</S.SubmitButton>
+                <S.SubmitButton type="submit">{t('submit')}</S.SubmitButton>
             </S.Form>
         </S.ContactFormContainer>
     );

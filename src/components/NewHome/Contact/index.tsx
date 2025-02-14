@@ -8,17 +8,19 @@ import FacebookIcon from '@/public/images/icons/facebook.svg';
 import InstagramIcon from '@/public/images/icons/instagram.svg';
 import Link from 'next/link';
 import { ContactForm } from '@/components/NewHome/components';
+import { useTranslations } from 'next-intl';
 
 export const ContactBlock = () => {
+    const t = useTranslations('Contact');
   return (
     <S.ContactBlockContainer>
       <S.ContactBlockLeftContainer>
-        <S.CollaborateTitle>Let’s Collaborate.</S.CollaborateTitle>
+        <S.CollaborateTitle>{t('collaborate')}</S.CollaborateTitle>
         <S.ContactInfo>
-          <S.ContactInfoItem>Call us +374 44 711 611</S.ContactInfoItem>
-          <S.ContactInfoItem>Say hi info@korpus.am</S.ContactInfoItem>
+          <S.ContactInfoItem>{t('call_number')} +374 44 711 611</S.ContactInfoItem>
+          <S.ContactInfoItem>{t('email_adress')} info@korpus.am</S.ContactInfoItem>
           <S.ContactInfoItem>
-            Visit us Yerevan, Tevosyan 13/11{' '}
+          {t('adress')}{' '}
           </S.ContactInfoItem>
         </S.ContactInfo>
         <S.SocialButtons>
@@ -53,7 +55,7 @@ export const ContactBlock = () => {
       </S.ContactBlockLeftContainer>
       <S.ContactBlockRightContainer>
         <S.Title>
-          Get in touch with us. <br /> We are here to assist you
+        {t('contact_title')} <br /> {t('contact_title2')}
         </S.Title>
         <ContactForm />
       </S.ContactBlockRightContainer>

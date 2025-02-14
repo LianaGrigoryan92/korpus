@@ -8,11 +8,13 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useClientMediaQuery } from '@/hooks/useClientMediaQuery';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
   const isMobile = useClientMediaQuery('(max-width: 980px)');
   const pathname = usePathname();
   const hide = ['sign-in', 'sign-up'].includes(pathname.split('/')[2]);
+    const t = useTranslations('Footer');
 
   return (
     <S.Container>
@@ -47,7 +49,7 @@ export default function Footer() {
                 </S.FooterNavList>
                 <S.FooterNavList>
                 <S.FooterNavItem>
-                    <Link href="/about">About</Link>
+                    <Link href="/about">{t('about')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
                     <Link href="#" onClick={(e) => {
@@ -64,13 +66,13 @@ export default function Footer() {
                 </S.FooterNavList>
                 <S.FooterNavList>
                   <S.FooterNavItem>
-                    <Link href="/terms">Terms & conditions</Link>
+                    <Link href="/terms">{t('terms')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/privacy">Privacy policy</Link>
+                    <Link href="/privacy">{t('privacy')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/refund">Return & Refund</Link>
+                    <Link href="/refund">{t('refund')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
                     <Link href="/faq">FAQ</Link>
@@ -82,34 +84,34 @@ export default function Footer() {
               <>
                 <S.FooterNavList>
                   <S.FooterNavItem>
-                    <Link href="/about">About</Link>
+                    <Link href="/about">{t('about')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/services">Services</Link>
+                    <Link href="/services">{t('services')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/shop">Shop</Link>
+                    <Link href="/shop">{t('shop')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
                     <Link href="/carriers">Carriers</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/contact">Contact Us</Link>
+                    <Link href="/contact">{t('contact')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/shipping">Shipping & Delivery</Link>
+                    <Link href="/shipping">{t('shipping')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/refund">Return & Refund</Link>
+                    <Link href="/refund">{t('refund')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
                     <Link href="/faq">FAQ</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/terms">Terms & conditions</Link>
+                    <Link href="/[locale]/terms">{t('terms')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/privacy">Privacy policy</Link>
+                    <Link href="/privacy">{t('privacy')}</Link>
                   </S.FooterNavItem>
                 </S.FooterNavList>
               </>

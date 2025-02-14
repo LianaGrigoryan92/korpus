@@ -13,6 +13,7 @@ import { ArrowRight } from 'lucide-react';
 import { theme } from '@/styles';
 import {Button} from "./Navbar.styled";
 import {useRouter} from "next/navigation";
+import { useTranslations } from 'next-intl';
 
 export default function Navbar(
     // { isLoggedIn }: { isLoggedIn?: boolean }
@@ -44,6 +45,8 @@ export default function Navbar(
   const handleClickProfileButton = () => {
     router.push('/korpus-pro');
   };
+
+ const t = useTranslations('Header');
 
   useEffect(() => {
     const countCartItems = () => {
@@ -131,7 +134,7 @@ export default function Navbar(
                   </S.CategoryItem>
                 </S.ProductCategories>
               </S.NavItem> */}
-              <Link href={'/about'}>About</Link>
+              <Link href={'/about'}>{t('about')}</Link>
               <Link href={'/korpus-pro'}>KorpusPro</Link>
             </S.NavItemWrapper>
             <S.NavItemWrapper>

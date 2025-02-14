@@ -1,9 +1,9 @@
+
 export const mockServices = [
   {
     id: 1,
-    title: 'Cutting',
-    description:
-      'Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.',
+    title: 'cutting_title',
+    description:"cutting_description",
     image: '/images/services/cutting.jfif',
     hoverImage: '/images/services/hover/cutting.jfif',
     isComing: false,
@@ -14,9 +14,8 @@ export const mockServices = [
   },
   {
     id: 2,
-    title: 'Edging',
-    description:
-      'Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.',
+    title: 'edging_title',
+    description:'edging_description',
     image: '/images/services/edging.jfif',
     hoverImage: '/images/services/hover/edging.jpeg',
     isComing: false,
@@ -27,9 +26,8 @@ export const mockServices = [
   },
   {
     id: 3,
-    title: 'Wood Processing',
-    description:
-      'Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.',
+    title: 'wood_title',
+    description:'wood_description',
     image: '/images/services/processing.jfif',
     hoverImage: '/images/services/hover/processing.jpeg',
     isComing: true,
@@ -40,9 +38,8 @@ export const mockServices = [
   },
   {
     id: 4,
-    title: 'Coating',
-    description:
-      'Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors. Committed to eco-friendly practices, we only source materials from sustainable vendors.',
+    title: 'coating_title',
+    description:'coating_description',
     image: '/images/services/coating.jfif',
     hoverImage: '/images/services/hover/coating.jfif',
     isComing: true,
