@@ -108,7 +108,7 @@ export default function Footer() {
                     <Link href="/faq">FAQ</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
-                    <Link href="/[locale]/terms">{t('terms')}</Link>
+                    <Link href="/terms">{t('terms')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
                     <Link href="/privacy">{t('privacy')}</Link>
