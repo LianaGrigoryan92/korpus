@@ -5,7 +5,11 @@ import styled from 'styled-components';
 export const ContactBlockContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    gap: 156px;
+    gap: 56px;
+    @media (max-width: 1280px) {
+        gap:0px;
+        flex-direction: column;
+    }
 `;
 
 export const ContactBlockLeftContainer = styled.div`
@@ -21,6 +25,11 @@ export const CollaborateTitle = styled.div`
     padding-bottom: 24px;
     border-bottom: 1px solid #D9D9D9;
     margin-bottom: 22px;
+
+    @media (max-width: 768px) {
+        font-size: 20px;
+        line-height: 24px;
+    }
 `;
 
 export const ContactInfo = styled.div`
@@ -30,6 +39,9 @@ export const ContactInfo = styled.div`
     padding-bottom: 44px;
     border-bottom: 1px solid #D9D9D9;
     margin-bottom: 17px;
+    @media (max-width: 768px) {
+        padding-bottom: 24px;
+    }
 `;
 
 export const ContactInfoItem = styled.div`
@@ -37,6 +49,10 @@ export const ContactInfoItem = styled.div`
     line-height: 24px;
     font-weight: 400;
     color: #000;
+    @media (max-width: 768px) {
+        font-size: 16px;
+        line-height: 20px;
+    }
 `;
 
 export const SocialButtons = styled.div`
@@ -65,4 +81,15 @@ export const Title = styled.h3`
     font-weight: 600;
     line-height: 54px;
     color: #000;
+
+    @media (max-width: 1280px) {
+       font-size: 40px;
+       text-align: center;
+       margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+    font-size: 32px;
+    line-height: 36px;
+  }
 `;

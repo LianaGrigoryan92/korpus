@@ -25,7 +25,14 @@ export const ContactForm = () => {
 
     const onSubmit = (data: FormData) => {
         console.log("Form Data:", data);
+        const message = `Name: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\nMessage: ${data.message}`;
+        const encodedMessage = encodeURIComponent(message);
+        const phoneNumber = "37499603750";  
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        window.open(whatsappUrl, "_blank");
     };
+    
+    
 
     return (
         <S.ContactFormContainer>

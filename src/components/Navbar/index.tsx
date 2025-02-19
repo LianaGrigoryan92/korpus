@@ -20,7 +20,7 @@ export default function Navbar(
 ) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [cartItemCount, setCartItemCount] = useState<number>(0);
-  const isMobile = useClientMediaQuery('(max-width: 980px)');
+  const isMobile = useClientMediaQuery('(max-width: 520px)');
   const locale = useLocale() as Locale;
   const [isVisibleCategories, setIsVisibleCategories] =
     useState<boolean>(false);
@@ -96,7 +96,7 @@ export default function Navbar(
         {isMobile ? (
           <S.NavItemWrapper>
             <S.Button onClick={() => handleOpenMenu()}>Menu</S.Button>
-            <Link href={'/profile'}>Facade</Link>
+            {/* <Link href={'/profile'}>Facade</Link> */}
           </S.NavItemWrapper>
         ) : (
           <>

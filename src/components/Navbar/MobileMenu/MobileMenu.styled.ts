@@ -7,7 +7,7 @@ export const MobileMenu = styled.div`
   width: 100%;
   height: 100%;
   background-color: #fff;
-  z-index: 1000;
+  z-index: 100001;
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
@@ -24,6 +24,7 @@ export const Header = styled.div`
   align-items: center;
   margin-top: 16px;
   padding: 16px;
+  border-bottom: 1px solid #000;
 `;
 
 export const MenuButton = styled.button`
@@ -39,7 +40,7 @@ export const CancelButton = styled.button`
 `;
 
 export const Logo = styled.img`
-  width: 100%;
+  width: 200px;
   font-weight: bold;
   margin: 24px 0;
 `;
@@ -80,12 +81,14 @@ export const Search = styled.input`
   }
 `;
 
-export const MenuItem = styled.div`
+export const MenuItem = styled.a`
   padding: 8px 0;
   font-size: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color:#000;
+  text-decoration: none;
 
   &:last-child {
     border-bottom: none;

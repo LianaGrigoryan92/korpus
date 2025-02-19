@@ -44,7 +44,7 @@ export default function Category() {
                         height: '100%',
                         zIndex: 1,
                         backgroundColor: '#fff',
-                        maxWidth: '1320px',
+                        maxWidth: '1440px',
                         top: 0,
                       }}
                   />

@@ -68,6 +68,13 @@
     "contact":"Contact Us",
     "shipping":"Shipping & Delivery"
 
+  },
+  "Banner":{
+    "create":"Create",
+    "your":"Your",
+    "furniture":"Furniture",
+    "with":"with",
+    "us":"us"
   }
 }
 

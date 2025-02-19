@@ -23,7 +23,7 @@ export const FrameLayout = styled.div`
 
 export const FrameWrapper = styled.div`
   width: 100%;
-  height: 90vh;
+  height: 110vh;
 `;
 
 export const CategoryContainer = styled.div``;

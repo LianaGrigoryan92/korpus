@@ -16,7 +16,8 @@ const styles = css`
 
   body {
     background-color: white;
-    font-family: 'Graphik Trial', sans-serif;
+    // font-family: 'Graphik Trial', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;

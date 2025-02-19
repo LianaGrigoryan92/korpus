@@ -12,6 +12,10 @@ export const ServiceItemContainer = styled.div<{
   flex-direction: ${({ $isReverse }) => ($isReverse ? 'row-reverse' : 'row')};
   justify-content: space-between;
   position: relative;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 
   ${({ $isComing }) =>
     $isComing &&
@@ -42,6 +46,14 @@ export const ServiceItemTitle = styled.h2<{ $isReverse: boolean }>`
   line-height: 56px;
   color: #000000;
   text-align: ${({ $isReverse }) => ($isReverse ? 'right' : 'left')};
+    @media (max-width: 1280px) {
+    font-size: 40px;
+  }
+    @media (max-width: 768px) {
+    font-size: 32px;
+    line-height: 36px;
+    text-align: center;
+  }
 `;
 
 export const ServiceItemText = styled.div<{

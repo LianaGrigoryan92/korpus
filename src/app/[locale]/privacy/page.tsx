@@ -15,77 +15,53 @@ const PrivacyPage = () => {
     <S.PrivacyContainer>
      
      <S.PrivacyTitle>
-     Privacy Policy <BookText size={32}/>
+     Գաղտնիության քաղաքականություն<BookText size={32}/>
         </S.PrivacyTitle>
         <S.PrivacyContent>
-        Welcome to Korpus. Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website, products, and services.
+        1. Ստորագրելով Պայմանագիրը՝ Օգտատերը տալիս է համաձայնությունը՝ Ընկերության կողմից իր անձնական տվյալների մշակմանը, ներառյալ ազգանունը, անունը, հայրանունը, կազմակերպության տվյալները, էլեկտրոնային փոստի հասցեն, կոնտակտային հեռախոսահամարը և այլ անհրաժեշտ տեղեկատվություն։
         </S.PrivacyContent>
         <S.PrivacyContent>
-        By using our services, you agree to the terms of this Privacy Policy.
+        2. Ընկերությունը պահպանում է Օգտատիրոջ անձնական տվյալները` ՀՀ օրենսդրության պահանջներին համապատասխան։
         </S.PrivacyContent>
-        <S.PrivacySubTitle>
-        1. Information We Collect
-        </S.PrivacySubTitle>
         <S.PrivacyContent>
-        We collect personal information you provide to us when you register an account, make a purchase, or contact us for support. This information may include your name, email address, and payment details.
+        3. Անձնական տվյալների անվտանգությունն ապահովվում է «Անձնական տվյալների պաշտպանության մասին» ՀՀ օրենքին համապատասխան։
         </S.PrivacyContent>
-        <S.PrivacySubTitleSmall>
-        a.Personal Information
-        </S.PrivacySubTitleSmall>
+        <S.PrivacyContent>
+        4. Ընկերությունը կարող է փոխանցել Օգտատիրոջ անձնական տվյալները երրորդ անձանց հետևյալ դեպքերում․
+        </S.PrivacyContent>
         <S.PrivacyList>
-          <li>Name, email address, phone number, and billing details.</li>
-          <li>Account login details, including username and password.</li>
+        <dd>4.1 եթե Օգտատերը տվել է իր անձնական տվյալները փոխանցելու համաձայնությունը</dd>
+        <dd>4.2 եթե փոխանցումն անհրաժեշտ է Օգտատիրոջը՝ Կայքի ծառայություններից օգտվելու համար,</dd>
+        <dd>4.3 եթե փոխանցումը նախատեսված է ՀՀ օրենսդրությամբ և կատարվում է օրենքով սահմանված կարգով:</dd>
         </S.PrivacyList>
-        <S.PrivacySubTitleSmall>
-        b.Non-Personal Information
-        </S.PrivacySubTitleSmall>
+        <S.PrivacyContent>
+        5. Օգտատերն իրավունք ունի փոփոխելու իր կողմից ներկայացված անձնական տվյալները:
+        </S.PrivacyContent>
+        <S.PrivacyContent>
+        6. Օգտատերը համաձայն է և թույլ է տալիս Ընկերությանը իր էլեկտրոնային հասցեին ուղղարկել գովազդային ու տեղեկատվական նյութեր, առաջարկներ։
+        </S.PrivacyContent>
+        <S.PrivacyContent>
+        7. Կայքում գրացվելու նպատակով Կայքին տրված Օգտատիրոջ անձնական տվյալները օգտագործվելու են հետևյալ ծառայությունների մատուցման համար՝
+        </S.PrivacyContent>
         <S.PrivacyList>
-          <li>Browser type, device information, and IP address.</li>
-          <li>Usage data such as pages visited and time spent on our platform.</li>
+          <li>փոխանցել տեղեկատվություն (այդ թվում գովազդ) Օգտատիրոջը,</li>
+          <li>պատասխանել Օգտատիրոջ հարցերին,</li>
+          <li>հրապարակել Օգտատիրոջ արձագանքները,</li>
+          <li>պահպանել հետադարձ կապ Օգտատիրոջ հետ և ուղղարկել նորություններ։</li>
         </S.PrivacyList>
-        <S.PrivacySubTitleSmall>
-        c. Cookies and Tracking Technologies
-        </S.PrivacySubTitleSmall>
+        <S.PrivacyContent>
+        8. Ստորագրելով Պայմանագիրը՝ Օգտատերը տալիս է համաձայնություն՝ Կայքի Ադմինիստրացիայի կողմից իր անձնական տվյալների մշակմանը, մասնավորապես հետևյալ նպատակներով.
+        </S.PrivacyContent>
         <S.PrivacyList>
-          <li>We use cookies and similar tracking technologies to enhance your experience on our website. Cookies are small data files stored on your device that help us understand how you interact with our services. You can control the use of cookies through your browser settings.</li>
+          <li>ստանալ գովազդ,</li>
+          <li>ստանալ SMS (WhatsApp) հաղորդագրություններ և հեռախոսազանգեր, </li>
+          <li>ստանալ այլ ծառայություններ:</li>
         </S.PrivacyList>
-        <S.PrivacySubTitle>
-        2. How We Use Your Information
-        </S.PrivacySubTitle>
         <S.PrivacyContent>
-        We use your personal information to provide and improve our services, process transactions, and communicate with you. We may also use your information for marketing purposes, but you can opt out at any time.
+        Կայքի Ադմինիստրացիան պահպանում է Օգտատիրոջ անձնական տվյալները` ՀՀ օրենսդրության պահանջներին և իր ներքին կանոնակարգերին համապատասխան:
         </S.PrivacyContent>
-        <S.PrivacySubTitle>
-        3. How We Share Your Information
-        </S.PrivacySubTitle>
-        <S.PrivacyContent>
-        We do not sell your personal information to third parties. However, we may share your information with trusted partners who assist us in operating our website, conducting our business, or providing services to you, as long as those parties agree to keep this information confidential.
-        </S.PrivacyContent>
-        <S.PrivacySubTitle>
-        4. Data Security
-        </S.PrivacySubTitle>
-        <S.PrivacyContent>
-        We implement a variety of security measures to maintain the safety of your personal information. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
-        </S.PrivacyContent>
-        <S.PrivacySubTitle>
-        5. Your Rights
-        </S.PrivacySubTitle>
-        <S.PrivacyContent>
-        You have the right to access, correct, or delete your personal information. You can also object to the processing of your data or request data portability. To exercise these rights, please contact us at the provided contact information.
-        </S.PrivacyContent>
-        <S.PrivacySubTitle>
-        6. Changes to This Privacy Policy
-        </S.PrivacySubTitle>
-        <S.PrivacyContent>
-        We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on our website. You are advised to review this Privacy Policy periodically for any changes.
-        </S.PrivacyContent>
-        <S.PrivacySubTitle>
-        7. Contact Us
-        </S.PrivacySubTitle>
-        <S.PrivacyContent>
-        If you have any questions about this Privacy Policy, please contact us at privacy@korpus.com.
-        </S.PrivacyContent>
-        
+      
+ 
   
     </S.PrivacyContainer>
   );
