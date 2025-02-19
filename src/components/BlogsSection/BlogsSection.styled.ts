@@ -34,7 +34,7 @@ export const Blogs = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   column-gap: 16px;
-  max-width: 1320px;
+  max-width: 1440px;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;

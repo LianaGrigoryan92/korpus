@@ -30,10 +30,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onClose }) => {
               Products{' '}
               <ArrowRight size={24} color={theme.palette.common.black} />
             </S.MenuItem> */}
-            <S.MenuItem>
+            <S.MenuItem href={'/about'}>
               About <ArrowRight size={24} color={theme.palette.common.black} />
             </S.MenuItem>
-            <S.MenuItem>
+            <S.MenuItem href={'/korpus-pro'}>
               Korpuspro{' '}
               <ArrowRight size={24} color={theme.palette.common.black} />
             </S.MenuItem>

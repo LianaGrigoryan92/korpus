@@ -59,6 +59,10 @@ export default function Footer() {
                         behavior: 'smooth',
                       });
                     }}>Contact Us</Link>
+                    
+                  </S.FooterNavItem>
+                  <S.FooterNavItem>
+                    <Link href="/faq">FAQ</Link>
                   </S.FooterNavItem>
                   {/* <S.FooterNavItem>
                     <Link href="/shipping">Shipping & Delivery</Link>
@@ -74,14 +78,12 @@ export default function Footer() {
                   <S.FooterNavItem>
                     <Link href="/refund">{t('refund')}</Link>
                   </S.FooterNavItem>
-                  <S.FooterNavItem>
-                    <Link href="/faq">FAQ</Link>
-                  </S.FooterNavItem>
+            
                 </S.FooterNavList>
               </>
             )}
             {isMobile && (
-              <>
+              <S.FooterNavColumn>
                 <S.FooterNavList>
                   <S.FooterNavItem>
                     <Link href="/about">{t('about')}</Link>
@@ -92,16 +94,19 @@ export default function Footer() {
                   <S.FooterNavItem>
                     <Link href="/shop">{t('shop')}</Link>
                   </S.FooterNavItem>
-                  <S.FooterNavItem>
+                  {/* <S.FooterNavItem>
                     <Link href="/carriers">Carriers</Link>
-                  </S.FooterNavItem>
+                  </S.FooterNavItem> */}
                   <S.FooterNavItem>
                     <Link href="/contact">{t('contact')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
                     <Link href="/shipping">{t('shipping')}</Link>
                   </S.FooterNavItem>
-                  <S.FooterNavItem>
+
+                </S.FooterNavList>
+                <S.FooterNavList>
+                <S.FooterNavItem>
                     <Link href="/refund">{t('refund')}</Link>
                   </S.FooterNavItem>
                   <S.FooterNavItem>
@@ -114,7 +119,7 @@ export default function Footer() {
                     <Link href="/privacy">{t('privacy')}</Link>
                   </S.FooterNavItem>
                 </S.FooterNavList>
-              </>
+              </S.FooterNavColumn>
             )}
             <S.FooterNavList>
               <S.FooterNavItem>

@@ -13,6 +13,6 @@ export const MainLayout = styled.div`
 `;
 
 export const MainContent = styled.div`
-  max-width: 1320px;
+  max-width: 1440px;
   width: 100%;
 `;

@@ -10,6 +10,7 @@ import EdgingGif from '@/public/images/gif/edging.gif';
 import ProcessingGif from '@/public/images/gif/proccessing.gif';
 import CoatingGif from '@/public/images/gif/coating.gif';
 import Logo from '@/public/images/icons/logo.svg';
+import { useTranslations } from 'next-intl';
 
 // styled
 import * as S from './Banner.styled';
@@ -20,16 +21,17 @@ export const Banner = () => {
     const handleBrowseShop = () => {
         router.push('/korpus-pro')
     }
+      const t = useTranslations('Banner');
 
     return (
         <S.BannerWrapper>
             <S.BannerContent>
-                <S.BannerTitle>Create</S.BannerTitle>
+                <S.BannerTitle>{t('create')}</S.BannerTitle>
                 <S.BannerGif><Image src={CuttingGif.src} alt="Cutting" width={425} height={102} /></S.BannerGif>
-                <S.BannerTitle>Your</S.BannerTitle>
+                <S.BannerTitle>{t('your')}</S.BannerTitle>
             </S.BannerContent>
             <S.BannerContent>
-                <S.BannerTitle>Furniture</S.BannerTitle>
+                <S.BannerTitle>{t('furniture')}</S.BannerTitle>
                 <S.BannerGif><Image src={EdgingGif.src} alt="Edging" width={560} height={102} /></S.BannerGif>
             </S.BannerContent>
             {/* <S.BannerContent>
@@ -37,9 +39,11 @@ export const Banner = () => {
                 <S.BannerTitle>together</S.BannerTitle>
             </S.BannerContent> */}
             <S.BannerContent>
-                <S.BannerTitle>with</S.BannerTitle>
-                <S.BannerGif><Image src={CoatingGif.src} alt="Coating" width={510} height={102} /></S.BannerGif>
-                <S.BannerTitle>us</S.BannerTitle>
+                <S.BannerTitle>{t('with')}</S.BannerTitle>
+                <S.BannerGif>
+                    <Image src={CoatingGif.src} alt="Coating"  width={510} height={102} />
+                </S.BannerGif>
+                <S.BannerTitle>{t('us')}</S.BannerTitle>
                 <S.BannerButton onClick={handleBrowseShop}>
                     <img src={Logo.src} alt="Korpus Logo" />
                 </S.BannerButton>

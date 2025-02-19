@@ -13,6 +13,11 @@ export const ServiceItemContainer = styled.div<{
   justify-content: space-between;
   position: relative;
 
+  @media (max-width:768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+
   ${({ $isComing }) =>
     $isComing &&
     `
@@ -42,6 +47,17 @@ export const ServiceItemTitle = styled.h2<{ $isReverse: boolean }>`
   line-height: 56px;
   color: #000000;
   text-align: ${({ $isReverse }) => ($isReverse ? 'right' : 'left')};
+
+  @media (max-width: 1280px) {
+    font-size: 32px;
+    line-height: 38px;
+  }
+  @media (max-width: 768px) {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+
 `;
 
 export const ServiceItemText = styled.div<{
@@ -59,28 +75,37 @@ export const ServiceItemText = styled.div<{
   text-align: ${({ $isReverse }) => ($isReverse ? 'right' : 'left')};
 `;
 
+// export const ComingSoon = styled.p<{ $isReverse: boolean }>`
+//   font-family: 'Graphik Cond Trial';
+//   color: #fff;
+//   font-weight: 500;
+//   font-size: 20px;
+//   line-height: 24px;
+//   position: relative;
+//   text-align: ${({ $isReverse }) => ($isReverse ? 'right' : 'left')};
+//   z-index: 100000;
+//   background-color: #000;
+//   max-width: 250px;
+//   width: 100%;
+//   text-transform: uppercase;
+//   padding: 10px 30px;
+//   border-bottom-right-radius: ${({ $isReverse }) =>
+//     $isReverse ? '0' : '70px'};
+//   border-top-left-radius: ${({ $isReverse }) => ($isReverse ? '0' : '65px')};
+//   border-bottom-left-radius: ${({ $isReverse }) =>
+//     !$isReverse ? '0' : '70px'};
+//   border-top-right-radius: ${({ $isReverse }) => (!$isReverse ? '0' : '65px')};
+//   display: flex;
+//   justify-content: center;
+// `;
 export const ComingSoon = styled.p<{ $isReverse: boolean }>`
-  font-family: 'Graphik Cond Trial';
-  color: #fff;
-  font-weight: 500;
-  font-size: 20px;
+  color: #000000;
+  font-weight: 600;
+  font-size: 18px;
   line-height: 24px;
   position: relative;
   text-align: ${({ $isReverse }) => ($isReverse ? 'right' : 'left')};
-  z-index: 100000;
-  background-color: #000;
-  max-width: 250px;
-  width: 100%;
-  text-transform: uppercase;
-  padding: 10px 30px;
-  border-bottom-right-radius: ${({ $isReverse }) =>
-    $isReverse ? '0' : '70px'};
-  border-top-left-radius: ${({ $isReverse }) => ($isReverse ? '0' : '65px')};
-  border-bottom-left-radius: ${({ $isReverse }) =>
-    !$isReverse ? '0' : '70px'};
-  border-top-right-radius: ${({ $isReverse }) => (!$isReverse ? '0' : '65px')};
-  display: flex;
-  justify-content: center;
+  z-index: 10000;
 `;
 
 export const ComingWrapper = styled.div<{ $isReverse: boolean }>`

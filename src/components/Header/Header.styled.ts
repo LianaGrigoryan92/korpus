@@ -19,7 +19,7 @@ export const Container = styled.header`
 export const Header = styled.div`
   display: grid;
   grid-template-columns: 1fr 5fr;
-  max-width: 1320px;
+  max-width: 1440px;
   width: 100%;
   position: relative;
 `;

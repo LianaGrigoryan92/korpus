@@ -15,30 +15,64 @@ const RefundPage = () => {
   return (
     <S.RefundContainer>
     <MainLayout>
-      <S.RefundTitle>Refund Policy</S.RefundTitle>
+      <S.RefundTitle>ԱՊՐԱՆՔԻ ՀԱՆՁՆՈՒՄ, ՎԵՐԱԴԱՐՁ</S.RefundTitle>
       <S.RefundContent>
         <S.RefundParagraph>
-          At Korpus, we strive to ensure that our customers are satisfied with their purchases. If you are not completely satisfied with your purchase, we are here to help.
-        </S.RefundParagraph>
-        <S.RefundSubTitle>Returns</S.RefundSubTitle>
-        <S.RefundParagraph>
-          You have 30 calendar days to return an item from the date you received it. To be eligible for a return, your item must be unused and in the same condition that you received it. Your item must be in the original packaging.
-        </S.RefundParagraph>
-        <S.RefundSubTitle>Refunds</S.RefundSubTitle>
-        <S.RefundParagraph>
-          Once we receive your item, we will inspect it and notify you that we have received your returned item. We will immediately notify you on the status of your refund after inspecting the item.
+        Օգտատերը կամ վերջինիս կողմից նշված անձը պատրաստված ապրանքը իր միջոցներով կարող է վերցնել Ընկերության պահեստից (հասցե՝ ՀՀ, ք․ Երևան, Թևոսյան 13/11) կամ ստանալ առաքմամբ։
         </S.RefundParagraph>
         <S.RefundParagraph>
-          If your return is approved, we will initiate a refund to your credit card (or original method of payment). You will receive the credit within a certain amount of days, depending on your card issuer's policies.
-        </S.RefundParagraph>
-        <S.RefundSubTitle>Shipping</S.RefundSubTitle>
-        <S.RefundParagraph>
-          You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund.
-        </S.RefundParagraph>
-        <S.RefundSubTitle>Contact Us</S.RefundSubTitle>
-        <S.RefundParagraph>
-          If you have any questions on how to return your item to us, contact us at <S.RefundLink href="mailto:info@korpus.am">info@korpus.am</S.RefundLink>.
-        </S.RefundParagraph>
+        Ընկերության պահեստից ապրանքը վերցնելու համար Օգտատերը կամ վերջինիս կողմից նշված անձը ապրանքը կարող է ստանալ միայն Պատվերի հաստատման մասին Ընկերության կողմից Օգատիրոջն ուղարկված փաստաթղթով։
+
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Օգտատերը Ընկերության պահեստից ապրանքները կարող է վերցնել դրանք պատրաստ լինելու մասին ծանուցումը Ընկերության կողմից ուղարկվելուց հետո մինչև 3 (երեք) աշխատանքային օրվա ընթացքում՝ երկուշաբթիից ուրբաթ, ժամը՝ 09։0-18։00-ը ընկած ժամանակահատվածում՝ ներկայանալով Ընկերության պահեստի հասցեով։
+
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Օգտատերը կամ վերջինիս կողմից նշված անձի կողմից Ընկերության պահեստից ապրանքը դուրս հանելուց հետո վերջիններս ամբողջապես կրում են այդ ապրանքի պատահական կորստի կամ վնասվածքի ռիսկը։
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Ապրանքների առաքում պատվիրելու դեպքում առաքումն իրականացվելու է Ընկերության կամ առաքման ծառայություններ իրականացնողների միջոցով, որոնց ընտրում է Օգտատերը՝ իր պատասխանատվությամբ։
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Ապրանքների առաքումն իրականացվում է ապրանքը պատրաստ լինելու մասին ծանուցումը Ընկերության կողմից ուղարկվելուց հետո 4-5 աշխատանքային օրվա ընթացքում։
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Առաքումն իրականացնում է Օգտատիրոջ կողմից նշված հասցեով՝ նախապես կապ հաստատելով Օգտատիրոջ կողմից տրամադրած հեռախոսահամարով։ Ապրանքը հանձնվում է օգտատիրոջ կողմից նշված անձին։
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Օգտատերը պարտավոր է ապահովել տրամադրված հեռախոսահամարի հասանելիությունը:
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Օգտատերը պատասխանատու է առաքման հասցեի ճշգրտության և հստակության համար: Ոչ ճշգրիտ կամ թերի հասցեների ներկայացման կամ պայմանավորված առաքման ժամին ապրանքը չընդունելու դեպքում Ընկերությունը պատասխանատվություն չի կրում առաքման ուշացման, ապրանքների կորստի կամ այլ խնդիրներ համար:
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Օգտատերը կամ վերջինսի կողմից նշված առաքումը ստացող անձը պարտավոր է առաքման պահին ստուգել ապարանքների համապատասխանությունը ներկայացված պահանջներին, ներառյալ՝ քանակը, տեսքը, պատշաճ որակը և տեխնիկական բնութագրերը:
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Անհատական առաջադրանքով պատվերի նկարագրին համապատասխանությունը։
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Օգտատերը կամ վերջինսի կողմից առաքումը ստացող անձը առաքման պահին չի ստուգում ապրանքը կամ ստուգելուց հետո սույն կանոններով սահմանված կարգով Ընկերությանը չի ներկայացնում որևէ առարկություն կատարված աշխատանքի համար, ապա ապրանքը համարվում է պատշաճ որակի, իսկ աշխատանքը՝ պատշաճ կատարված։
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Եթե առաքման պահին Օգտատիրոջ կողմից հայտաբերվում է որևէ անհամապատասխանություն, ապա այդ Օգտատերն անմիջապես պարտավոր է տեղեկացնել առաքումն իրականացնող անձին, ինչպես նաև Ընկերությանը՝ էլեկտրոնային փոստի հասցեով՝ գրավոր ներկայացնելով առաքման պահին հայտնաբերված թերությունների և/կամ անհամապատասխանության մասին բողոք/տեղեկացում։
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Ընկերությունը պատասխանատվություն չի կրում ապրանքի որակի կամ քանակի հետ կապված բողոքների համար, ինչպես նաև Օգտատիրոջը չի վերադարձվում ապրանքի և առաքման համար վճարված գումարը, եթե Օգտատիրոջ կողմից համապատասխան բողոքը ներկայացվել է առաքումն իրականացնելուց հետո 3 (երեք) աշխատանքային օր անց։
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Ընկերությունը պատասխանատվություն չի կրում ապրանքի որակի կամ քանակի հետ կապված այն բողոքների համար, որոնք առաջացել են առաքման ծառայություններ իրականացնողների միջոցով ապրանքը Օգտատիրոջը փոխանցելու/տեղափոխոլու ընթացքում։ Ապրանքի առաքումը ընկերության փոարեն այլ առաքում իրականացնողի միջոցով ընտրելիս Օգտատերը ընդունում և առաջնորդվում է տվյալ առաքում իրականացնողի պայմաններով, որոնց համար պատասխանատվություն չի կրում։
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Եթե Օգտատիրոջ մեղքով 3 (երեք) օր անընդմեջ հնարավոր չի եղել առաքել ապրանքը կամ ապրանքը պատրաստ լինելու մասին ծանուցումը Ընկերության կողմից ուղարկվելուց հետո 3 (երեք) աշխատանքային օրվա ընթացքում Օգտատերն չի վերցրել ապրանքը Ընկերության պահեստից, ապա Ընկերությունը ապրանքը վերցնում է պատասխանատու պահպանության առավելագույնը 60 (վաթսուն) օր ժամկետով։
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Պատասխանատու պահպանության վերցված ապրանքը Օգտատիրոջը առաքվելու կամ վերջինս կողմից այն ստանալու դեպքում, Օգտատերը պարտավոր է հատուցել ապրանքի պահպանության համար կատարած Ընկերության ծախսերը՝ ապրանքի պահպանության յուրաքանչյուր օրվա համար վճարելով ապրանքի գնի 1%-ին (մեկ տոկոսի) համարժեք ՀՀ դրամ։
+         </S.RefundParagraph>
+         <S.RefundParagraph>
+         Ապրանքը պատասխանատու պահպանության վերցնելու և պահպանության համար նախատեսված ծախսերի մասին Օգտատերը ծանուցվում է էլեկտրոնային փոստի հասցեով։
+         </S.RefundParagraph>
       </S.RefundContent>
     </MainLayout>
   </S.RefundContainer>

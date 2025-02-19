@@ -8,7 +8,7 @@ export const Navbar = styled.nav`
   align-items: center;
   width: 100%;
 
-  @media (max-width: 980px) {
+  @media (max-width: 520px) {
     justify-content: flex-end;
   }
 `;
