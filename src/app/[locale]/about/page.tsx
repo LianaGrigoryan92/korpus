@@ -38,12 +38,12 @@ function About() {
       setExpanded(isExpanded ? panel : false);
     };
 
-
+    console.log("NEXT_PUBLIC_STRAPI_URL:", process.env.NEXT_PUBLIC_STRAPI_URL);
+    console.log("Image URL from Strapi:", data?.about_info_block.firstImage?.data?.attributes?.url);
+    console.log("Final Image URL:", getImageUrl(data?.about_info_block.firstImage));
     console.log({ data, isLoading });
 
-console.log("NEXT_PUBLIC_STRAPI_URL:", process.env.NEXT_PUBLIC_STRAPI_URL);
-console.log("Image URL from Strapi:", data?.about_info_block.firstImage?.data?.attributes?.url);
-console.log("Final Image URL:", getImageUrl(data?.about_info_block.firstImage));
+
 
   return (
     <S.AboutContainer>
