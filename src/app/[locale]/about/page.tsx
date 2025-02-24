@@ -13,7 +13,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import { Plus, Minus, ArrowRight } from 'lucide-react';
 import styled from 'styled-components';
 import { useClientMediaQuery } from '@/hooks/useClientMediaQuery';
-// import { useParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -27,9 +27,12 @@ const Accordion = styled((props: AccordionProps) => (
 }));
 
 function About() {
-  // const locale = useParams();
-  // const { data, isLoading } = useGetAboutContentQuery({locale: locale.toString()});
-  const { data, isLoading, error } = useGetAboutContentQuery();
+  const locale = useParams()?.locale || 'en';
+  console.log("Locale from useParams:", locale); 
+  const { data, isLoading } = useGetAboutContentQuery({
+    locale: locale.toString() 
+  });
+  // const { data, isLoading, error } = useGetAboutContentQuery();
   const [expanded, setExpanded] = useState<number | false>(false);
   const isMobile = useClientMediaQuery('(max-width: 1200px)');
 
