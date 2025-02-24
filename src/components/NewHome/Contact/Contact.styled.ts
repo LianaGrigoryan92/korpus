@@ -6,6 +6,7 @@ export const ContactBlockContainer = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 56px;
+    margin-top: 40px;
     @media (max-width: 1280px) {
         gap:0px;
         flex-direction: column;
@@ -74,13 +75,15 @@ export const ContactBlockRightContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 60px;
+    width: 100%;
 `;
 
 export const Title = styled.h3`
     font-size: 50px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 54px;
     color: #000;
+    text-align: center;
 
     @media (max-width: 1280px) {
        font-size: 40px;

@@ -7,6 +7,8 @@ import * as S from './page.styled';
 import { useParams } from 'next/navigation';
 import md5 from 'md5';
 // import { KorpusProCategories, MainLayout } from '@/components';
+import CuttingGif from '@/public/images/gif/cutting.gif';
+import Image from "next/image";
 
 interface User {
   userId: number;
@@ -33,6 +35,13 @@ const KorpusPro = () => {
       {/* <MainLayout> */}
       <S.FrameLayout>
         <S.FrameWrapper>
+          <S.LoaderContainer>
+            <S.LoaderSpinner></S.LoaderSpinner>
+
+          <S.BannerGif><Image src={CuttingGif.src} alt="Cutting" width={425} height={102} layout='responsive'/></S.BannerGif>
+          </S.LoaderContainer>
+
+            
           <iframe
             src={
               // user

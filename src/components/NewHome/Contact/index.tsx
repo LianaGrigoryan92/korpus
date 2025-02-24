@@ -55,7 +55,7 @@ export const ContactBlock = () => {
       </S.ContactBlockLeftContainer>
       <S.ContactBlockRightContainer>
         <S.Title>
-        {t('contact_title')} <br /> {t('contact_title2')}
+        {t('contact_title')} 
         </S.Title>
         <ContactForm />
       </S.ContactBlockRightContainer>

@@ -53,7 +53,8 @@ export const ContactForm = () => {
                     <S.Label htmlFor="phone">{t('phone')}</S.Label>
                     <S.Input
                         id="phone"
-                        placeholder={t('type')}
+                        // placeholder={t('type')}
+                        placeholder="+374 44 711 611"
                         {...register("phone", {
                             required: "Phone number is required",
                             pattern: {

@@ -7,7 +7,7 @@ export const Container = styled.div``;
 export const Title = styled.h2`
     color: #000000;
     font-size: 50px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 54px;
     margin-bottom: 60px;
   @media (max-width: 1280px) {
@@ -23,6 +23,7 @@ export const Title = styled.h2`
 export const InfoContent = styled.div`
     // margin: 0 73px;
     display: flex;
+    flex-direction: column;
     gap: 42px;
      @media (max-width: 1200px) {
     gap: 10px;
@@ -46,43 +47,57 @@ export const InfoContent = styled.div`
  
 `;
 
-export const InfoBlockContainerRight = styled.div`
-    margin-bottom: 48px;
-    display: flex;
-    align-items: flex-end;
-    width: calc(100% - 304px);
-    @media (max-width: 1040px) {
-        width: 100%;
-    }
-`;
+// export const InfoBlockContainerRight = styled.div`
+//     // margin-bottom: 48px;
+//     // display: flex;
+//     // align-items: flex-end;
+//     // width: calc(100% - 304px);
+//     width: 50%;
+//     @media (max-width: 1040px) {
+//         width: 100%;
+//     }
+// `;
 
-export const InfoBlockContainerLeft = styled.div`
-    margin-top: 22px;
-    display: flex;
-    align-items: start;
-    width: calc(100% - 304px);
-    @media (max-width: 1040px) {
-        width: 60%;
-        padding-right: 20px;
-    }
-    @media (max-width: 768px) {
-        width: 100%;
-        margin-bottom: 40px;
-    }
-`;
+// export const InfoBlockContainerLeft = styled.div`
+// width: 50%;
+//     // margin-top: 22px;
+//     // display: flex;
+//     // align-items: start;
+//     // width: calc(100% - 304px);
+//     @media (max-width: 1040px) {
+//         width: 60%;
+//         padding-right: 20px;
+//     }
+//     @media (max-width: 768px) {
+//         width: 100%;
+//         margin-bottom: 40px;
+//     }
+// `;
 
 export const InfoBlock = styled.div`
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     gap: 56px;
+  
     @media (max-width: 1040px) {
         
         gap: 40px;
+        flex-direction: column;
+        margin-bottom: 40px;
        
     }
 `;
 
-export const InfoItem = styled.div``;
+export const InfoItem = styled.div`
+  height: 50%;
+  width: 50%;
+
+     @media (max-width: 1040px) {
+        
+        width: 100%;
+       
+    }
+`;
 
 export const InfoItemTitle = styled.h4`
     color: #000000;

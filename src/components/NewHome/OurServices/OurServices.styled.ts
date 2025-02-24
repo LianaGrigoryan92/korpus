@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const Title = styled.h2`
   color: #000000;
   font-size: 50px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 54px;
   @media (max-width: 1280px) {
     font-size: 40px;
