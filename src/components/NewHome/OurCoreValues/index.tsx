@@ -14,7 +14,7 @@ export const OurCoreValues = () => {
     <S.Container>
       <S.Title>{t('core_title')}</S.Title>
       <S.InfoContent>
-        <S.InfoBlockContainerLeft>
+    
           <S.InfoBlock>
             <S.InfoItem>
               <S.InfoItemTitle>{t('core_title_customer')}</S.InfoItemTitle>
@@ -23,27 +23,28 @@ export const OurCoreValues = () => {
               </S.InfoItemDescription>
             </S.InfoItem>
             <S.InfoItem>
-              <S.InfoItemTitle>{t('core_title_accessibility')}</S.InfoItemTitle>
-              <S.InfoItemDescription>
-              {t('core_description_accessibility')}
-              </S.InfoItemDescription>
-            </S.InfoItem>
-          </S.InfoBlock>
-        </S.InfoBlockContainerLeft>
-        <Image
-          src={OurCoreValuesGif.src}
-          alt="Our core values"
-          width={304}
-          height={434}
-        />
-        <S.InfoBlockContainerRight>
-          <S.InfoBlock>
-            <S.InfoItem>
               <S.InfoItemTitle>{t('core_title_qa')}</S.InfoItemTitle>
               <S.InfoItemDescription>
               {t('core_description_qa')}
               </S.InfoItemDescription>
             </S.InfoItem>
+          </S.InfoBlock>
+     
+        {/* <Image
+          src={OurCoreValuesGif.src}
+          alt="Our core values"
+          width={304}
+          height={434}
+        /> */}
+   
+          <S.InfoBlock>
+          <S.InfoItem>
+              <S.InfoItemTitle>{t('core_title_accessibility')}</S.InfoItemTitle>
+              <S.InfoItemDescription>
+              {t('core_description_accessibility')}
+              </S.InfoItemDescription>
+            </S.InfoItem>
+   
             <S.InfoItem>
               <S.InfoItemTitle>{t('core_title_responsibility')}</S.InfoItemTitle>
               <S.InfoItemDescription>
@@ -51,7 +52,7 @@ export const OurCoreValues = () => {
               </S.InfoItemDescription>
             </S.InfoItem>
           </S.InfoBlock>
-        </S.InfoBlockContainerRight>
+      
       </S.InfoContent>
     </S.Container>
   );

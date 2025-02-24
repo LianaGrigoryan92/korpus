@@ -43,7 +43,7 @@ export const ServiceItemContent = styled.div`
 
 export const ServiceItemTitle = styled.h2<{ $isReverse: boolean }>`
   font-weight: 500;
-  font-size: 48px;
+  font-size: 32px;
   line-height: 56px;
   color: #000000;
   text-align: ${({ $isReverse }) => ($isReverse ? 'right' : 'left')};
@@ -65,7 +65,7 @@ export const ServiceItemText = styled.div<{
   $isReverse: boolean;
 }>`
   max-width: 580px;
-  font-size: 16px;
+  font-size: 18px;
   color: rgba(0, 0, 0, 0.6);
   line-height: 24px;
   overflow: hidden;
@@ -127,7 +127,7 @@ export const ServiceItemTextReadButton = styled.button`
     text-decoration: underline;
   }
 `;
-
+1
 export const ServiceItemImageWrapper = styled.div<{
   $isExpanded: boolean;
   $hoverImage: string | null;
@@ -140,11 +140,11 @@ export const ServiceItemImageWrapper = styled.div<{
   position: relative;
   max-width: 618px;
   background-image: url(${({ $image }) => $image ?? ''});
-  background-size: ${({ $bgSize }) => ($bgSize ? `${$bgSize}px` : '600px')};
+  background-size: ${({ $bgSize }) => ($bgSize ? `${$bgSize}px` : '100%')};
   background-position: ${({ $bgPos }) => $bgPos ?? 'center'};
   background-repeat: no-repeat;
   width: 100%;
-  height: ${({ $isExpanded }) => ($isExpanded ? '485px' : '286px')};
+  height: ${({ $isExpanded }) => ($isExpanded ? '485px' : '294px')};
   transition: all 0.5s ease-in-out;
   z-index: 1100;
   overflow: hidden;
@@ -160,9 +160,11 @@ export const ServiceItemImageWrapper = styled.div<{
     height: 100%;
     background-image: url(${(props) => props.$hoverImage ?? props.$image});
     background-size: 100%;
-    background-position: 9px -220px;;
+    // background-position: 1px -211px;
+    background-color:#fff;
     background-repeat: no-repeat;
     transition: left 0.5s ease-in-out;
+    background-position: center center;
   }
 
   &:hover::before {
