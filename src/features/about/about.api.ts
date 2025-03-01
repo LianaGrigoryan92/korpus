@@ -10,7 +10,7 @@ export const aboutApi = createApi({
     getAboutContent: builder.query<About, { locale: string }>({
       query: ({ locale }) => {
         const localeParam = strapiLanguageAdapter(locale);
-        console.log('Locale used in query:', localeParam); // Check the locale value
+        console.log('Locale used in query:', localeParam);
         return {
           url: `/abouts?populate[about_info_block][populate]=firstImage,secondaryImage,lastImage&populate[about_questions][populate][questions][populate]=*&populate[about_questions][populate]=about_questions_image&populate[learn_more_block][populate]=image&locale=${localeParam}`,
           headers: {
@@ -18,7 +18,11 @@ export const aboutApi = createApi({
           },
         };
       },
-      transformResponse: (response: { data: any }) => response.data ? response.data.attributes : {},
+      transformResponse: (response: { data: any }) => {
+        console.log('Strapi Response:', response); // Log the full response to check the structure
+        return response.data ? response.data.attributes : {};
+      },
+      
     }),
   }),
 });

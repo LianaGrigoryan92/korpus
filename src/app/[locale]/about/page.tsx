@@ -28,7 +28,11 @@ const Accordion = styled((props: AccordionProps) => (
 }));
 
 function About() {
-  const locale = useParams()?.locale || 'en';
+  const locale = useParams()?.locale;
+  const localeParam = Array.isArray(locale) ? locale[0] : locale || 'en';
+  console.log('Locale used in query:', localeParam);
+  
+console.log('Locale used in query:', localeParam);
   const adaptedLocale = strapiLanguageAdapter(locale?.toString() || 'en');
   console.log("Final API locale:", adaptedLocale);
   
