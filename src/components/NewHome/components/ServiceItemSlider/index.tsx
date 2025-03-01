@@ -10,6 +10,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useTranslations } from 'next-intl';
 
+
 interface IProps {
   title: string;
   description: string;
@@ -53,7 +54,7 @@ export const ServiceItemSlider = ({
         )}
       </S.ServiceItemContent>
       <S.SliderWrapper>
-        <Slider {...sliderSettings}>
+        {/* <Slider {...sliderSettings}>
           {images.map((image, index) => (
             <S.SliderImage
               key={index}
@@ -61,7 +62,12 @@ export const ServiceItemSlider = ({
               alt={`${title} image ${index + 1}`}
             />
           ))}
-        </Slider>
+        </Slider> */}
+         <S.StyledVideo autoPlay loop muted>
+          <source src="/videos/video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </S.StyledVideo>
+        
       </S.SliderWrapper>
     </S.ServiceItemContainer>
   );
