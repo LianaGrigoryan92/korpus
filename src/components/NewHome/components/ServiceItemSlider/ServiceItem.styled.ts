@@ -105,7 +105,7 @@ export const SliderWrapper = styled.div`
   width: 100%;
   max-width: 618px;
   height: 286px;
-  overflow: hidden;
+  // overflow: hidden;
   border-radius: 12px;
 
   .slick-slider {
@@ -128,4 +128,14 @@ export const SliderImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+`;
+
+
+export const StyledVideo = styled.video`
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0 auto;
+  display: block;
 `;

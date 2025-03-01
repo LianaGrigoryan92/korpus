@@ -14,6 +14,7 @@ import { Plus, Minus, ArrowRight } from 'lucide-react';
 import styled from 'styled-components';
 import { useClientMediaQuery } from '@/hooks/useClientMediaQuery';
 import { useParams } from 'next/navigation';
+import { strapiLanguageAdapter } from '../../../utils/strapi-language-adapter';
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -28,10 +29,11 @@ const Accordion = styled((props: AccordionProps) => (
 
 function About() {
   const locale = useParams()?.locale || 'en';
-  console.log("Locale from useParams:", locale); 
-  const { data, isLoading } = useGetAboutContentQuery({
-    locale: locale.toString() 
-  });
+  const adaptedLocale = strapiLanguageAdapter(locale?.toString() || 'en');
+  console.log("Final API locale:", adaptedLocale);
+  
+  const { data, isLoading } = useGetAboutContentQuery({ locale: adaptedLocale });
+  
   // const { data, isLoading, error } = useGetAboutContentQuery();
   const [expanded, setExpanded] = useState<number | false>(false);
   const isMobile = useClientMediaQuery('(max-width: 1200px)');
